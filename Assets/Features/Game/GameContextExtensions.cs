@@ -22,17 +22,17 @@ public static class GameContextExtensions
                 horizontalShift = 2;
             }
 
-            var leftIndex = new Vector2Int(slot.Value.x - horizontalShift, i);
-            var rightIndex = new Vector2Int(slot.Value.x + horizontalShift, i);
+            var leftIndex = new Vector2Int(slot.Value.x - horizontalShift, slot.Value.y + i);
+            var rightIndex = new Vector2Int(slot.Value.x + horizontalShift, slot.Value.y + i);
 
             if (slotIndexer.TryGetValue(leftIndex, out var leftNeighbor))
             {
-                neighbors.Add((GameEntity)leftNeighbor);
+                neighbors.Add((GameEntity) leftNeighbor);
             }
 
             if (slotIndexer.TryGetValue(rightIndex, out var rightNeighbor))
             {
-                neighbors.Add((GameEntity)rightNeighbor);
+                neighbors.Add((GameEntity) rightNeighbor);
             }
         }
 

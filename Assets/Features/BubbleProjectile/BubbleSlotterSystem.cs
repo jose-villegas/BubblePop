@@ -55,7 +55,6 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
 
             // let the merge system now take charge
             gameEntity.isBubbleWaitingMerge = true;
-            gameEntity.RemoveCollidedWithBubble();
 
             // // todo: actually mark as stable when done merging
             // gameEntity.ReplaceLayer(LayerMask.NameToLayer("StableBubbles"));

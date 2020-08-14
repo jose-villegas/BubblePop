@@ -24,7 +24,7 @@ public class MergeMarkingSystem : ReactiveSystem<GameEntity>
             // check which ones match the merge number
             foreach (var neighbor in neighbors)
             {
-                if (neighbor.bubbleNumber == item.bubbleNumber)
+                if (neighbor.bubbleNumber.Value == item.bubbleNumber.Value)
                 {
                     // mark also as waiting for merge
                     neighbor.isBubbleWaitingMerge = true;
