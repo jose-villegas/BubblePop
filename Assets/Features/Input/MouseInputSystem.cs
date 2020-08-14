@@ -1,7 +1,6 @@
 ﻿using Entitas;
 using UnityEngine;
 
-[Input]
 public class MouseInputSystem : IExecuteSystem
 {
     private readonly Contexts _contexts;

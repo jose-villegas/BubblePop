@@ -2,5 +2,6 @@
 {
     public ProjectilesFeature(Contexts contexts)
     {
+        Add(new ThrownSystem(contexts));
     }
 }

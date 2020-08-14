@@ -2,5 +2,6 @@
 {
     public InputFeature(Contexts contexts)
     {
+        Add(new MouseInputSystem(contexts));
     }
 }
