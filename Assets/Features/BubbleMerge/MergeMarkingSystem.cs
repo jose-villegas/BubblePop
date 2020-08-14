@@ -16,6 +16,16 @@ public class MergeMarkingSystem : ReactiveSystem<GameEntity>
         _contexts = contexts;
     }
 
+    protected override bool Filter(GameEntity entity)
+    {
+        return entity.isBubble && entity.isBubbleWaitingMerge && entity.hasBubbleNumber;
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return context.CreateCollector(GameMatcher.BubbleWaitingMerge);
+    }
+
     protected override void Execute(List<GameEntity> entities)
     {
         foreach (var item in entities)
@@ -46,15 +56,5 @@ public class MergeMarkingSystem : ReactiveSystem<GameEntity>
                 }
             }
         }
-    }
-
-    protected override bool Filter(GameEntity entity)
-    {
-        return entity.isBubble && entity.isBubbleWaitingMerge;
-    }
-
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-    {
-        return context.CreateCollector(GameMatcher.BubbleWaitingMerge);
     }
 }

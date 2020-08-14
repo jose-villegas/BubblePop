@@ -39,8 +39,13 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbl
         // reload projectiles
         _nextBubble.AddTranslateTo(_configuration.ProjectileSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
         _nextBubble.AddScaleTo(_configuration.ProjectileSpeed, _configuration.BubbleScale);
+        _nextBubble.isMoving = true;
 
+        // handle when translation is done, converting it to a normal throwable bubble
         _nextBubble.OnComponentRemoved += OnDynamicsCompleted;
+
+        // remove reload entity
+        entity.Destroy();
     }
 
     private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)

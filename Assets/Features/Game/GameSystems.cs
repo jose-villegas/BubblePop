@@ -2,7 +2,6 @@
 {
     public GameSystems(Contexts contexts)
     {
-        Add(new ViewFeature(contexts));
         Add(new BubbleProjectileFeature(contexts));
         Add(new BubblesFeature(contexts));
         Add(new SlotsFeature(contexts));
@@ -11,6 +10,7 @@
         Add(new InputFeature(contexts));
         Add(new ProjectilesFeature(contexts));
         Add(new DynamicsFeature(contexts));
+        Add(new ViewFeature(contexts));
 
         // events
         Add(new GameEventSystems(contexts));

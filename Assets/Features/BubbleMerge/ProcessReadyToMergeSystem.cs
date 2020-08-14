@@ -25,7 +25,7 @@ public class ProcessReadyToMergeSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isBubble && entity.isBubbleReadyToMerge;
+        return entity.isBubble && entity.isBubbleReadyToMerge && entity.hasBubbleNumber;
     }
 
     protected override void Execute(List<GameEntity> entities)
@@ -72,9 +72,6 @@ public class ProcessReadyToMergeSystem : ReactiveSystem<GameEntity>
             }
         }
 
-        if (choosenEntity != null)
-        {
-            choosenEntity.isBubbleChosenAsMergeTo = true;
-        }
+        choosenEntity?.ReplaceBubbleChosenAsMergeTo(finalNumber);
     }
 }

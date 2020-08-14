@@ -105,4 +105,22 @@ public static class GameContextExtensions
 
         return newIndex;
     }
+
+    public static void ConvertToStableBubble(this GameEntity bubble)
+    {
+        bubble.isBubbleReadyToMerge = false;
+        bubble.isBubbleWaitingMerge = false;
+        bubble.isStableBubble = true;
+        bubble.ReplaceLayer(LayerMask.NameToLayer("StableBubbles"));
+
+        if (bubble.hasBubbleChosenAsMergeTo)
+        {
+            bubble.RemoveBubbleChosenAsMergeTo();
+        }
+
+        if (bubble.hasCollidedWithBubble)
+        {
+            bubble.RemoveCollidedWithBubble();
+        }
+    }
 }

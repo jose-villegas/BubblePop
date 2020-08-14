@@ -4,5 +4,6 @@ public class BubbleMergeFeature : Feature
     {
         Add(new MergeMarkingSystem(contexts));
         Add(new ProcessReadyToMergeSystem(contexts));
+        Add(new MergeWithChosenEntitySystem(contexts));
     }
 }

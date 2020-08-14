@@ -32,27 +32,28 @@ public static class GameComponentsLookup {
     public const int Layer = 21;
     public const int LayerListener = 22;
     public const int LinkedView = 23;
-    public const int Position = 24;
-    public const int PositionListener = 25;
-    public const int Rotation = 26;
-    public const int RotationListener = 27;
-    public const int Scale = 28;
-    public const int ScaleListener = 29;
-    public const int ScaleTo = 30;
-    public const int Speed = 31;
-    public const int StableBubble = 32;
-    public const int Throwable = 33;
-    public const int Thrown = 34;
-    public const int TranslateTo = 35;
-    public const int Trigger2DEvent = 36;
-    public const int Trigger2DEventListener = 37;
-    public const int TriggerEnter2D = 38;
-    public const int TriggerEnter2DListener = 39;
-    public const int TriggerExit2D = 40;
-    public const int TriggerExit2DListener = 41;
-    public const int UnstableBubble = 42;
+    public const int Moving = 24;
+    public const int Position = 25;
+    public const int PositionListener = 26;
+    public const int Rotation = 27;
+    public const int RotationListener = 28;
+    public const int Scale = 29;
+    public const int ScaleListener = 30;
+    public const int ScaleTo = 31;
+    public const int Speed = 32;
+    public const int StableBubble = 33;
+    public const int Throwable = 34;
+    public const int Thrown = 35;
+    public const int TranslateTo = 36;
+    public const int Trigger2DEvent = 37;
+    public const int Trigger2DEventListener = 38;
+    public const int TriggerEnter2D = 39;
+    public const int TriggerEnter2DListener = 40;
+    public const int TriggerExit2D = 41;
+    public const int TriggerExit2DListener = 42;
+    public const int UnstableBubble = 43;
 
-    public const int TotalComponents = 43;
+    public const int TotalComponents = 44;
 
     public static readonly string[] componentNames = {
         "AnyBubbleProjectileReloadListener",
@@ -79,6 +80,7 @@ public static class GameComponentsLookup {
         "Layer",
         "LayerListener",
         "LinkedView",
+        "Moving",
         "Position",
         "PositionListener",
         "Rotation",
@@ -125,6 +127,7 @@ public static class GameComponentsLookup {
         typeof(LayerComponent),
         typeof(LayerListenerComponent),
         typeof(LinkedViewComponent),
+        typeof(MovingComponent),
         typeof(PositionComponent),
         typeof(PositionListenerComponent),
         typeof(RotationComponent),

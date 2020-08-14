@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DesperateDevs.Utils;
 using Entitas;
 using UnityEngine;
@@ -44,11 +45,13 @@ public class BubbleSloIndexerSystem : ReactiveSystem<GameEntity>, IDestroyedList
 
     public void OnDestroyed(GameEntity entity)
     {
-        var index = entity.bubbleSlot.Value;
-
-        if (_indexerEntity.bubbleSlotIndexer.Value.ContainsKey(index))
+        // clean up indexer
+        foreach (var keyValuePair in _indexerEntity.bubbleSlotIndexer.Value.ToList())
         {
-            _indexerEntity.bubbleSlotIndexer.Value.Remove(index);
+            if (keyValuePair.Value == null || !keyValuePair.Value.isEnabled)
+            {
+                _indexerEntity.bubbleSlotIndexer.Value.Remove(keyValuePair.Key);
+            }
         }
     }
 }

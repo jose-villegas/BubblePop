@@ -14,6 +14,7 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     [SerializeField] private Vector3 bubbleScale;
     [SerializeField] private Vector3 nextBubbleScale;
     [SerializeField] private float _overlapCircleRadius;
+    [SerializeField] private float _mergeTranslateSpeed;
 
     public int MaximumExponent => _maximumExponent;
 
@@ -34,4 +35,6 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public Vector3 NextBubbleScale => nextBubbleScale;
 
     public float OverlapCircleRadius => _overlapCircleRadius;
+
+    public float MergeTranslateSpeed => _mergeTranslateSpeed;
 }
