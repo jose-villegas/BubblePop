@@ -12,52 +12,54 @@ public static class GameComponentsLookup {
     public const int AnyGameEventListener = 1;
     public const int AnyGameStartedListener = 2;
     public const int Asset = 3;
-    public const int Bubble = 4;
-    public const int BubbleNumber = 5;
-    public const int BubbleNumberListener = 6;
-    public const int BubbleProjectileReload = 7;
-    public const int BubbleReadyToMerge = 8;
-    public const int BubbleSlot = 9;
-    public const int BubbleSlotIndexer = 10;
-    public const int BubbleWaitingMerge = 11;
-    public const int CollidedWithBubble = 12;
-    public const int Destroyed = 13;
-    public const int DestroyedListener = 14;
-    public const int Direction = 15;
-    public const int EntityTag = 16;
-    public const int EntityTagIndexer = 17;
-    public const int GameEvent = 18;
-    public const int GameStarted = 19;
-    public const int Layer = 20;
-    public const int LayerListener = 21;
-    public const int LinkedView = 22;
-    public const int Position = 23;
-    public const int PositionListener = 24;
-    public const int Rotation = 25;
-    public const int RotationListener = 26;
-    public const int Scale = 27;
-    public const int ScaleListener = 28;
-    public const int ScaleTo = 29;
-    public const int Speed = 30;
-    public const int StableBubble = 31;
-    public const int Throwable = 32;
-    public const int Thrown = 33;
-    public const int TranslateTo = 34;
-    public const int Trigger2DEvent = 35;
-    public const int Trigger2DEventListener = 36;
-    public const int TriggerEnter2D = 37;
-    public const int TriggerEnter2DListener = 38;
-    public const int TriggerExit2D = 39;
-    public const int TriggerExit2DListener = 40;
-    public const int UnstableBubble = 41;
+    public const int BubbleChosenAsMergeTo = 4;
+    public const int Bubble = 5;
+    public const int BubbleNumber = 6;
+    public const int BubbleNumberListener = 7;
+    public const int BubbleProjectileReload = 8;
+    public const int BubbleReadyToMerge = 9;
+    public const int BubbleSlot = 10;
+    public const int BubbleSlotIndexer = 11;
+    public const int BubbleWaitingMerge = 12;
+    public const int CollidedWithBubble = 13;
+    public const int Destroyed = 14;
+    public const int DestroyedListener = 15;
+    public const int Direction = 16;
+    public const int EntityTag = 17;
+    public const int EntityTagIndexer = 18;
+    public const int GameEvent = 19;
+    public const int GameStarted = 20;
+    public const int Layer = 21;
+    public const int LayerListener = 22;
+    public const int LinkedView = 23;
+    public const int Position = 24;
+    public const int PositionListener = 25;
+    public const int Rotation = 26;
+    public const int RotationListener = 27;
+    public const int Scale = 28;
+    public const int ScaleListener = 29;
+    public const int ScaleTo = 30;
+    public const int Speed = 31;
+    public const int StableBubble = 32;
+    public const int Throwable = 33;
+    public const int Thrown = 34;
+    public const int TranslateTo = 35;
+    public const int Trigger2DEvent = 36;
+    public const int Trigger2DEventListener = 37;
+    public const int TriggerEnter2D = 38;
+    public const int TriggerEnter2DListener = 39;
+    public const int TriggerExit2D = 40;
+    public const int TriggerExit2DListener = 41;
+    public const int UnstableBubble = 42;
 
-    public const int TotalComponents = 42;
+    public const int TotalComponents = 43;
 
     public static readonly string[] componentNames = {
         "AnyBubbleProjectileReloadListener",
         "AnyGameEventListener",
         "AnyGameStartedListener",
         "Asset",
+        "BubbleChosenAsMergeTo",
         "Bubble",
         "BubbleNumber",
         "BubbleNumberListener",
@@ -103,6 +105,7 @@ public static class GameComponentsLookup {
         typeof(AnyGameEventListenerComponent),
         typeof(AnyGameStartedListenerComponent),
         typeof(AssetComponent),
+        typeof(BubbleChosenAsMergeToComponent),
         typeof(BubbleComponent),
         typeof(BubbleNumberComponent),
         typeof(BubbleNumberListenerComponent),

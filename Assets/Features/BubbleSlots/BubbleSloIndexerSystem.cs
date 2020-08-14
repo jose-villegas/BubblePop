@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using DesperateDevs.Utils;
 using Entitas;
 using UnityEngine;
 
 /// <summary>
 /// Adds new slot instances to the indexer entity
 /// </summary>
-public class BubbleSloIndexerSystem : ReactiveSystem<GameEntity>
+public class BubbleSloIndexerSystem : ReactiveSystem<GameEntity>, IDestroyedListener
 {
     readonly Contexts _contexts;
 
@@ -36,6 +37,18 @@ public class BubbleSloIndexerSystem : ReactiveSystem<GameEntity>
         {
             // save to the indexer
             _indexerEntity.bubbleSlotIndexer.Value[gameEntity.bubbleSlot.Value] = gameEntity;
+            // in case its destroyed
+            gameEntity.AddDestroyedListener(this);
+        }
+    }
+
+    public void OnDestroyed(GameEntity entity)
+    {
+        var index = entity.bubbleSlot.Value;
+
+        if (_indexerEntity.bubbleSlotIndexer.Value.ContainsKey(index))
+        {
+            _indexerEntity.bubbleSlotIndexer.Value.Remove(index);
         }
     }
 }
