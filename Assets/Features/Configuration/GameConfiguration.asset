@@ -22,3 +22,4 @@ MonoBehaviour:
   bubbleScale: {x: 4, y: 4, z: 4}
   nextBubbleScale: {x: 3.5, y: 3.5, z: 3.5}
   _overlapCircleRadius: 0.35
+  _mergeTranslateSpeed: 10

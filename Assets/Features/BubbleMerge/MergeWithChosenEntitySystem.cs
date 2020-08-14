@@ -12,6 +12,7 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
     private readonly Contexts _contexts;
     private IGroup<GameEntity> _readyToMergeGroup;
     private IGameConfiguration _configuration;
+    private int _expectedDestroyCount;
 
     public MergeWithChosenEntitySystem(Contexts contexts) : base(contexts.game)
     {
@@ -36,12 +37,16 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
 
         if (_readyToMergeGroup.count > 1)
         {
+            _expectedDestroyCount = _readyToMergeGroup.count - 1;
+
             foreach (var readyBubble in _readyToMergeGroup.AsEnumerable().ToList())
             {
                 if (readyBubble == target) continue;
 
                 readyBubble.AddTranslateTo(_configuration.MergeTranslateSpeed, target.position.Value);
+                // wait for translation complete to removed merged bubbles
                 readyBubble.OnComponentRemoved += OnDynamicsCompleted;
+                readyBubble.OnDestroyEntity += OnReadyBubbleDestroyed;
             }
         }
         else
@@ -57,13 +62,12 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
         }
     }
 
-    private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)
+    private void OnReadyBubbleDestroyed(IEntity entity)
     {
-        if (component is TranslateToComponent)
-        {
-            var gameEntity = (GameEntity) entity;
-            gameEntity.isDestroyed = true;
+        _expectedDestroyCount--;
 
+        if (_expectedDestroyCount == 0)
+        {
             // the chosen bubble is now stable
             var chosen = _contexts.game.bubbleChosenAsMergeToEntity;
 
@@ -72,11 +76,18 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
                 var finalNumber = chosen.bubbleChosenAsMergeTo.Value;
                 chosen.ConvertToStableBubble();
                 chosen.ReplaceBubbleNumber(finalNumber);
-
-                // trigger reload
-                var e = _contexts.game.CreateEntity();
-                e.isBubbleProjectileReload = true;
+                // set chosen as waiting to merge, checking if there is further moves
+                chosen.isBubbleWaitingMerge = true;
             }
+        }
+    }
+
+    private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)
+    {
+        if (component is TranslateToComponent)
+        {
+            var gameEntity = (GameEntity) entity;
+            gameEntity.isDestroyed = true;
         }
     }
 }

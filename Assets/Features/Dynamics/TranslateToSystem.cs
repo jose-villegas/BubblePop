@@ -31,6 +31,7 @@ public class TranslateToSystem : IExecuteSystem
             if (Math.Abs((position - target).sqrMagnitude) <= Constants.Tolerance)
             {
                 gameEntity.RemoveTranslateTo();
+                gameEntity.ReplacePosition(target);
             }
         }
     }

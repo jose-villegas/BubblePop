@@ -31,6 +31,7 @@ public class ScaleToSystem : IExecuteSystem
             if (Math.Abs((scale - target).sqrMagnitude) <= Constants.Tolerance)
             {
                 gameEntity.RemoveScaleTo();
+                gameEntity.ReplaceScale(target);
             }
         }
     }
