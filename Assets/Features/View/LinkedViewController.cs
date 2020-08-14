@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using System;
+using Entitas;
 using Entitas.Unity;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionLis
     IScaleListener, IDestroyedListener, ILayerListener
 {
     public IEntity LinkedEntity { get; private set; }
+    public Action<GameEntity> OnViewLinked { get; set; }
 
     public virtual Vector3 Position
     {
@@ -51,6 +53,8 @@ public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionLis
 
         if (gameEntity.hasLayer)
             gameObject.layer = gameEntity.layer.Value;
+
+        OnViewLinked?.Invoke(gameEntity);
     }
 
     public void OnPosition(GameEntity entity, Vector3 value)
