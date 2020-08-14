@@ -8,31 +8,41 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Asset = 0;
-    public const int Bubble = 1;
-    public const int BubbleNumber = 2;
-    public const int BubbleNumberListener = 3;
-    public const int BubbleSlot = 4;
-    public const int Destroyed = 5;
-    public const int DestroyedListener = 6;
-    public const int LinkedView = 7;
-    public const int Position = 8;
-    public const int PositionListener = 9;
-    public const int Rotation = 10;
-    public const int RotationListener = 11;
-    public const int Scale = 12;
-    public const int ScaleListener = 13;
+    public const int AnyGameEventListener = 0;
+    public const int AnyGameStartedListener = 1;
+    public const int Asset = 2;
+    public const int Bubble = 3;
+    public const int BubbleNumber = 4;
+    public const int BubbleNumberListener = 5;
+    public const int BubbleSlot = 6;
+    public const int BubbleSlotLink = 7;
+    public const int Destroyed = 8;
+    public const int DestroyedListener = 9;
+    public const int GameEvent = 10;
+    public const int GameStarted = 11;
+    public const int LinkedView = 12;
+    public const int Position = 13;
+    public const int PositionListener = 14;
+    public const int Rotation = 15;
+    public const int RotationListener = 16;
+    public const int Scale = 17;
+    public const int ScaleListener = 18;
 
-    public const int TotalComponents = 14;
+    public const int TotalComponents = 19;
 
     public static readonly string[] componentNames = {
+        "AnyGameEventListener",
+        "AnyGameStartedListener",
         "Asset",
         "Bubble",
         "BubbleNumber",
         "BubbleNumberListener",
         "BubbleSlot",
+        "BubbleSlotLink",
         "Destroyed",
         "DestroyedListener",
+        "GameEvent",
+        "GameStarted",
         "LinkedView",
         "Position",
         "PositionListener",
@@ -43,13 +53,18 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(AnyGameEventListenerComponent),
+        typeof(AnyGameStartedListenerComponent),
         typeof(AssetComponent),
         typeof(BubbleComponent),
         typeof(BubbleNumberComponent),
         typeof(BubbleNumberListenerComponent),
         typeof(BubbleSlot),
+        typeof(BubbleSlotLinkComponent),
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),
+        typeof(GameEventComponent),
+        typeof(GameStartedComponent),
         typeof(LinkedViewComponent),
         typeof(PositionComponent),
         typeof(PositionListenerComponent),

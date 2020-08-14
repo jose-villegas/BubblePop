@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class AssetInstancingSystem : ReactiveSystem<GameEntity>
 {
-    private Contexts _contexts;
+    readonly Contexts _contexts;
 
     /// <summary>
     /// All instaces will be set as children of this transform

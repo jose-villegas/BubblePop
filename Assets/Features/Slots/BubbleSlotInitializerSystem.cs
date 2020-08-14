@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class BubbleSlotInitializerSystem : IInitializeSystem
 {
-    private Contexts _contexts;
+    readonly Contexts _contexts;
 
     public BubbleSlotInitializerSystem(Contexts contexts)
     {
@@ -16,15 +16,12 @@ public class BubbleSlotInitializerSystem : IInitializeSystem
 
     public void Initialize()
     {
-        for (int i = 0; i < 8; i++)
+        var iterator = new BubbleSlotIterator(6, 8);
+
+        foreach (Vector2Int index in iterator)
         {
-            for (int j = 0; j < 6; j++)
-            {
-                var e = _contexts.game.CreateEntity();
-                var horizontalIndex = j * 2 + i % 2;
-                var verticalIndex = i - 2;
-                e.ReplaceBubbleSlot(new Vector2Int(horizontalIndex, verticalIndex));
-            }
+            var e = _contexts.game.CreateEntity();
+            e.ReplaceBubbleSlot(index);
         }
     }
 }
