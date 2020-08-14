@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public BubbleSlot bubbleSlot { get { return (BubbleSlot)GetComponent(GameComponentsLookup.BubbleSlot); } }
+    public BubbleSlotComponent bubbleSlot { get { return (BubbleSlotComponent)GetComponent(GameComponentsLookup.BubbleSlot); } }
     public bool hasBubbleSlot { get { return HasComponent(GameComponentsLookup.BubbleSlot); } }
 
     public void AddBubbleSlot(UnityEngine.Vector2Int newValue) {
         var index = GameComponentsLookup.BubbleSlot;
-        var component = (BubbleSlot)CreateComponent(index, typeof(BubbleSlot));
+        var component = (BubbleSlotComponent)CreateComponent(index, typeof(BubbleSlotComponent));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceBubbleSlot(UnityEngine.Vector2Int newValue) {
         var index = GameComponentsLookup.BubbleSlot;
-        var component = (BubbleSlot)CreateComponent(index, typeof(BubbleSlot));
+        var component = (BubbleSlotComponent)CreateComponent(index, typeof(BubbleSlotComponent));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }

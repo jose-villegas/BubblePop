@@ -6,7 +6,7 @@ using UnityEngine;
 /// slot within the bubble slots structure
 /// </summary>
 [Game]
-public sealed class BubbleSlot : IComponent
+public sealed class BubbleSlotComponent : IComponent
 {
     public Vector2Int Value;
 }

@@ -15,20 +15,21 @@ public static class GameComponentsLookup {
     public const int BubbleNumber = 4;
     public const int BubbleNumberListener = 5;
     public const int BubbleSlot = 6;
-    public const int BubbleSlotLink = 7;
-    public const int Destroyed = 8;
-    public const int DestroyedListener = 9;
-    public const int GameEvent = 10;
-    public const int GameStarted = 11;
-    public const int LinkedView = 12;
-    public const int Position = 13;
-    public const int PositionListener = 14;
-    public const int Rotation = 15;
-    public const int RotationListener = 16;
-    public const int Scale = 17;
-    public const int ScaleListener = 18;
+    public const int BubbleSlotIndexer = 7;
+    public const int BubbleSlotLink = 8;
+    public const int Destroyed = 9;
+    public const int DestroyedListener = 10;
+    public const int GameEvent = 11;
+    public const int GameStarted = 12;
+    public const int LinkedView = 13;
+    public const int Position = 14;
+    public const int PositionListener = 15;
+    public const int Rotation = 16;
+    public const int RotationListener = 17;
+    public const int Scale = 18;
+    public const int ScaleListener = 19;
 
-    public const int TotalComponents = 19;
+    public const int TotalComponents = 20;
 
     public static readonly string[] componentNames = {
         "AnyGameEventListener",
@@ -38,6 +39,7 @@ public static class GameComponentsLookup {
         "BubbleNumber",
         "BubbleNumberListener",
         "BubbleSlot",
+        "BubbleSlotIndexer",
         "BubbleSlotLink",
         "Destroyed",
         "DestroyedListener",
@@ -59,7 +61,8 @@ public static class GameComponentsLookup {
         typeof(BubbleComponent),
         typeof(BubbleNumberComponent),
         typeof(BubbleNumberListenerComponent),
-        typeof(BubbleSlot),
+        typeof(BubbleSlotComponent),
+        typeof(BubbleSlotIndexerComponent),
         typeof(BubbleSlotLinkComponent),
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),

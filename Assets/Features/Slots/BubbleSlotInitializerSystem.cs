@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using System.Collections.Generic;
+using Entitas;
 using UnityEngine;
 
 /// <summary>
@@ -18,10 +19,16 @@ public class BubbleSlotInitializerSystem : IInitializeSystem
     {
         var iterator = new BubbleSlotIterator(6, 8);
 
+        // create indexer
+        var indexerEntity = _contexts.game.CreateEntity();
+        indexerEntity.AddBubbleSlotIndexer(new Dictionary<Vector2Int, GameEntity>());
+
         foreach (Vector2Int index in iterator)
         {
             var e = _contexts.game.CreateEntity();
             e.ReplaceBubbleSlot(index);
+            // index the slot component for faster lookup
+            indexerEntity.bubbleSlotIndexer.Value[index] = e;
         }
     }
 }

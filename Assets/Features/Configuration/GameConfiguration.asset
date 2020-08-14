@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GameConfiguration
   m_EditorClassIdentifier: 
   _possibleBubbleValues: 02000000040000000800000010000000200000004000000080000000000100000002000000040000
+  initialRowCount: 3
