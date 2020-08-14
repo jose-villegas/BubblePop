@@ -43,4 +43,8 @@ public interface IGameConfiguration
     /// </summary>
     int SlotsInitialVerticalIndex { get; }
 
+    Vector3 BubbleScale { get; }
+
+    Vector3 NextBubbleScale { get; }
+
 }

@@ -9,6 +9,7 @@
         Add(new WorldFeature(contexts));
         Add(new InputFeature(contexts));
         Add(new ProjectilesFeature(contexts));
+        Add(new DynamicsFeature(contexts));
 
         // events
         Add(new GameEventSystems(contexts));

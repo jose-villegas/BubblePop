@@ -5,6 +5,8 @@ using UnityEngine;
 public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyGameStartedListener
 {
     private Contexts _contexts;
+    private GameEntity _nextBubble;
+    private IGameConfiguration _configuration;
 
     public BubbleProjectileSpawnSystem(Contexts contexts) : base(contexts.game)
     {
@@ -12,20 +14,40 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyGameS
 
         var e = _contexts.game.CreateEntity();
         e.AddAnyGameStartedListener(this);
+
+        _configuration = _contexts.configuration.gameConfiguration.value;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.BubbleInserted);
+        return context.CreateCollector(GameMatcher.BubbleProjectileInserted);
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isBubbleInserted;
+        return entity.isBubbleProjectileInserted;
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
+        // reload projectiles
+        _nextBubble.AddTranslateTo(_configuration.ProjectileSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
+        _nextBubble.AddScaleTo(_configuration.ProjectileSpeed, _configuration.BubbleScale);
+
+        _nextBubble.OnComponentRemoved += OnDynamicsCompleted;
+    }
+
+    private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)
+    {
+        _nextBubble.OnComponentRemoved -= OnDynamicsCompleted;
+
+        if (component is TranslateToComponent || component is ScaleToComponent)
+        {
+            _nextBubble.isThrowable = true;
+            _nextBubble.AddSpeed(_configuration.ProjectileSpeed);
+
+            CreateNextBubbleToThrow();
+        }
     }
 
     public void OnAnyGameStarted(GameEntity entity)
@@ -36,19 +58,17 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyGameS
 
     private void CreateNextBubbleToThrow()
     {
-        var configuration = _contexts.configuration.gameConfiguration.value;
-        var e = _contexts.game.CreateEntity();
-        e.isBubble = true;
-        e.isUnstableBubble = true;
+        _nextBubble = _contexts.game.CreateEntity();
+        _nextBubble.isBubble = true;
+        _nextBubble.isUnstableBubble = true;
 
-        e.AddAsset("Bubble");
-        e.AddPosition(Vector3.up * configuration.ProjectileBubblesHeight + Vector3.left);
-        e.AddScale(Vector3.one * 3);
+        _nextBubble.AddAsset("Bubble");
+        _nextBubble.AddPosition(Vector3.up * _configuration.ProjectileBubblesHeight + Vector3.left);
+        _nextBubble.AddScale(_configuration.NextBubbleScale);
     }
 
     private void CreateBubbleToThrow()
     {
-        var configuration = _contexts.configuration.gameConfiguration.value;
         // create bubble that will be thrown
         var e = _contexts.game.CreateEntity();
         e.isThrowable = true;
@@ -56,7 +76,8 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyGameS
         e.isUnstableBubble = true;
 
         e.AddAsset("Bubble");
-        e.AddPosition(Vector3.up * configuration.ProjectileBubblesHeight);
-        e.AddSpeed(configuration.ProjectileSpeed);
+        e.AddPosition(Vector3.up * _configuration.ProjectileBubblesHeight);
+        e.AddScale(_configuration.BubbleScale);
+        e.AddSpeed(_configuration.ProjectileSpeed);
     }
 }

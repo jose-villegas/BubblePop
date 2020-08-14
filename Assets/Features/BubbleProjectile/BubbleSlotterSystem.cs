@@ -49,6 +49,10 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
             e.ReplaceBubbleSlot(newSlotIndex);
             // link between slot space and entity
             gameEntity.AddBubbleSlotLink(e);
+
+            // todo: actually mark as stable when done merging
+            var ins = _contexts.game.CreateEntity();
+            ins.isBubbleProjectileInserted = true;
         }
     }
 
@@ -58,12 +62,18 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
         var angle = Mathf.Rad2Deg * angleRadians;
 
         // right to the collider
+        //  * *
+        // * o (*)
+        //  * *
         if (angle < 30 && angle >= -30)
         {
             newIndex.x++;
         }
 
         // top-right to the collider
+        //  * (*)
+        // *  o  *
+        //  *   *
         if (angle >= 30 && angle < 90)
         {
             newIndex.x++;
@@ -71,6 +81,9 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
         }
 
         // top-left to the collider
+        //  (*) *
+        // *  o  *
+        //  *   *
         if (angle >= 90 && angle < 150)
         {
             newIndex.x--;
@@ -78,12 +91,18 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
         }
 
         // left to the collider
+        //    * *
+        // (*) o *
+        //    * *
         if (angle >= 150 && angle < -150)
         {
             newIndex.x--;
         }
 
         // bottom-left to the collider
+        //  *  *
+        // *  o  *
+        // (*)  *
         if (angle >= -150 && angle < -90)
         {
             newIndex.x--;
@@ -91,6 +110,9 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
         }
 
         // bottom-right to the collider
+        //  *   *
+        // *  o  *
+        //  *  (*)
         if (angle >= -90 && angle < -30)
         {
             newIndex.x++;

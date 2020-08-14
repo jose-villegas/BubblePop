@@ -26,6 +26,7 @@ public class GameStartBubblesSystem : ReactiveSystem<GameEntity>
     protected override void Execute(List<GameEntity> entities)
     {
         var availableInitialSlots = _contexts.game.GetGroup(GameMatcher.BubbleSlot);
+        var configuration = _contexts.configuration.gameConfiguration.value;
 
         foreach (var availableInitialSlot in availableInitialSlots)
         {
@@ -36,6 +37,7 @@ public class GameStartBubblesSystem : ReactiveSystem<GameEntity>
 
             // add components
             e.AddPosition(Vector3.zero);
+            e.AddScale(configuration.BubbleScale);
             e.AddAsset("Bubble");
 
             // establish link with slot entity

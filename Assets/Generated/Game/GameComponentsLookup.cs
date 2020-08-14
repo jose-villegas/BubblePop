@@ -12,51 +12,51 @@ public static class GameComponentsLookup {
     public const int AnyGameStartedListener = 1;
     public const int Asset = 2;
     public const int Bubble = 3;
-    public const int BubbleInserted = 4;
-    public const int BubbleInsertedListener = 5;
-    public const int BubbleNumber = 6;
-    public const int BubbleNumberListener = 7;
-    public const int BubbleSlot = 8;
-    public const int BubbleSlotIndexer = 9;
-    public const int BubbleSlotLink = 10;
-    public const int CollidedWithBubble = 11;
-    public const int Destroyed = 12;
-    public const int DestroyedListener = 13;
-    public const int Direction = 14;
-    public const int EntityTag = 15;
-    public const int EntityTagIndexer = 16;
-    public const int GameEvent = 17;
-    public const int GameStarted = 18;
-    public const int LinkedView = 19;
-    public const int Position = 20;
-    public const int PositionListener = 21;
-    public const int Rotation = 22;
-    public const int RotationListener = 23;
-    public const int Scale = 24;
-    public const int ScaleListener = 25;
+    public const int BubbleNumber = 4;
+    public const int BubbleNumberListener = 5;
+    public const int BubbleProjectileInserted = 6;
+    public const int BubbleSlot = 7;
+    public const int BubbleSlotIndexer = 8;
+    public const int BubbleSlotLink = 9;
+    public const int CollidedWithBubble = 10;
+    public const int Destroyed = 11;
+    public const int DestroyedListener = 12;
+    public const int Direction = 13;
+    public const int EntityTag = 14;
+    public const int EntityTagIndexer = 15;
+    public const int GameEvent = 16;
+    public const int GameStarted = 17;
+    public const int LinkedView = 18;
+    public const int Position = 19;
+    public const int PositionListener = 20;
+    public const int Rotation = 21;
+    public const int RotationListener = 22;
+    public const int Scale = 23;
+    public const int ScaleListener = 24;
+    public const int ScaleTo = 25;
     public const int Speed = 26;
     public const int StableBubble = 27;
     public const int Throwable = 28;
     public const int Thrown = 29;
-    public const int Trigger2DEvent = 30;
-    public const int Trigger2DEventListener = 31;
-    public const int TriggerEnter2D = 32;
-    public const int TriggerEnter2DListener = 33;
-    public const int TriggerExit2D = 34;
-    public const int TriggerExit2DListener = 35;
-    public const int UnstableBubble = 36;
+    public const int TranslateTo = 30;
+    public const int Trigger2DEvent = 31;
+    public const int Trigger2DEventListener = 32;
+    public const int TriggerEnter2D = 33;
+    public const int TriggerEnter2DListener = 34;
+    public const int TriggerExit2D = 35;
+    public const int TriggerExit2DListener = 36;
+    public const int UnstableBubble = 37;
 
-    public const int TotalComponents = 37;
+    public const int TotalComponents = 38;
 
     public static readonly string[] componentNames = {
         "AnyGameEventListener",
         "AnyGameStartedListener",
         "Asset",
         "Bubble",
-        "BubbleInserted",
-        "BubbleInsertedListener",
         "BubbleNumber",
         "BubbleNumberListener",
+        "BubbleProjectileInserted",
         "BubbleSlot",
         "BubbleSlotIndexer",
         "BubbleSlotLink",
@@ -75,10 +75,12 @@ public static class GameComponentsLookup {
         "RotationListener",
         "Scale",
         "ScaleListener",
+        "ScaleTo",
         "Speed",
         "StableBubble",
         "Throwable",
         "Thrown",
+        "TranslateTo",
         "Trigger2DEvent",
         "Trigger2DEventListener",
         "TriggerEnter2D",
@@ -93,10 +95,9 @@ public static class GameComponentsLookup {
         typeof(AnyGameStartedListenerComponent),
         typeof(AssetComponent),
         typeof(BubbleComponent),
-        typeof(BubbleInsertedComponent),
-        typeof(BubbleInsertedListenerComponent),
         typeof(BubbleNumberComponent),
         typeof(BubbleNumberListenerComponent),
+        typeof(BubbleProjectileInserted),
         typeof(BubbleSlotComponent),
         typeof(BubbleSlotIndexerComponent),
         typeof(BubbleSlotLinkComponent),
@@ -115,10 +116,12 @@ public static class GameComponentsLookup {
         typeof(RotationListenerComponent),
         typeof(ScaleComponent),
         typeof(ScaleListenerComponent),
+        typeof(ScaleToComponent),
         typeof(SpeedComponent),
         typeof(StableBubbleComponent),
         typeof(ThrowableComponent),
         typeof(ThrownComponent),
+        typeof(TranslateToComponent),
         typeof(Trigger2DEventComponent),
         typeof(Trigger2DEventListenerComponent),
         typeof(TriggerEnter2DComponent),
