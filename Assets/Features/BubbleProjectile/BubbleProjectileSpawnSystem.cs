@@ -57,7 +57,7 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyGameS
         var configuration = _contexts.configuration.gameConfiguration.value;
         // create bubble that will be thrown
         var e = _contexts.game.CreateEntity();
-        e.isBubbleProjectile = true;
+        e.isThrowable = true;
         e.isBubble = true;
 
         e.AddAsset("Bubble");

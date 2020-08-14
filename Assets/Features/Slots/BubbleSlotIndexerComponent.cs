@@ -10,5 +10,5 @@ using UnityEngine;
 [Game, Unique]
 public sealed class BubbleSlotIndexerComponent : IComponent
 {
-    public Dictionary<Vector2Int, GameEntity> Value;
+    public Dictionary<Vector2Int, IEntity> Value;
 }

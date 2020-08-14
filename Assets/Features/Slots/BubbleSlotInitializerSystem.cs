@@ -22,14 +22,16 @@ public class BubbleSlotInitializerSystem : IInitializeSystem
 
         // create indexer
         var indexerEntity = _contexts.game.CreateEntity();
-        indexerEntity.AddBubbleSlotIndexer(new Dictionary<Vector2Int, GameEntity>());
+        indexerEntity.AddBubbleSlotIndexer(new Dictionary<Vector2Int, IEntity>());
 
         foreach (Vector2Int index in iterator)
         {
-            var e = _contexts.game.CreateEntity();
-            e.ReplaceBubbleSlot(index);
             // index the slot component for faster lookup
-            indexerEntity.bubbleSlotIndexer.Value[index] = e;
+            var modifiedIndex = new Vector2Int(index.x, index.y + configuration.SlotsInitialVerticalIndex);
+
+            var e = _contexts.game.CreateEntity();
+            e.ReplaceBubbleSlot(modifiedIndex);
+            indexerEntity.bubbleSlotIndexer.Value[modifiedIndex] = e;
         }
     }
 }

@@ -35,6 +35,7 @@ public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionLis
         _entity.AddPositionListener(this);
         _entity.AddRotationListener(this);
         _entity.AddScaleListener(this);
+        _entity.AddLinkedView(this);
 
         if (_entity.hasPosition)
             transform.localPosition = _entity.position.Value;

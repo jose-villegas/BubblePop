@@ -21,7 +21,7 @@ public class BubbleSlotIterator : IEnumerable
             for (int j = 0; j < _horizontalSize; j++)
             {
                 var horizontalIndex = j * 2 + i % 2;
-                var verticalIndex = i - 2;
+                var verticalIndex = i;
 
                 yield return new Vector2Int(horizontalIndex, verticalIndex);
             }

@@ -12,7 +12,7 @@ public partial class GameContext {
     public BubbleSlotIndexerComponent bubbleSlotIndexer { get { return bubbleSlotIndexerEntity.bubbleSlotIndexer; } }
     public bool hasBubbleSlotIndexer { get { return bubbleSlotIndexerEntity != null; } }
 
-    public GameEntity SetBubbleSlotIndexer(System.Collections.Generic.Dictionary<UnityEngine.Vector2Int, GameEntity> newValue) {
+    public GameEntity SetBubbleSlotIndexer(System.Collections.Generic.Dictionary<UnityEngine.Vector2Int, Entitas.IEntity> newValue) {
         if (hasBubbleSlotIndexer) {
             throw new Entitas.EntitasException("Could not set BubbleSlotIndexer!\n" + this + " already has an entity with BubbleSlotIndexerComponent!",
                 "You should check if the context already has a bubbleSlotIndexerEntity before setting it or use context.ReplaceBubbleSlotIndexer().");
@@ -22,7 +22,7 @@ public partial class GameContext {
         return entity;
     }
 
-    public void ReplaceBubbleSlotIndexer(System.Collections.Generic.Dictionary<UnityEngine.Vector2Int, GameEntity> newValue) {
+    public void ReplaceBubbleSlotIndexer(System.Collections.Generic.Dictionary<UnityEngine.Vector2Int, Entitas.IEntity> newValue) {
         var entity = bubbleSlotIndexerEntity;
         if (entity == null) {
             entity = SetBubbleSlotIndexer(newValue);
@@ -49,14 +49,14 @@ public partial class GameEntity {
     public BubbleSlotIndexerComponent bubbleSlotIndexer { get { return (BubbleSlotIndexerComponent)GetComponent(GameComponentsLookup.BubbleSlotIndexer); } }
     public bool hasBubbleSlotIndexer { get { return HasComponent(GameComponentsLookup.BubbleSlotIndexer); } }
 
-    public void AddBubbleSlotIndexer(System.Collections.Generic.Dictionary<UnityEngine.Vector2Int, GameEntity> newValue) {
+    public void AddBubbleSlotIndexer(System.Collections.Generic.Dictionary<UnityEngine.Vector2Int, Entitas.IEntity> newValue) {
         var index = GameComponentsLookup.BubbleSlotIndexer;
         var component = (BubbleSlotIndexerComponent)CreateComponent(index, typeof(BubbleSlotIndexerComponent));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceBubbleSlotIndexer(System.Collections.Generic.Dictionary<UnityEngine.Vector2Int, GameEntity> newValue) {
+    public void ReplaceBubbleSlotIndexer(System.Collections.Generic.Dictionary<UnityEngine.Vector2Int, Entitas.IEntity> newValue) {
         var index = GameComponentsLookup.BubbleSlotIndexer;
         var component = (BubbleSlotIndexerComponent)CreateComponent(index, typeof(BubbleSlotIndexerComponent));
         component.Value = newValue;

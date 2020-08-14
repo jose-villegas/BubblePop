@@ -8,6 +8,7 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     [SerializeField] private int _initialRowCount;
     [SerializeField] private Vector2 _bubblesSeparation;
     [SerializeField] private float _projectileBubblesHeight;
+    [SerializeField] private int _slotsInitialVerticalIndex;
 
     public List<int> PossibleBubbleValues => _possibleBubbleValues;
 
@@ -16,4 +17,6 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public Vector2 BubblesSeparation => _bubblesSeparation;
 
     public float ProjectileBubblesHeight => _projectileBubblesHeight;
+
+    public int SlotsInitialVerticalIndex => _slotsInitialVerticalIndex;
 }
