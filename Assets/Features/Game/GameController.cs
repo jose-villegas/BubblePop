@@ -3,11 +3,10 @@
 public class GameController
 {
     readonly Systems _systems;
-    readonly Contexts _contexts;
 
-    public GameController(Contexts contexts)
+    public GameController(Contexts contexts, IGameConfiguration configuration)
     {
-        _contexts = contexts;
+        contexts.configuration.SetGameConfiguration(configuration);
         _systems = new GameSystems(contexts);
     }
 
