@@ -41,7 +41,7 @@ public class BubbleBounceSystem : ReactiveSystem<GameEntity>, ITriggerEnter2DLis
         var tag = value.tag;
 
         // we have collided with a limit
-        if (tag == "LimitLeft" || tag == "LimitRight")
+        if (tag == "LimitLeft" || tag == "LimitRight" && entity.isThrown)
         {
             var currentDirection = entity.direction.Value;
             var newDirection = Vector3.Reflect(currentDirection, tag == "LimitRight" ? Vector3.left : Vector3.right);

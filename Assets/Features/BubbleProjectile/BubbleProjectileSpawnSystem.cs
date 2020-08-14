@@ -39,6 +39,7 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyGameS
         var configuration = _contexts.configuration.gameConfiguration.value;
         var e = _contexts.game.CreateEntity();
         e.isBubble = true;
+        e.isUnstableBubble = true;
 
         e.AddAsset("Bubble");
         e.AddPosition(Vector3.up * configuration.ProjectileBubblesHeight + Vector3.left);
@@ -52,6 +53,7 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyGameS
         var e = _contexts.game.CreateEntity();
         e.isThrowable = true;
         e.isBubble = true;
+        e.isUnstableBubble = true;
 
         e.AddAsset("Bubble");
         e.AddPosition(Vector3.up * configuration.ProjectileBubblesHeight);

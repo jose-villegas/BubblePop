@@ -39,13 +39,25 @@ public class BubbleProjectileStopSystem : ReactiveSystem<GameEntity>, ITriggerEn
     {
         var tag = value.tag;
 
+        // determine if we have collision with an stable bubble
+        var linkedView = value.GetComponent<ILinkedView>();
+
+        if (linkedView == null) return;
+
+        var colliderEntity = (GameEntity) linkedView.LinkedEntity;
+
+        if (!colliderEntity.isStableBubble) return;
+
         // we have collided with a limit
-        if (tag == "Bubble")
+        if (tag == "Bubble" && entity.isThrown)
         {
             // remove thrown and throwable components
             entity.isThrown = false;
             entity.RemoveDirection();
             entity.RemoveSpeed();
+
+            // get collider linked entity - save collider data
+            entity.ReplaceCollidedWithBubble(colliderEntity);
         }
     }
 }

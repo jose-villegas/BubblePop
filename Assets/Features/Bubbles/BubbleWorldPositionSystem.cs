@@ -2,7 +2,9 @@
 using Entitas;
 using UnityEngine;
 
-
+/// <summary>
+/// This systems converts slot index to world space positions
+/// </summary>
 public class BubbleWorldPositionSystem : ReactiveSystem<GameEntity>
 {
     readonly Contexts _contexts;
