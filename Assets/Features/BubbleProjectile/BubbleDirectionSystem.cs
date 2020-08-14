@@ -5,13 +5,13 @@ using UnityEngine;
 /// This system handles direction update for thrown and throwable
 /// bubbles
 /// </summary>
-public class BubbleProjectileDirectionSystem : IExecuteSystem, IAnyGameStartedListener
+public class BubbleDirectionSystem : IExecuteSystem, IAnyGameStartedListener
 {
     private readonly Contexts _contexts;
     private IGroup<GameEntity> _group;
     private Camera _camera;
 
-    public BubbleProjectileDirectionSystem(Contexts contexts)
+    public BubbleDirectionSystem(Contexts contexts)
     {
         _contexts = contexts;
 
@@ -32,6 +32,10 @@ public class BubbleProjectileDirectionSystem : IExecuteSystem, IAnyGameStartedLi
         foreach (var bubble in _group)
         {
             var pos = bubble.position.Value;
+            var screenPos = _camera.WorldToScreenPoint(pos);
+
+            var direction = (mousePos - screenPos).normalized;
+            bubble.ReplaceDirection(direction);
         }
     }
 

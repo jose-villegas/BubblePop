@@ -3,6 +3,7 @@
     public BubbleProjectileFeature(Contexts contexts)
     {
         Add(new BubbleProjectileSpawnSystem(contexts));
-        Add(new BubbleProjectileDirectionSystem(contexts));
+        Add(new BubbleDirectionSystem(contexts));
+        Add(new BubbleShootSystem(contexts));
     }
 }

@@ -8,15 +8,24 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
+    public const int AnyInputEventListener = 0;
+    public const int AnyMouseUpListener = 1;
+    public const int InputEvent = 2;
+    public const int MouseUp = 3;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 4;
 
     public static readonly string[] componentNames = {
-
+        "AnyInputEventListener",
+        "AnyMouseUpListener",
+        "InputEvent",
+        "MouseUp"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(AnyInputEventListenerComponent),
+        typeof(AnyMouseUpListenerComponent),
+        typeof(InputEventComponent),
+        typeof(MouseUpComponent)
     };
 }

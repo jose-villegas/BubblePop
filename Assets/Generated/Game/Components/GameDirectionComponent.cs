@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly DirectionComponent directionComponent = new DirectionComponent();
+    public DirectionComponent direction { get { return (DirectionComponent)GetComponent(GameComponentsLookup.Direction); } }
+    public bool hasDirection { get { return HasComponent(GameComponentsLookup.Direction); } }
 
-    public bool isDirection {
-        get { return HasComponent(GameComponentsLookup.Direction); }
-        set {
-            if (value != isDirection) {
-                var index = GameComponentsLookup.Direction;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : directionComponent;
+    public void AddDirection(UnityEngine.Vector3 newValue) {
+        var index = GameComponentsLookup.Direction;
+        var component = (DirectionComponent)CreateComponent(index, typeof(DirectionComponent));
+        component.Value = newValue;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplaceDirection(UnityEngine.Vector3 newValue) {
+        var index = GameComponentsLookup.Direction;
+        var component = (DirectionComponent)CreateComponent(index, typeof(DirectionComponent));
+        component.Value = newValue;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveDirection() {
+        RemoveComponent(GameComponentsLookup.Direction);
     }
 }
 
