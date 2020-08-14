@@ -10,6 +10,7 @@
         Add(new InputFeature(contexts));
         Add(new ProjectilesFeature(contexts));
         Add(new DynamicsFeature(contexts));
+        Add(new BubblesScrollingFeature(contexts));
         Add(new ViewFeature(contexts));
 
         // events

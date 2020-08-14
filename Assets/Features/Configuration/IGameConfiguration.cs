@@ -48,16 +48,21 @@ public interface IGameConfiguration
     float ProjectileSpeed { get; }
 
     /// <summary>
-    /// Determines the initial vertical index of the first instanced
-    /// slots, instead of starting from zero
+    /// Determines the initial vertical height of the first instanced
+    /// slots
     /// </summary>
-    int SlotsInitialVerticalIndex { get; }
+    float SlotPositioningVerticalHeight { get; }
 
     Vector3 BubbleScale { get; }
 
     Vector3 NextBubbleScale { get; }
 
     float OverlapCircleRadius { get; }
+
     float MergeTranslateSpeed { get; }
+
     float ReloadSpeed { get; }
+
+    float MinimumBubblePosition { get; }
+    float ScrollingSpeed { get; }
 }

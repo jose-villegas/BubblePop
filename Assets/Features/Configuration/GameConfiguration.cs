@@ -4,18 +4,33 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Configuration/Game Configuration", fileName = "GameConfiguration")]
 public class GameConfiguration : ScriptableObject, IGameConfiguration
 {
-    [SerializeField] private int _maximumExponent;
+    [Header("Bubble Number")] [SerializeField]
+    private int _maximumExponent;
+
     [SerializeField] private int _maximumSpawnExponent;
-    [SerializeField] private int _initialRowCount;
+
+    [Header("Bubble Instancing")] [SerializeField]
+    private int _initialRowCount;
+
+    [Header("Bubble Transform")] [SerializeField]
+    private float _slotPositioningVerticalHeight;
+
     [SerializeField] private Vector2 _bubblesSeparation;
-    [SerializeField] private float _projectileBubblesHeight;
-    [SerializeField] private int _slotsInitialVerticalIndex;
-    [SerializeField] private float _projectileSpeed;
     [SerializeField] private Vector3 bubbleScale;
+
+    [Header("Bubble Merge")] [SerializeField]
+    private float _mergeTranslateSpeed;
+
+    [Header("Projectile Bubble")] [SerializeField]
+    private float _reloadSpeed;
+
+    [SerializeField] private float _projectileSpeed;
+    [SerializeField] private float _projectileBubblesHeight;
     [SerializeField] private Vector3 nextBubbleScale;
     [SerializeField] private float _overlapCircleRadius;
-    [SerializeField] private float _mergeTranslateSpeed;
-    [SerializeField] private float _reloadSpeed;
+
+    [Header("Scrolling")] [SerializeField] private float _minimumBubblePosition;
+    [SerializeField] private float _scrollingSpeed;
 
     public int MaximumExponent => _maximumExponent;
 
@@ -29,7 +44,7 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
 
     public float ProjectileSpeed => _projectileSpeed;
 
-    public int SlotsInitialVerticalIndex => _slotsInitialVerticalIndex;
+    public float SlotPositioningVerticalHeight => _slotPositioningVerticalHeight;
 
     public Vector3 BubbleScale => bubbleScale;
 
@@ -40,4 +55,8 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public float MergeTranslateSpeed => _mergeTranslateSpeed;
 
     public float ReloadSpeed => _reloadSpeed;
+
+    public float MinimumBubblePosition => _minimumBubblePosition;
+
+    public float ScrollingSpeed => _scrollingSpeed;
 }

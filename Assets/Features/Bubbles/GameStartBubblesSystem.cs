@@ -30,7 +30,7 @@ public class GameStartBubblesSystem : ReactiveSystem<GameEntity>
 
         foreach (Vector2Int slot in iterator)
         {
-            var modifiedIndex = new Vector2Int(slot.x, slot.y + configuration.SlotsInitialVerticalIndex);
+            var modifiedIndex = new Vector2Int(slot.x, slot.y);
             // create initial bubbles
             var e = _contexts.game.CreateEntity();
             e.isBubble = true;

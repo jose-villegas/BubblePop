@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: GameConfiguration
   m_EditorClassIdentifier: 
   _maximumExponent: 11
-  _maximumSpawnExponent: 8
-  _initialRowCount: 4
+  _maximumSpawnExponent: 7
+  _initialRowCount: 8
+  _slotPositioningVerticalHeight: 1.65
   _bubblesSeparation: {x: 0.375, y: 0.65}
-  _projectileBubblesHeight: -4
-  _slotsInitialVerticalIndex: 2
-  _projectileSpeed: 20
   bubbleScale: {x: 4, y: 4, z: 4}
+  _mergeTranslateSpeed: 15
+  _reloadSpeed: 10
+  _projectileSpeed: 20
+  _projectileBubblesHeight: -4
   nextBubbleScale: {x: 3.5, y: 3.5, z: 3.5}
   _overlapCircleRadius: 0.35
-  _mergeTranslateSpeed: 10
+  _minimumBubblePosition: -1
+  _scrollingSpeed: 15

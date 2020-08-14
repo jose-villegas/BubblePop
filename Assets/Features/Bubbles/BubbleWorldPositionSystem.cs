@@ -7,11 +7,13 @@ using UnityEngine;
 /// </summary>
 public class BubbleWorldPositionSystem : ReactiveSystem<GameEntity>
 {
-    readonly Contexts _contexts;
+    private readonly Contexts _contexts;
+    private readonly IGameConfiguration _configuration;
 
     public BubbleWorldPositionSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
+        _configuration = _contexts.configuration.gameConfiguration.value;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -28,6 +30,7 @@ public class BubbleWorldPositionSystem : ReactiveSystem<GameEntity>
     {
         var screenWidth = Screen.width;
         var configuration = _contexts.configuration.gameConfiguration.value;
+        var offset = _contexts.game.hasBubbleVerticalOffset ? _contexts.game.bubbleVerticalOffset.Value : 0;
 
         foreach (var gameEntity in entities)
         {
@@ -36,7 +39,7 @@ public class BubbleWorldPositionSystem : ReactiveSystem<GameEntity>
             var position = new Vector3
             (
                 (slot.x - 5) * configuration.BubblesSeparation.x - configuration.BubblesSeparation.x / 2f,
-                slot.y * configuration.BubblesSeparation.y,
+                slot.y * configuration.BubblesSeparation.y + _configuration.SlotPositioningVerticalHeight + offset,
                 0
             );
 
