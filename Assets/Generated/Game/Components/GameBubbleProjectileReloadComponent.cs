@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly BubbleProjectileInserted bubbleProjectileInsertedComponent = new BubbleProjectileInserted();
+    static readonly BubbleProjectileReload bubbleProjectileReloadComponent = new BubbleProjectileReload();
 
-    public bool isBubbleProjectileInserted {
-        get { return HasComponent(GameComponentsLookup.BubbleProjectileInserted); }
+    public bool isBubbleProjectileReload {
+        get { return HasComponent(GameComponentsLookup.BubbleProjectileReload); }
         set {
-            if (value != isBubbleProjectileInserted) {
-                var index = GameComponentsLookup.BubbleProjectileInserted;
+            if (value != isBubbleProjectileReload) {
+                var index = GameComponentsLookup.BubbleProjectileReload;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : bubbleProjectileInsertedComponent;
+                            : bubbleProjectileReloadComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherBubbleProjectileInserted;
+    static Entitas.IMatcher<GameEntity> _matcherBubbleProjectileReload;
 
-    public static Entitas.IMatcher<GameEntity> BubbleProjectileInserted {
+    public static Entitas.IMatcher<GameEntity> BubbleProjectileReload {
         get {
-            if (_matcherBubbleProjectileInserted == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.BubbleProjectileInserted);
+            if (_matcherBubbleProjectileReload == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.BubbleProjectileReload);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherBubbleProjectileInserted = matcher;
+                _matcherBubbleProjectileReload = matcher;
             }
 
-            return _matcherBubbleProjectileInserted;
+            return _matcherBubbleProjectileReload;
         }
     }
 }

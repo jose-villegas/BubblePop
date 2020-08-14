@@ -2,7 +2,7 @@
 using Entitas;
 using UnityEngine;
 
-public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>
+public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbleProjectileReloadListener
 {
     private Contexts _contexts;
     private GameEntity _nextBubble;
@@ -12,6 +12,10 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>
     {
         _contexts = contexts;
         _configuration = _contexts.configuration.gameConfiguration.value;
+
+        // create reload listener
+        var e = _contexts.game.CreateEntity();
+        e.AddAnyBubbleProjectileReloadListener(this);
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -26,14 +30,17 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        // // reload projectiles
-        // _nextBubble.AddTranslateTo(_configuration.ProjectileSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
-        // _nextBubble.AddScaleTo(_configuration.ProjectileSpeed, _configuration.BubbleScale);
-
-        // _nextBubble.OnComponentRemoved += OnDynamicsCompleted;
-
         CreateBubbleToThrow();
         CreateNextBubbleToThrow();
+    }
+
+    public void OnAnyBubbleProjectileReload(GameEntity entity)
+    {
+        // reload projectiles
+        _nextBubble.AddTranslateTo(_configuration.ProjectileSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
+        _nextBubble.AddScaleTo(_configuration.ProjectileSpeed, _configuration.BubbleScale);
+
+        _nextBubble.OnComponentRemoved += OnDynamicsCompleted;
     }
 
     private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)
@@ -65,7 +72,7 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>
     {
         // create bubble that will be thrown
         var e = _contexts.game.CreateEntity();
-         e.isBubble = true;
+        e.isBubble = true;
         e.isThrowable = true;
         e.isUnstableBubble = true;
 

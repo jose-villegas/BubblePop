@@ -28,6 +28,8 @@ public class BubbleProjectileStopSystem : IExecuteSystem
             var colliders = Physics2D.OverlapCircleAll(gameEntity.position.Value, _configuration.OverlapCircleRadius,
                 _bubblesLayer);
 
+            Debug.Log(colliders.Length);
+
             foreach (var collider in colliders)
             {
                 // we have collided with a limit
@@ -38,14 +40,22 @@ public class BubbleProjectileStopSystem : IExecuteSystem
 
                 if (linkedView == null) return;
 
-                var colliderEntity = (GameEntity) linkedView.LinkedEntity;
+                var colliderEntity = (GameEntity)linkedView.LinkedEntity;
 
                 if (!colliderEntity.isStableBubble) return;
 
                 // remove thrown and throwable components
                 gameEntity.isThrown = false;
-                gameEntity.RemoveDirection();
-                gameEntity.RemoveSpeed();
+
+                if (gameEntity.hasDirection)
+                {
+                    gameEntity.RemoveDirection();
+                }
+                
+                if (gameEntity.hasSpeed)
+                {
+                    gameEntity.RemoveSpeed();
+                }
 
                 // get collider linked entity - save collider data
                 gameEntity.ReplaceCollidedWithBubble(colliderEntity);

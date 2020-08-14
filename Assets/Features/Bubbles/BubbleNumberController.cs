@@ -22,16 +22,10 @@ public class BubbleNumberController : MonoBehaviour, IBubbleNumberListener
 
     private void OnViewLinked(GameEntity entity)
     {
+        entity.AddBubbleNumberListener(this);
+
         if (!entity.hasBubbleNumber) return;
 
         OnBubbleNumber(entity, entity.bubbleNumber.Value);
-    }
-
-    private void Start()
-    {
-
-        // subscribe to parent entity number changes
-        var e = (GameEntity)_view.LinkedEntity;
-        e.AddBubbleNumberListener(this);
     }
 }

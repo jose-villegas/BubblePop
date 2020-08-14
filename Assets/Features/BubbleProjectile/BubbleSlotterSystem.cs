@@ -43,27 +43,38 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
 
             var newSlotIndex = CalculateNewSlotIndex(angle, colliderSlotIndex);
 
+            // check if this slot is already occupied we may be taking the wrong collider
+            var indexer = _contexts.game.bubbleSlotIndexer.Value;
+
+            if (indexer.ContainsKey(newSlotIndex))
+            {
+                continue;
+            }
+
             // new slot to store this bubble
             gameEntity.ReplaceBubbleSlot(newSlotIndex);
 
             // todo: actually mark as stable when done merging
-            var ins = _contexts.game.CreateEntity();
             gameEntity.ReplaceLayer(LayerMask.NameToLayer("StableBubbles"));
             gameEntity.isStableBubble = true;
-            ins.isBubbleProjectileInserted = true;
+
+            // send reload event
+            var e = _contexts.game.CreateEntity();
+            e.isBubbleProjectileReload = true;
         }
     }
 
     private static Vector2Int CalculateNewSlotIndex(float angleRadians, in Vector2Int index)
     {
         var newIndex = new Vector2Int(index.x, index.y);
-        var angle = Mathf.Rad2Deg * angleRadians;
+        // map angle to 0 - 360
+        var angle = (angleRadians > 0 ? angleRadians : (2 * Mathf.PI + angleRadians)) * 360 / (2 * Mathf.PI);
 
         // right to the collider
         //  * *
         // * o (*)
         //  * *
-        if (angle < 30 && angle >= -30)
+        if (angle < 30 || angle >= 330)
         {
             newIndex.x += 2;
         }
@@ -92,7 +103,7 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
         //    * *
         // (*) o *
         //    * *
-        if (angle >= 150 && angle < -150)
+        if (angle >= 150 && angle < 210)
         {
             newIndex.x -= 2;
         }
@@ -101,7 +112,7 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
         //  *  *
         // *  o  *
         // (*)  *
-        if (angle >= -150 && angle < -90)
+        if (angle >= 210 && angle < 270)
         {
             newIndex.x--;
             newIndex.y--;
@@ -111,7 +122,7 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
         //  *   *
         // *  o  *
         //  *  (*)
-        if (angle >= -90 && angle < -30)
+        if (angle >= 270 && angle < 330)
         {
             newIndex.x++;
             newIndex.y--;
