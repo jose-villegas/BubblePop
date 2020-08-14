@@ -1,0 +1,59 @@
+﻿using System.Collections.Generic;
+using Entitas;
+using UnityEngine;
+
+/// <summary>
+/// This class instantiates objects with asset and view components
+/// using the <see cref="Resources"/> folder.
+/// </summary>
+public class LinkedViewAssetInstancingSystem : ReactiveSystem<GameEntity>
+{
+    private Contexts _contexts;
+
+    /// <summary>
+    /// All instaces will be set as children of this transform
+    /// </summary>
+    private Transform _parent;
+
+    public LinkedViewAssetInstancingSystem(Contexts contexts) : base(contexts.game)
+    {
+        _contexts = contexts;
+        _parent = new GameObject("Views").transform;
+    }
+
+    public LinkedViewAssetInstancingSystem(IContext<GameEntity> context) : base(context)
+    {
+    }
+
+    public LinkedViewAssetInstancingSystem(ICollector<GameEntity> collector) : base(collector)
+    {
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Asset, GameMatcher.LinkedView));
+    }
+
+    protected override bool Filter(GameEntity entity)
+    {
+        return entity.hasAsset && entity.hasLinkedView;
+    }
+
+    protected override void Execute(List<GameEntity> entities)
+    {
+        foreach (var gameEntity in entities)
+        {
+            var prefab = Resources.Load<GameObject>(gameEntity.asset.Value);
+            var view = Object.Instantiate(prefab, _parent).GetComponent<ILinkedView>();
+
+            if (view != null)
+            {
+                view.Link(gameEntity);
+            }
+            else
+            {
+                Debug.LogWarning("Trying to instantiate asset without a LinkedView component");
+            }
+        }
+    }
+}
