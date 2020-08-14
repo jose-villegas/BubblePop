@@ -59,4 +59,5 @@ public interface IGameConfiguration
 
     float OverlapCircleRadius { get; }
     float MergeTranslateSpeed { get; }
+    float ReloadSpeed { get; }
 }

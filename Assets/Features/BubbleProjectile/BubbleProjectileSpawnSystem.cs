@@ -37,8 +37,8 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbl
     public void OnAnyBubbleProjectileReload(GameEntity entity)
     {
         // reload projectiles
-        _nextBubble.AddTranslateTo(_configuration.ProjectileSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
-        _nextBubble.AddScaleTo(_configuration.ProjectileSpeed, _configuration.BubbleScale);
+        _nextBubble.AddTranslateTo(_configuration.ReloadSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
+        _nextBubble.AddScaleTo(_configuration.ReloadSpeed, _configuration.BubbleScale);
         _nextBubble.isMoving = true;
 
         // handle when translation is done, converting it to a normal throwable bubble
@@ -81,10 +81,15 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbl
         e.isThrowable = true;
         e.isUnstableBubble = true;
 
-        e.AddPosition(Vector3.up * _configuration.ProjectileBubblesHeight);
-        e.AddScale(_configuration.BubbleScale);
+        e.AddPosition(Vector3.up * _configuration.ProjectileBubblesHeight + Vector3.left);
+        e.AddScale(_configuration.NextBubbleScale);
         e.AddSpeed(_configuration.ProjectileSpeed);
         e.AddLayer(LayerMask.NameToLayer("FlyingBubble"));
         e.AddAsset("Bubble");
+
+        // animate emtry
+        e.AddTranslateTo(_configuration.ReloadSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
+        e.AddScaleTo(_configuration.ReloadSpeed, _configuration.BubbleScale);
+        e.isMoving = true;
     }
 }

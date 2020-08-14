@@ -44,6 +44,7 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
                 if (readyBubble == target) continue;
 
                 readyBubble.AddTranslateTo(_configuration.MergeTranslateSpeed, target.position.Value);
+                readyBubble.isMoving = true;
                 // wait for translation complete to removed merged bubbles
                 readyBubble.OnComponentRemoved += OnDynamicsCompleted;
                 readyBubble.OnDestroyEntity += OnReadyBubbleDestroyed;

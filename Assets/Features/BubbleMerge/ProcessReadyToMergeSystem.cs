@@ -72,6 +72,11 @@ public class ProcessReadyToMergeSystem : ReactiveSystem<GameEntity>
             }
         }
 
+        if (_contexts.game.hasBubbleChosenAsMergeTo)
+        {
+            _contexts.game.RemoveBubbleChosenAsMergeTo();
+        }
+
         choosenEntity?.ReplaceBubbleChosenAsMergeTo(finalNumber);
     }
 }
