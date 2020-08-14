@@ -8,7 +8,7 @@ public class GameController
     public GameController(Contexts contexts)
     {
         _contexts = contexts;
-        _systems = new Systems();
+        _systems = new GameSystems(contexts);
     }
 
     public void Initialize()

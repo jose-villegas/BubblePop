@@ -2,7 +2,7 @@
 {
     public GameSystems(Contexts contexts)
     {
-        // view
-        Add(new LinkedViewAssetInstancingSystem(contexts));
+        Add(new ViewFeature(contexts));
+        Add(new SlotsFeature(contexts));
     }
 }

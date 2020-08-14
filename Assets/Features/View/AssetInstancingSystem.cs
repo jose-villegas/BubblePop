@@ -3,10 +3,10 @@ using Entitas;
 using UnityEngine;
 
 /// <summary>
-/// This class instantiates objects with asset and view components
-/// using the <see cref="Resources"/> folder.
+/// This class instantiates objects with asset and links their view components.
+/// USes the <see cref="Resources"/> folder.
 /// </summary>
-public class LinkedViewAssetInstancingSystem : ReactiveSystem<GameEntity>
+public class AssetInstancingSystem : ReactiveSystem<GameEntity>
 {
     private Contexts _contexts;
 
@@ -15,28 +15,28 @@ public class LinkedViewAssetInstancingSystem : ReactiveSystem<GameEntity>
     /// </summary>
     private Transform _parent;
 
-    public LinkedViewAssetInstancingSystem(Contexts contexts) : base(contexts.game)
+    public AssetInstancingSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
         _parent = new GameObject("Views").transform;
     }
 
-    public LinkedViewAssetInstancingSystem(IContext<GameEntity> context) : base(context)
+    public AssetInstancingSystem(IContext<GameEntity> context) : base(context)
     {
     }
 
-    public LinkedViewAssetInstancingSystem(ICollector<GameEntity> collector) : base(collector)
+    public AssetInstancingSystem(ICollector<GameEntity> collector) : base(collector)
     {
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Asset, GameMatcher.LinkedView));
+        return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Asset));
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.hasAsset && entity.hasLinkedView;
+        return entity.hasAsset && !entity.hasLinkedView;
     }
 
     protected override void Execute(List<GameEntity> entities)
