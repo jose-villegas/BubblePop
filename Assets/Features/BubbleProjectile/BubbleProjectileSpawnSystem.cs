@@ -63,5 +63,6 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyGameS
 
         e.AddAsset("Bubble");
         e.AddPosition(Vector3.up * configuration.ProjectileBubblesHeight);
+        e.AddSpeed(configuration.ProjectileSpeed);
     }
 }

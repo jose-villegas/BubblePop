@@ -34,10 +34,13 @@ public interface IGameConfiguration
     /// will be spawned
     /// </summary>
     float ProjectileBubblesHeight { get; }
+   
+    float ProjectileSpeed { get; }
 
     /// <summary>
     /// Determines the initial vertical index of the first instanced
     /// slots, instead of starting from zero
     /// </summary>
     int SlotsInitialVerticalIndex { get; }
+
 }

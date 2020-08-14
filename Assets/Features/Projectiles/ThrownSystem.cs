@@ -10,7 +10,7 @@ public class ThrownSystem : IExecuteSystem
     {
         _contexts = contexts;
         _group = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Direction, GameMatcher.Thrown,
-            GameMatcher.Position));
+            GameMatcher.Position, GameMatcher.Speed));
     }
 
     public void Execute()
@@ -19,7 +19,9 @@ public class ThrownSystem : IExecuteSystem
         {
             var currentPos = gameEntity.position.Value;
             var direction = gameEntity.direction.Value;
-            var nextPos = currentPos + direction * Time.deltaTime;
+            var speed = gameEntity.speed.Value;
+            var nextPos = currentPos + direction * speed * Time.deltaTime;
+
             gameEntity.ReplacePosition(nextPos);
         }
     }

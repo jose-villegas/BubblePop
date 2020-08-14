@@ -33,11 +33,12 @@ public static class GameComponentsLookup {
     public const int RotationListener = 22;
     public const int Scale = 23;
     public const int ScaleListener = 24;
-    public const int StableBubble = 25;
-    public const int Throwable = 26;
-    public const int Thrown = 27;
+    public const int Speed = 25;
+    public const int StableBubble = 26;
+    public const int Throwable = 27;
+    public const int Thrown = 28;
 
-    public const int TotalComponents = 28;
+    public const int TotalComponents = 29;
 
     public static readonly string[] componentNames = {
         "AnyGameEventListener",
@@ -65,6 +66,7 @@ public static class GameComponentsLookup {
         "RotationListener",
         "Scale",
         "ScaleListener",
+        "Speed",
         "StableBubble",
         "Throwable",
         "Thrown"
@@ -96,6 +98,7 @@ public static class GameComponentsLookup {
         typeof(RotationListenerComponent),
         typeof(ScaleComponent),
         typeof(ScaleListenerComponent),
+        typeof(SpeedComponent),
         typeof(StableBubbleComponent),
         typeof(ThrowableComponent),
         typeof(ThrownComponent)
