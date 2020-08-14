@@ -1,6 +1,9 @@
 ﻿using Entitas;
 using UnityEngine;
 
+/// <summary>
+/// This systems handles mouse events
+/// </summary>
 public class MouseInputSystem : IExecuteSystem
 {
     private readonly Contexts _contexts;
