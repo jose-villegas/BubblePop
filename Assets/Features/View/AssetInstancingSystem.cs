@@ -21,14 +21,6 @@ public class AssetInstancingSystem : ReactiveSystem<GameEntity>
         _parent = new GameObject("Views").transform;
     }
 
-    public AssetInstancingSystem(IContext<GameEntity> context) : base(context)
-    {
-    }
-
-    public AssetInstancingSystem(ICollector<GameEntity> collector) : base(collector)
-    {
-    }
-
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
         return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Asset));

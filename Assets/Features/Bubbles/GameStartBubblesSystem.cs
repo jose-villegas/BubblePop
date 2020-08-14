@@ -13,15 +13,6 @@ public class GameStartBubblesSystem : ReactiveSystem<GameEntity>
     {
         _contexts = contexts;
     }
-
-    public GameStartBubblesSystem(IContext<GameEntity> context) : base(context)
-    {
-    }
-
-    public GameStartBubblesSystem(ICollector<GameEntity> collector) : base(collector)
-    {
-    }
-
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
         return context.CreateCollector(GameMatcher.GameStarted);

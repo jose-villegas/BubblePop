@@ -37,8 +37,14 @@ public static class GameComponentsLookup {
     public const int StableBubble = 26;
     public const int Throwable = 27;
     public const int Thrown = 28;
+    public const int Trigger2DEvent = 29;
+    public const int Trigger2DEventListener = 30;
+    public const int TriggerEnter2D = 31;
+    public const int TriggerEnter2DListener = 32;
+    public const int TriggerExit2D = 33;
+    public const int TriggerExit2DListener = 34;
 
-    public const int TotalComponents = 29;
+    public const int TotalComponents = 35;
 
     public static readonly string[] componentNames = {
         "AnyGameEventListener",
@@ -69,7 +75,13 @@ public static class GameComponentsLookup {
         "Speed",
         "StableBubble",
         "Throwable",
-        "Thrown"
+        "Thrown",
+        "Trigger2DEvent",
+        "Trigger2DEventListener",
+        "TriggerEnter2D",
+        "TriggerEnter2DListener",
+        "TriggerExit2D",
+        "TriggerExit2DListener"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -101,6 +113,12 @@ public static class GameComponentsLookup {
         typeof(SpeedComponent),
         typeof(StableBubbleComponent),
         typeof(ThrowableComponent),
-        typeof(ThrownComponent)
+        typeof(ThrownComponent),
+        typeof(Trigger2DEventComponent),
+        typeof(Trigger2DEventListenerComponent),
+        typeof(TriggerEnter2DComponent),
+        typeof(TriggerEnter2DListenerComponent),
+        typeof(TriggerExit2DComponent),
+        typeof(TriggerExit2DListenerComponent)
     };
 }

@@ -6,5 +6,7 @@
 /// </summary>
 public interface ILinkedView
 {
+    IEntity LinkedEntity { get; }
+    
     void Link(IEntity entity);
 }

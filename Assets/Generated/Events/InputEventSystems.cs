@@ -10,6 +10,7 @@ public sealed class InputEventSystems : Feature {
 
     public InputEventSystems(Contexts contexts) {
         Add(new AnyInputEventEventSystem(contexts)); // priority: 0
+        Add(new AnyMouseEventEventSystem(contexts)); // priority: 0
         Add(new AnyMouseUpEventSystem(contexts)); // priority: 0
     }
 }

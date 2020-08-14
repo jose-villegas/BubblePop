@@ -36,6 +36,9 @@ public class BubbleDirectionSystem : IExecuteSystem, IAnyGameStartedListener
 
             var direction = (mousePos - screenPos).normalized;
             bubble.ReplaceDirection(direction);
+#if UNITY_EDITOR
+            Debug.DrawRay(pos, direction, Color.blue);
+#endif
         }
     }
 

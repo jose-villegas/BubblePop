@@ -17,4 +17,4 @@ MonoBehaviour:
   _bubblesSeparation: {x: 0.375, y: 0.65}
   _projectileBubblesHeight: -4
   _slotsInitialVerticalIndex: 2
-  _projectileSpeed: 5
+  _projectileSpeed: 20

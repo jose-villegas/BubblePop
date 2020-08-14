@@ -17,14 +17,6 @@ public class EntityTagIndexingSystem : ReactiveSystem<GameEntity>
         e.AddEntityTagIndexer(new Dictionary<string, IEntity>());
     }
 
-    public EntityTagIndexingSystem(IContext<GameEntity> context) : base(context)
-    {
-    }
-
-    public EntityTagIndexingSystem(ICollector<GameEntity> collector) : base(collector)
-    {
-    }
-
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
         return context.CreateCollector(GameMatcher.EntityTag);

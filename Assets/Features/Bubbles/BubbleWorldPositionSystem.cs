@@ -12,14 +12,6 @@ public class BubbleWorldPositionSystem : ReactiveSystem<GameEntity>
         _contexts = contexts;
     }
 
-    public BubbleWorldPositionSystem(IContext<GameEntity> context) : base(context)
-    {
-    }
-
-    public BubbleWorldPositionSystem(ICollector<GameEntity> collector) : base(collector)
-    {
-    }
-
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
         return context.CreateCollector(GameMatcher.BubbleSlotLink);

@@ -6,7 +6,7 @@ public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionLis
     IScaleListener,
     IDestroyedListener
 {
-    protected GameEntity _entity;
+    public IEntity LinkedEntity { get; private set; }
 
     public virtual Vector3 Position
     {
@@ -26,25 +26,28 @@ public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionLis
         set => transform.localScale = value;
     }
 
+
     public void Link(IEntity entity)
     {
         gameObject.Link(entity);
-        _entity = (GameEntity) entity;
+        LinkedEntity = entity;
 
-        _entity.AddDestroyedListener(this);
-        _entity.AddPositionListener(this);
-        _entity.AddRotationListener(this);
-        _entity.AddScaleListener(this);
-        _entity.AddLinkedView(this);
+        var gameEntity = (GameEntity) LinkedEntity;
 
-        if (_entity.hasPosition)
-            transform.localPosition = _entity.position.Value;
+        gameEntity.AddDestroyedListener(this);
+        gameEntity.AddPositionListener(this);
+        gameEntity.AddRotationListener(this);
+        gameEntity.AddScaleListener(this);
+        gameEntity.AddLinkedView(this);
 
-        if (_entity.hasScale)
-            transform.localScale = _entity.scale.Value;
+        if (gameEntity.hasPosition)
+            transform.localPosition = gameEntity.position.Value;
 
-        if (_entity.hasRotation)
-            transform.rotation = _entity.rotation.Value;
+        if (gameEntity.hasScale)
+            transform.localScale = gameEntity.scale.Value;
+
+        if (gameEntity.hasRotation)
+            transform.rotation = gameEntity.rotation.Value;
     }
 
     public void OnPosition(GameEntity entity, Vector3 value)
@@ -66,7 +69,7 @@ public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionLis
     {
         gameObject.Unlink();
 
-        _entity.Destroy();
+        LinkedEntity.Destroy();
         Destroy(gameObject);
     }
 }

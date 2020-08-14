@@ -14,14 +14,6 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyGameS
         e.AddAnyGameStartedListener(this);
     }
 
-    public BubbleProjectileSpawnSystem(IContext<GameEntity> context) : base(context)
-    {
-    }
-
-    public BubbleProjectileSpawnSystem(ICollector<GameEntity> collector) : base(collector)
-    {
-    }
-
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
         return context.CreateCollector(GameMatcher.BubbleInserted);
