@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Entitas;
 using UnityEngine;
 
@@ -20,14 +21,28 @@ public class MergeMarkingSystem : ReactiveSystem<GameEntity>
         foreach (var item in entities)
         {
             var neighbors = _contexts.game.GetBubbleNeighbors(item.bubbleSlot);
+            var foundMatch = false;
 
             // check which ones match the merge number
             foreach (var neighbor in neighbors)
             {
-                if (neighbor.bubbleNumber.Value == item.bubbleNumber.Value)
+                if (neighbor.bubbleNumber.Value == item.bubbleNumber.Value && !neighbor.isBubbleWaitingMerge)
                 {
                     // mark also as waiting for merge
                     neighbor.isBubbleWaitingMerge = true;
+                    foundMatch = true;
+                }
+            }
+
+            // since there is no more matching neighbors, it's ready for merging
+            if (!foundMatch)
+            {
+                var group = _contexts.game.GetGroup(GameMatcher.BubbleWaitingMerge);
+
+                foreach (var gameEntity in group.AsEnumerable().ToList())
+                {
+                    gameEntity.isBubbleWaitingMerge = false;
+                    gameEntity.isBubbleReadyToMerge = true;
                 }
             }
         }

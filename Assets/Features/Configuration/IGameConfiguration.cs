@@ -6,7 +6,17 @@ using UnityEngine;
 [Configuration, Unique, ComponentName("GameConfiguration")]
 public interface IGameConfiguration
 {
-    List<int> PossibleBubbleValues { get; }
+    /// <summary>
+    /// Determines the maximum possible value for a bubble
+    /// </summary>
+    int MaximumExponent { get; }
+
+    /// <summary>
+    /// When bubbles are spawned, this determined their
+    /// maximum assigned value, unlike <see cref="MaximumExponent"/>
+    /// that can be reached through merging
+    /// </summary>
+    int MaximumSpawnExponent { get; }
 
     /// <summary>
     /// This defines how many rows will be filled with

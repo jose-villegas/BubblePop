@@ -4,7 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Configuration/Game Configuration", fileName = "GameConfiguration")]
 public class GameConfiguration : ScriptableObject, IGameConfiguration
 {
-    [SerializeField] private List<int> _possibleBubbleValues;
+    [SerializeField] private int _maximumExponent;
+    [SerializeField] private int _maximumSpawnExponent;
     [SerializeField] private int _initialRowCount;
     [SerializeField] private Vector2 _bubblesSeparation;
     [SerializeField] private float _projectileBubblesHeight;
@@ -14,7 +15,9 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     [SerializeField] private Vector3 nextBubbleScale;
     [SerializeField] private float _overlapCircleRadius;
 
-    public List<int> PossibleBubbleValues => _possibleBubbleValues;
+    public int MaximumExponent => _maximumExponent;
+
+    public int MaximumSpawnExponent => _maximumSpawnExponent;
 
     public int InitialRowCount => _initialRowCount;
 

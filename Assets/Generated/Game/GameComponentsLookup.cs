@@ -16,41 +16,42 @@ public static class GameComponentsLookup {
     public const int BubbleNumber = 5;
     public const int BubbleNumberListener = 6;
     public const int BubbleProjectileReload = 7;
-    public const int BubbleSlot = 8;
-    public const int BubbleSlotIndexer = 9;
-    public const int BubbleWaitingMerge = 10;
-    public const int CollidedWithBubble = 11;
-    public const int Destroyed = 12;
-    public const int DestroyedListener = 13;
-    public const int Direction = 14;
-    public const int EntityTag = 15;
-    public const int EntityTagIndexer = 16;
-    public const int GameEvent = 17;
-    public const int GameStarted = 18;
-    public const int Layer = 19;
-    public const int LayerListener = 20;
-    public const int LinkedView = 21;
-    public const int Position = 22;
-    public const int PositionListener = 23;
-    public const int Rotation = 24;
-    public const int RotationListener = 25;
-    public const int Scale = 26;
-    public const int ScaleListener = 27;
-    public const int ScaleTo = 28;
-    public const int Speed = 29;
-    public const int StableBubble = 30;
-    public const int Throwable = 31;
-    public const int Thrown = 32;
-    public const int TranslateTo = 33;
-    public const int Trigger2DEvent = 34;
-    public const int Trigger2DEventListener = 35;
-    public const int TriggerEnter2D = 36;
-    public const int TriggerEnter2DListener = 37;
-    public const int TriggerExit2D = 38;
-    public const int TriggerExit2DListener = 39;
-    public const int UnstableBubble = 40;
+    public const int BubbleReadyToMerge = 8;
+    public const int BubbleSlot = 9;
+    public const int BubbleSlotIndexer = 10;
+    public const int BubbleWaitingMerge = 11;
+    public const int CollidedWithBubble = 12;
+    public const int Destroyed = 13;
+    public const int DestroyedListener = 14;
+    public const int Direction = 15;
+    public const int EntityTag = 16;
+    public const int EntityTagIndexer = 17;
+    public const int GameEvent = 18;
+    public const int GameStarted = 19;
+    public const int Layer = 20;
+    public const int LayerListener = 21;
+    public const int LinkedView = 22;
+    public const int Position = 23;
+    public const int PositionListener = 24;
+    public const int Rotation = 25;
+    public const int RotationListener = 26;
+    public const int Scale = 27;
+    public const int ScaleListener = 28;
+    public const int ScaleTo = 29;
+    public const int Speed = 30;
+    public const int StableBubble = 31;
+    public const int Throwable = 32;
+    public const int Thrown = 33;
+    public const int TranslateTo = 34;
+    public const int Trigger2DEvent = 35;
+    public const int Trigger2DEventListener = 36;
+    public const int TriggerEnter2D = 37;
+    public const int TriggerEnter2DListener = 38;
+    public const int TriggerExit2D = 39;
+    public const int TriggerExit2DListener = 40;
+    public const int UnstableBubble = 41;
 
-    public const int TotalComponents = 41;
+    public const int TotalComponents = 42;
 
     public static readonly string[] componentNames = {
         "AnyBubbleProjectileReloadListener",
@@ -61,6 +62,7 @@ public static class GameComponentsLookup {
         "BubbleNumber",
         "BubbleNumberListener",
         "BubbleProjectileReload",
+        "BubbleReadyToMerge",
         "BubbleSlot",
         "BubbleSlotIndexer",
         "BubbleWaitingMerge",
@@ -105,6 +107,7 @@ public static class GameComponentsLookup {
         typeof(BubbleNumberComponent),
         typeof(BubbleNumberListenerComponent),
         typeof(BubbleProjectileReload),
+        typeof(BubbleReadyToMergeComponent),
         typeof(BubbleSlotComponent),
         typeof(BubbleSlotIndexerComponent),
         typeof(BubbleWaitingMergeComponent),

@@ -28,8 +28,6 @@ public class BubbleProjectileStopSystem : IExecuteSystem
             var colliders = Physics2D.OverlapCircleAll(gameEntity.position.Value, _configuration.OverlapCircleRadius,
                 _bubblesLayer);
 
-            Debug.Log(colliders.Length);
-
             foreach (var collider in colliders)
             {
                 // we have collided with a limit

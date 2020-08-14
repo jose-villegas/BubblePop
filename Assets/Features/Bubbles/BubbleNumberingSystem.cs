@@ -20,8 +20,8 @@ public class BubbleNumberingSystem : ReactiveSystem<GameEntity>
     {
         foreach (var item in entities)
         {
-            var index = Random.Range(0, _configuration.PossibleBubbleValues.Count - 3);
-            item.ReplaceBubbleNumber(_configuration.PossibleBubbleValues[index]);
+            var power = Random.Range(1, _configuration.MaximumSpawnExponent + 1);
+            item.ReplaceBubbleNumber(1 << power);
         }
     }
 
