@@ -25,11 +25,12 @@ public class GameStartBubblesSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        var availableInitialSlots = _contexts.game.GetGroup(GameMatcher.BubbleSlot);
         var configuration = _contexts.configuration.gameConfiguration.value;
+        var iterator = new BubbleSlotIterator(6, configuration.InitialRowCount);
 
-        foreach (var availableInitialSlot in availableInitialSlots)
+        foreach (Vector2Int slot in iterator)
         {
+            var modifiedIndex = new Vector2Int(slot.x, slot.y + configuration.SlotsInitialVerticalIndex);
             // create initial bubbles
             var e = _contexts.game.CreateEntity();
             e.isBubble = true;
@@ -38,10 +39,11 @@ public class GameStartBubblesSystem : ReactiveSystem<GameEntity>
             // add components
             e.AddPosition(Vector3.zero);
             e.AddScale(configuration.BubbleScale);
+            e.AddLayer(LayerMask.NameToLayer("StableBubbles"));
             e.AddAsset("Bubble");
 
             // establish link with slot entity
-            e.AddBubbleSlotLink(availableInitialSlot);
+            e.AddBubbleSlot(modifiedIndex);
         }
     }
 }

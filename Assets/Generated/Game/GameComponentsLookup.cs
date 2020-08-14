@@ -17,37 +17,38 @@ public static class GameComponentsLookup {
     public const int BubbleProjectileInserted = 6;
     public const int BubbleSlot = 7;
     public const int BubbleSlotIndexer = 8;
-    public const int BubbleSlotLink = 9;
-    public const int CollidedWithBubble = 10;
-    public const int Destroyed = 11;
-    public const int DestroyedListener = 12;
-    public const int Direction = 13;
-    public const int EntityTag = 14;
-    public const int EntityTagIndexer = 15;
-    public const int GameEvent = 16;
-    public const int GameStarted = 17;
-    public const int LinkedView = 18;
-    public const int Position = 19;
-    public const int PositionListener = 20;
-    public const int Rotation = 21;
-    public const int RotationListener = 22;
-    public const int Scale = 23;
-    public const int ScaleListener = 24;
-    public const int ScaleTo = 25;
-    public const int Speed = 26;
-    public const int StableBubble = 27;
-    public const int Throwable = 28;
-    public const int Thrown = 29;
-    public const int TranslateTo = 30;
-    public const int Trigger2DEvent = 31;
-    public const int Trigger2DEventListener = 32;
-    public const int TriggerEnter2D = 33;
-    public const int TriggerEnter2DListener = 34;
-    public const int TriggerExit2D = 35;
-    public const int TriggerExit2DListener = 36;
-    public const int UnstableBubble = 37;
+    public const int CollidedWithBubble = 9;
+    public const int Destroyed = 10;
+    public const int DestroyedListener = 11;
+    public const int Direction = 12;
+    public const int EntityTag = 13;
+    public const int EntityTagIndexer = 14;
+    public const int GameEvent = 15;
+    public const int GameStarted = 16;
+    public const int Layer = 17;
+    public const int LayerListener = 18;
+    public const int LinkedView = 19;
+    public const int Position = 20;
+    public const int PositionListener = 21;
+    public const int Rotation = 22;
+    public const int RotationListener = 23;
+    public const int Scale = 24;
+    public const int ScaleListener = 25;
+    public const int ScaleTo = 26;
+    public const int Speed = 27;
+    public const int StableBubble = 28;
+    public const int Throwable = 29;
+    public const int Thrown = 30;
+    public const int TranslateTo = 31;
+    public const int Trigger2DEvent = 32;
+    public const int Trigger2DEventListener = 33;
+    public const int TriggerEnter2D = 34;
+    public const int TriggerEnter2DListener = 35;
+    public const int TriggerExit2D = 36;
+    public const int TriggerExit2DListener = 37;
+    public const int UnstableBubble = 38;
 
-    public const int TotalComponents = 38;
+    public const int TotalComponents = 39;
 
     public static readonly string[] componentNames = {
         "AnyGameEventListener",
@@ -59,7 +60,6 @@ public static class GameComponentsLookup {
         "BubbleProjectileInserted",
         "BubbleSlot",
         "BubbleSlotIndexer",
-        "BubbleSlotLink",
         "CollidedWithBubble",
         "Destroyed",
         "DestroyedListener",
@@ -68,6 +68,8 @@ public static class GameComponentsLookup {
         "EntityTagIndexer",
         "GameEvent",
         "GameStarted",
+        "Layer",
+        "LayerListener",
         "LinkedView",
         "Position",
         "PositionListener",
@@ -100,7 +102,6 @@ public static class GameComponentsLookup {
         typeof(BubbleProjectileInserted),
         typeof(BubbleSlotComponent),
         typeof(BubbleSlotIndexerComponent),
-        typeof(BubbleSlotLinkComponent),
         typeof(CollidedWithBubbleComponent),
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),
@@ -109,6 +110,8 @@ public static class GameComponentsLookup {
         typeof(EntityTagIndexer),
         typeof(GameEventComponent),
         typeof(GameStartedComponent),
+        typeof(LayerComponent),
+        typeof(LayerListenerComponent),
         typeof(LinkedViewComponent),
         typeof(PositionComponent),
         typeof(PositionListenerComponent),

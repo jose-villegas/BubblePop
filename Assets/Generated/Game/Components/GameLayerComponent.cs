@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public BubbleSlotLinkComponent bubbleSlotLink { get { return (BubbleSlotLinkComponent)GetComponent(GameComponentsLookup.BubbleSlotLink); } }
-    public bool hasBubbleSlotLink { get { return HasComponent(GameComponentsLookup.BubbleSlotLink); } }
+    public LayerComponent layer { get { return (LayerComponent)GetComponent(GameComponentsLookup.Layer); } }
+    public bool hasLayer { get { return HasComponent(GameComponentsLookup.Layer); } }
 
-    public void AddBubbleSlotLink(GameEntity newValue) {
-        var index = GameComponentsLookup.BubbleSlotLink;
-        var component = (BubbleSlotLinkComponent)CreateComponent(index, typeof(BubbleSlotLinkComponent));
+    public void AddLayer(int newValue) {
+        var index = GameComponentsLookup.Layer;
+        var component = (LayerComponent)CreateComponent(index, typeof(LayerComponent));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceBubbleSlotLink(GameEntity newValue) {
-        var index = GameComponentsLookup.BubbleSlotLink;
-        var component = (BubbleSlotLinkComponent)CreateComponent(index, typeof(BubbleSlotLinkComponent));
+    public void ReplaceLayer(int newValue) {
+        var index = GameComponentsLookup.Layer;
+        var component = (LayerComponent)CreateComponent(index, typeof(LayerComponent));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveBubbleSlotLink() {
-        RemoveComponent(GameComponentsLookup.BubbleSlotLink);
+    public void RemoveLayer() {
+        RemoveComponent(GameComponentsLookup.Layer);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherBubbleSlotLink;
+    static Entitas.IMatcher<GameEntity> _matcherLayer;
 
-    public static Entitas.IMatcher<GameEntity> BubbleSlotLink {
+    public static Entitas.IMatcher<GameEntity> Layer {
         get {
-            if (_matcherBubbleSlotLink == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.BubbleSlotLink);
+            if (_matcherLayer == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Layer);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherBubbleSlotLink = matcher;
+                _matcherLayer = matcher;
             }
 
-            return _matcherBubbleSlotLink;
+            return _matcherLayer;
         }
     }
 }

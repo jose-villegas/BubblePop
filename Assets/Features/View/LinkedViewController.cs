@@ -3,8 +3,7 @@ using Entitas.Unity;
 using UnityEngine;
 
 public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionListener, IRotationListener,
-    IScaleListener,
-    IDestroyedListener
+    IScaleListener, IDestroyedListener, ILayerListener
 {
     public IEntity LinkedEntity { get; private set; }
 
@@ -38,6 +37,7 @@ public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionLis
         gameEntity.AddPositionListener(this);
         gameEntity.AddRotationListener(this);
         gameEntity.AddScaleListener(this);
+        gameEntity.AddLayerListener(this);
         gameEntity.AddLinkedView(this);
 
         if (gameEntity.hasPosition)
@@ -48,6 +48,9 @@ public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionLis
 
         if (gameEntity.hasRotation)
             transform.rotation = gameEntity.rotation.Value;
+
+        if (gameEntity.hasLayer)
+            gameObject.layer = gameEntity.layer.Value;
     }
 
     public void OnPosition(GameEntity entity, Vector3 value)
@@ -71,5 +74,10 @@ public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionLis
 
         LinkedEntity.Destroy();
         Destroy(gameObject);
+    }
+
+    public void OnLayer(GameEntity entity, int value)
+    {
+        gameObject.layer = value;
     }
 }

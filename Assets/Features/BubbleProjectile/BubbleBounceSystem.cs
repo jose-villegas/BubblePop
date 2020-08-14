@@ -6,46 +6,39 @@ using UnityEngine;
 /// This system detects when a thrown bubble collider with one of the bounding limits
 /// changing its direction to bounce
 /// </summary>
-public class BubbleBounceSystem : ReactiveSystem<GameEntity>, ITriggerEnter2DListener
+public class BubbleBounceSystem : IExecuteSystem
 {
     private readonly Contexts _contexts;
     private IGroup<GameEntity> _group;
+    private int _limitsLayer;
+    private IGameConfiguration _configuration;
 
-    public BubbleBounceSystem(Contexts contexts) : base(contexts.game)
+    public BubbleBounceSystem(Contexts contexts)
     {
         _contexts = contexts;
-
+        _configuration = _contexts.configuration.gameConfiguration.value;
+        _limitsLayer = LayerMask.GetMask("Limits");
         _group = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Bubble, GameMatcher.Thrown));
     }
 
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    public void Execute()
     {
-        return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Bubble, GameMatcher.Thrown));
-    }
-
-    protected override bool Filter(GameEntity entity)
-    {
-        return entity.isBubble && entity.isThrown;
-    }
-
-    protected override void Execute(List<GameEntity> entities)
-    {
-        foreach (var gameEntity in entities)
+        foreach (var gameEntity in _group)
         {
-            gameEntity.AddTriggerEnter2DListener(this);
-        }
-    }
+            // we using this function because, unity default trigger detection was all fuzzy, this detects immediately
+            var colliders = Physics2D.OverlapCircleAll(gameEntity.position.Value, _configuration.OverlapCircleRadius,
+                _limitsLayer);
 
-    public void OnTriggerEnter2D(GameEntity entity, Collider2D value)
-    {
-        var tag = value.tag;
+            foreach (var collider in colliders)
+            {
+                // we have collided with a limit
+                if (collider.tag != "LimitLeft" && collider.tag != "LimitRight") continue;
 
-        // we have collided with a limit
-        if (tag == "LimitLeft" || tag == "LimitRight" && entity.isThrown)
-        {
-            var currentDirection = entity.direction.Value;
-            var newDirection = Vector3.Reflect(currentDirection, tag == "LimitRight" ? Vector3.left : Vector3.right);
-            entity.ReplaceDirection(newDirection);
+                var currentDirection = gameEntity.direction.Value;
+                var newDirection = Vector3.Reflect(currentDirection,
+                    collider.tag == "LimitRight" ? Vector3.left : Vector3.right);
+                gameEntity.ReplaceDirection(newDirection);
+            }
         }
     }
 }

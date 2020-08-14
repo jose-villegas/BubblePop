@@ -47,4 +47,6 @@ public interface IGameConfiguration
 
     Vector3 NextBubbleScale { get; }
 
+    float OverlapCircleRadius { get; }
+
 }

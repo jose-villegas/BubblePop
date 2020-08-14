@@ -62,9 +62,10 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyGameS
         _nextBubble.isBubble = true;
         _nextBubble.isUnstableBubble = true;
 
-        _nextBubble.AddAsset("Bubble");
         _nextBubble.AddPosition(Vector3.up * _configuration.ProjectileBubblesHeight + Vector3.left);
         _nextBubble.AddScale(_configuration.NextBubbleScale);
+        _nextBubble.AddLayer(LayerMask.NameToLayer("FlyingBubble"));
+        _nextBubble.AddAsset("Bubble");
     }
 
     private void CreateBubbleToThrow()
@@ -75,9 +76,11 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyGameS
         e.isBubble = true;
         e.isUnstableBubble = true;
 
-        e.AddAsset("Bubble");
+
         e.AddPosition(Vector3.up * _configuration.ProjectileBubblesHeight);
         e.AddScale(_configuration.BubbleScale);
         e.AddSpeed(_configuration.ProjectileSpeed);
+        e.AddLayer(LayerMask.NameToLayer("FlyingBubble"));
+        e.AddAsset("Bubble");
     }
 }

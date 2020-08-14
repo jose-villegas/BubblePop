@@ -16,12 +16,12 @@ public class BubbleWorldPositionSystem : ReactiveSystem<GameEntity>
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.BubbleSlotLink);
+        return context.CreateCollector(GameMatcher.BubbleSlot);
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isBubble && entity.hasBubbleSlotLink;
+        return entity.isBubble && entity.hasBubbleSlot;
     }
 
     protected override void Execute(List<GameEntity> entities)
@@ -31,8 +31,7 @@ public class BubbleWorldPositionSystem : ReactiveSystem<GameEntity>
 
         foreach (var gameEntity in entities)
         {
-            var slotLink = gameEntity.bubbleSlotLink.Value;
-            var slot = slotLink.bubbleSlot.Value;
+            var slot = gameEntity.bubbleSlot.Value;
 
             var position = new Vector3
             (

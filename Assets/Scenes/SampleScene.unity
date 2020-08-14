@@ -489,7 +489,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 642594342}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Limits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -601,7 +601,7 @@ GameObject:
   - component: {fileID: 895488425}
   - component: {fileID: 895488427}
   - component: {fileID: 895488426}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: LimitRight
   m_Icon: {fileID: 0}
@@ -738,7 +738,7 @@ GameObject:
   - component: {fileID: 1237750109}
   - component: {fileID: 1237750111}
   - component: {fileID: 1237750110}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: LimitLeft
   m_Icon: {fileID: 0}

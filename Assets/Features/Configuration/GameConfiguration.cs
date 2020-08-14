@@ -12,6 +12,7 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     [SerializeField] private float _projectileSpeed;
     [SerializeField] private Vector3 bubbleScale;
     [SerializeField] private Vector3 nextBubbleScale;
+    [SerializeField] private float _overlapCircleRadius;
 
     public List<int> PossibleBubbleValues => _possibleBubbleValues;
 
@@ -28,4 +29,6 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public Vector3 BubbleScale => bubbleScale;
 
     public Vector3 NextBubbleScale => nextBubbleScale;
+
+    public float OverlapCircleRadius => _overlapCircleRadius;
 }
