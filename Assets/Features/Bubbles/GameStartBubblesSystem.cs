@@ -2,6 +2,9 @@
 using Entitas;
 using UnityEngine;
 
+/// <summary>
+/// This system creates the initial and assigns their slot
+/// </summary>
 public class GameStartBubblesSystem : ReactiveSystem<GameEntity>
 {
     readonly Contexts _contexts;
@@ -41,8 +44,10 @@ public class GameStartBubblesSystem : ReactiveSystem<GameEntity>
             // create initial bubbles
             var e = _contexts.game.CreateEntity();
             e.isBubble = true;
+            e.isStableBubble = true;
+
+            e.AddPosition(Vector3.zero);
             e.AddAsset("Bubble");
-            e.AddPosition(new Vector3(index.x, index.y));
             // establish link with slot space
             var slotEntity = indexer.Value[index];
             e.AddBubbleSlotLink(slotEntity);

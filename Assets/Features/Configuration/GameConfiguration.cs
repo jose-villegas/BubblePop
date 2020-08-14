@@ -5,9 +5,15 @@ using UnityEngine;
 public class GameConfiguration : ScriptableObject, IGameConfiguration
 {
     [SerializeField] private List<int> _possibleBubbleValues;
-    [SerializeField] private int initialRowCount;
+    [SerializeField] private int _initialRowCount;
+    [SerializeField] private Vector2 _bubblesSeparation;
+    [SerializeField] private float _projectileBubblesHeight;
 
     public List<int> PossibleBubbleValues => _possibleBubbleValues;
 
-    public int InitialRowCount => initialRowCount;
+    public int InitialRowCount => _initialRowCount;
+
+    public Vector2 BubblesSeparation => _bubblesSeparation;
+
+    public float ProjectileBubblesHeight => _projectileBubblesHeight;
 }

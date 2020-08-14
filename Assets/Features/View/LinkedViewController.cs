@@ -2,7 +2,8 @@
 using Entitas.Unity;
 using UnityEngine;
 
-public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionListener, IRotationListener, IScaleListener,
+public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionListener, IRotationListener,
+    IScaleListener,
     IDestroyedListener
 {
     protected GameEntity _entity;
@@ -35,8 +36,14 @@ public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionLis
         _entity.AddRotationListener(this);
         _entity.AddScaleListener(this);
 
-        var pos = _entity.position.Value;
-        transform.localPosition = pos;
+        if (_entity.hasPosition)
+            transform.localPosition = _entity.position.Value;
+
+        if (_entity.hasScale)
+            transform.localScale = _entity.scale.Value;
+
+        if (_entity.hasRotation)
+            transform.rotation = _entity.rotation.Value;
     }
 
     public void OnPosition(GameEntity entity, Vector3 value)

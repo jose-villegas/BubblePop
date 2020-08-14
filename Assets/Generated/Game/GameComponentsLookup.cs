@@ -12,37 +12,46 @@ public static class GameComponentsLookup {
     public const int AnyGameStartedListener = 1;
     public const int Asset = 2;
     public const int Bubble = 3;
-    public const int BubbleNumber = 4;
-    public const int BubbleNumberListener = 5;
-    public const int BubbleSlot = 6;
-    public const int BubbleSlotIndexer = 7;
-    public const int BubbleSlotLink = 8;
-    public const int Destroyed = 9;
-    public const int DestroyedListener = 10;
-    public const int GameEvent = 11;
-    public const int GameStarted = 12;
-    public const int LinkedView = 13;
-    public const int Position = 14;
-    public const int PositionListener = 15;
-    public const int Rotation = 16;
-    public const int RotationListener = 17;
-    public const int Scale = 18;
-    public const int ScaleListener = 19;
+    public const int BubbleInserted = 4;
+    public const int BubbleInsertedListener = 5;
+    public const int BubbleNumber = 6;
+    public const int BubbleNumberListener = 7;
+    public const int BubbleProjectile = 8;
+    public const int BubbleSlot = 9;
+    public const int BubbleSlotIndexer = 10;
+    public const int BubbleSlotLink = 11;
+    public const int Destroyed = 12;
+    public const int DestroyedListener = 13;
+    public const int Direction = 14;
+    public const int GameEvent = 15;
+    public const int GameStarted = 16;
+    public const int LinkedView = 17;
+    public const int Position = 18;
+    public const int PositionListener = 19;
+    public const int Rotation = 20;
+    public const int RotationListener = 21;
+    public const int Scale = 22;
+    public const int ScaleListener = 23;
+    public const int StableBubble = 24;
 
-    public const int TotalComponents = 20;
+    public const int TotalComponents = 25;
 
     public static readonly string[] componentNames = {
         "AnyGameEventListener",
         "AnyGameStartedListener",
         "Asset",
         "Bubble",
+        "BubbleInserted",
+        "BubbleInsertedListener",
         "BubbleNumber",
         "BubbleNumberListener",
+        "BubbleProjectile",
         "BubbleSlot",
         "BubbleSlotIndexer",
         "BubbleSlotLink",
         "Destroyed",
         "DestroyedListener",
+        "Direction",
         "GameEvent",
         "GameStarted",
         "LinkedView",
@@ -51,7 +60,8 @@ public static class GameComponentsLookup {
         "Rotation",
         "RotationListener",
         "Scale",
-        "ScaleListener"
+        "ScaleListener",
+        "StableBubble"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -59,13 +69,17 @@ public static class GameComponentsLookup {
         typeof(AnyGameStartedListenerComponent),
         typeof(AssetComponent),
         typeof(BubbleComponent),
+        typeof(BubbleInsertedComponent),
+        typeof(BubbleInsertedListenerComponent),
         typeof(BubbleNumberComponent),
         typeof(BubbleNumberListenerComponent),
+        typeof(BubbleProjectileComponent),
         typeof(BubbleSlotComponent),
         typeof(BubbleSlotIndexerComponent),
         typeof(BubbleSlotLinkComponent),
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),
+        typeof(DirectionComponent),
         typeof(GameEventComponent),
         typeof(GameStartedComponent),
         typeof(LinkedViewComponent),
@@ -74,6 +88,7 @@ public static class GameComponentsLookup {
         typeof(RotationComponent),
         typeof(RotationListenerComponent),
         typeof(ScaleComponent),
-        typeof(ScaleListenerComponent)
+        typeof(ScaleListenerComponent),
+        typeof(StableBubbleComponent)
     };
 }

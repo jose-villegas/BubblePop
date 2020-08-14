@@ -17,7 +17,8 @@ public class BubbleSlotInitializerSystem : IInitializeSystem
 
     public void Initialize()
     {
-        var iterator = new BubbleSlotIterator(6, 8);
+        var configuration = _contexts.configuration.gameConfiguration.value;
+        var iterator = new BubbleSlotIterator(6, configuration.InitialRowCount);
 
         // create indexer
         var indexerEntity = _contexts.game.CreateEntity();

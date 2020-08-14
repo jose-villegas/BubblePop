@@ -5,5 +5,8 @@
         Add(new ViewFeature(contexts));
         Add(new BubblesFeature(contexts));
         Add(new SlotsFeature(contexts));
+
+        // events
+        Add(new GameEventSystems(contexts));
     }
 }

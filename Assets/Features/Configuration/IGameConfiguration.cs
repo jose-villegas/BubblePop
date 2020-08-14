@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Entitas.CodeGeneration.Attributes;
+using UnityEngine;
 
 [Configuration, Unique, ComponentName("GameConfiguration")]
 public interface IGameConfiguration
@@ -12,4 +13,8 @@ public interface IGameConfiguration
     /// starting bubbles at game start
     /// </summary>
     int InitialRowCount { get; }
+
+    Vector2 BubblesSeparation { get; }
+
+    float ProjectileBubblesHeight { get; }
 }
