@@ -155,5 +155,7 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
             var e = _contexts.game.CreateEntity();
             e.isBubbleProjectileReload = true;
         }
+
+        entity.OnComponentRemoved -= OnDynamicsCompleted;
     }
 }
