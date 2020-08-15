@@ -5,5 +5,6 @@
         Add(new GameStartBubblesSystem(contexts));
         Add(new BubbleWorldPositionSystem(contexts));
         Add(new BubbleNumberingSystem(contexts));
+        Add(new BubbleNudgeAnimationSystem(contexts));
     }
 }

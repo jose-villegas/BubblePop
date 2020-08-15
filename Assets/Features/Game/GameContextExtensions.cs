@@ -140,4 +140,22 @@ public static class GameContextExtensions
         );
         return position;
     }
+
+    public static void CreateStabeBubble(this GameContext context, IGameConfiguration configuration, Vector2Int slotIndex)
+    {
+        var e = context.CreateEntity();
+        e.isBubble = true;
+        e.isStableBubble = true;
+
+        var scaleSpeed = Random.Range(configuration.SpawnScaleSpeedRange.x, configuration.SpawnScaleSpeedRange.y);
+        // add components
+        e.AddPosition(Vector3.zero);
+        e.AddScale(Vector3.zero);
+        e.AddScaleTo(scaleSpeed, configuration.BubbleScale);
+        e.AddLayer(LayerMask.NameToLayer("StableBubbles"));
+        e.AddAsset("Bubble");
+
+        // establish link with slot entity
+        e.AddBubbleSlot(slotIndex);
+    }
 }

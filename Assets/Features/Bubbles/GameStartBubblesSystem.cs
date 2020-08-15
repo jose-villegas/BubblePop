@@ -31,18 +31,7 @@ public class GameStartBubblesSystem : ReactiveSystem<GameEntity>
         foreach (Vector2Int slotIndex in iterator)
         {
             // create initial bubbles
-            var e = _contexts.game.CreateEntity();
-            e.isBubble = true;
-            e.isStableBubble = true;
-
-            // add components
-            e.AddPosition(Vector3.zero);
-            e.AddScale(configuration.BubbleScale);
-            e.AddLayer(LayerMask.NameToLayer("StableBubbles"));
-            e.AddAsset("Bubble");
-
-            // establish link with slot entity
-            e.AddBubbleSlot(slotIndex);
+            _contexts.game.CreateStabeBubble(configuration, slotIndex);
         }
     }
 }

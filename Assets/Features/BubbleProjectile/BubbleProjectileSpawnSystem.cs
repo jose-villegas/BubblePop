@@ -50,7 +50,7 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbl
 
     private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)
     {
-        _nextBubble.OnComponentRemoved -= OnDynamicsCompleted;
+        entity.OnComponentRemoved -= OnDynamicsCompleted;
 
         if (component is TranslateToComponent || component is ScaleToComponent)
         {

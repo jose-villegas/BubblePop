@@ -29,6 +29,8 @@ public interface IGameConfiguration
     /// </summary>
     int InitialRowCount { get; }
 
+    Vector2 SpawnScaleSpeedRange { get; }
+
     /// <summary>
     /// This determines the separation scale between
     /// bubbles set in slots, the instancing slot position
@@ -71,4 +73,6 @@ public interface IGameConfiguration
     Vector2 ScrollingBubblePositionBounds { get; }
 
     float ScrollingSpeed { get; }
+    float NudgeDistance { get; }
+    float NudgeSpeed { get; }
 }

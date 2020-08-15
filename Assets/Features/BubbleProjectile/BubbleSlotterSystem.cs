@@ -66,6 +66,18 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
 
             // set to merge after movement
             gameEntity.OnComponentRemoved += OnDynamicsCompleted;
+
+            // find which neighbors to nudge
+            var neighbors = _contexts.game.GetBubbleNeighbors(gameEntity.bubbleSlot);
+
+            foreach (var neighbor in neighbors)
+            {
+                if (neighbor.bubbleNumber.Value != gameEntity.bubbleNumber.Value)
+                {
+                    var nudgeDir = (neighbor.position.Value - finalPosition).normalized;
+                    neighbor.ReplaceBubbleNudge(nudgeDir, neighbor.position.Value, false);
+                }
+            }
         }
     }
 

@@ -13,6 +13,8 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     [Header("Bubble Instancing")] [SerializeField]
     private int _initialRowCount;
 
+    [SerializeField] private Vector2 _spawnScaleSpeedRange;
+
     [Header("Bubble Transform")] [SerializeField]
     private float _slotPositioningVerticalHeight;
 
@@ -32,6 +34,11 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
 
     [Header("Scrolling")] [SerializeField] private Vector2 _scrollingBubblePositionBounds;
     [SerializeField] private float _scrollingSpeed;
+
+    [Header("Feedback")]
+    [SerializeField] private float _nudgeDistance;
+
+    [SerializeField] private float _nudgeSpeed;
 
     public List<ExponentConfiguration> ExponentConfigurations => _exponentConfigurations;
 
@@ -62,4 +69,10 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public Vector2 ScrollingBubblePositionBounds => _scrollingBubblePositionBounds;
 
     public float ScrollingSpeed => _scrollingSpeed;
+
+    public float NudgeDistance => _nudgeDistance;
+
+    public float NudgeSpeed => _nudgeSpeed;
+
+    public Vector2 SpawnScaleSpeedRange => _spawnScaleSpeedRange;
 }
