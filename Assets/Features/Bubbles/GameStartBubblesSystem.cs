@@ -28,9 +28,8 @@ public class GameStartBubblesSystem : ReactiveSystem<GameEntity>
         var configuration = _contexts.configuration.gameConfiguration.value;
         var iterator = new BubbleSlotIterator(6, configuration.InitialRowCount);
 
-        foreach (Vector2Int slot in iterator)
+        foreach (Vector2Int slotIndex in iterator)
         {
-            var modifiedIndex = new Vector2Int(slot.x, slot.y);
             // create initial bubbles
             var e = _contexts.game.CreateEntity();
             e.isBubble = true;
@@ -43,7 +42,7 @@ public class GameStartBubblesSystem : ReactiveSystem<GameEntity>
             e.AddAsset("Bubble");
 
             // establish link with slot entity
-            e.AddBubbleSlot(modifiedIndex);
+            e.AddBubbleSlot(slotIndex);
         }
     }
 }

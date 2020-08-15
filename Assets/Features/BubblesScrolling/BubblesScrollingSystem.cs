@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Entitas;
 using UnityEngine;
 
@@ -71,14 +72,55 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
     private void HandleScrollDownCase()
     {
         HandleScroll(-1);
-        // create line up top
 
+        // create line up top
+        CreateNewLine();
     }
 
     private void HandleScrollUpCase()
     {
         HandleScroll(1);
+
+        // remove top-most line
+        RemoveLine();
     }
+
+    private void RemoveLine()
+    {
+        var limit = _contexts.game.bubbleSlotLimitsIndex.MaximumVertical;
+        var iterator = new BubbleSlotIterator(6, limit + 1, limit);
+
+        foreach (Vector2Int slotIndex in iterator)
+        {
+            var entity = _contexts.game.bubbleSlotIndexer.Value[slotIndex] as GameEntity;
+            entity.isDestroyed = true;
+        }
+    }
+
+    private void CreateNewLine()
+    {
+        var limit = _contexts.game.bubbleSlotLimitsIndex.MaximumVertical;
+        var configuration = _contexts.configuration.gameConfiguration.value;
+        var iterator = new BubbleSlotIterator(6, limit + 2, limit + 1);
+
+        foreach (Vector2Int slotIndex in iterator)
+        {
+            // create initial bubbles
+            var e = _contexts.game.CreateEntity();
+            e.isBubble = true;
+            e.isStableBubble = true;
+
+            // add components
+            e.AddPosition(Vector3.zero);
+            e.AddScale(configuration.BubbleScale);
+            e.AddLayer(LayerMask.NameToLayer("StableBubbles"));
+            e.AddAsset("Bubble");
+
+            // establish link with slot entity
+            e.AddBubbleSlot(slotIndex);
+        }
+    }
+
 
     private void HandleScroll(float sign)
     {
