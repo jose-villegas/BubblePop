@@ -27,6 +27,12 @@ public class BubbleTraceController : MonoBehaviour, IBubbleTraceListener
 
     public void OnBubbleTrace(GameEntity entity, List<Vector3> values)
     {
+        if (values == null || values.Count == 0)
+        {
+            _lineRenderer.positionCount = 0;
+            return;
+        }
+
         _lineRenderer.positionCount = values.Count;
         _lineRenderer.SetPositions(values.ToArray());
     }

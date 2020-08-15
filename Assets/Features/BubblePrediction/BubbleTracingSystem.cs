@@ -21,8 +21,6 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
 
         _group = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Bubble, GameMatcher.Throwable));
         _hitLayer = LayerMask.GetMask("Limits", "StableBubbles");
-
-        // create trace component
     }
 
     public void Execute()
@@ -55,11 +53,16 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
 
                         if (hit.collider.gameObject.layer == LayerMask.NameToLayer("StableBubbles"))
                         {
+                            // obtain bubble entity
+                            var e = hit.collider.GetComponent<ILinkedView>();
+                            _contexts.game.ReplaceBubblePredictionHit(e.LinkedEntity as GameEntity, hit.point);
                             break;
                         }
                     }
                     else
                     {
+                        trace = null;
+                        _contexts.game.ReplaceBubblePredictionHit(null, direction);
                         break;
                     }
 
@@ -72,13 +75,18 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
 
                 _contexts.game.ReplaceBubbleTrace(trace);
 
-                for (int i = 1; i < _contexts.game.bubbleTrace.Values.Count; i++)
+#if UNITY_EDITOR
+                if (_contexts.game.bubbleTrace.Values != null && _contexts.game.bubbleTrace.Values.Count > 0)
                 {
-                    var point0 = _contexts.game.bubbleTrace.Values[i - 1];
-                    var point1 = _contexts.game.bubbleTrace.Values[i];
+                    for (int i = 1; i < _contexts.game.bubbleTrace.Values.Count; i++)
+                    {
+                        var point0 = _contexts.game.bubbleTrace.Values[i - 1];
+                        var point1 = _contexts.game.bubbleTrace.Values[i];
 
-                    Debug.DrawLine(point0, point1);
+                        Debug.DrawLine(point0, point1);
+                    }
                 }
+#endif
             }
         }
     }

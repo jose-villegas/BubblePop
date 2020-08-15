@@ -16,49 +16,51 @@ public static class GameComponentsLookup {
     public const int Bubble = 5;
     public const int BubbleNumber = 6;
     public const int BubbleNumberListener = 7;
-    public const int BubbleProjectileReload = 8;
-    public const int BubbleSlot = 9;
-    public const int BubbleSlotIndexer = 10;
-    public const int BubbleSlotLimitsIndex = 11;
-    public const int BubblesReadyToMerge = 12;
-    public const int BubblesScrollCheck = 13;
-    public const int BubbleTrace = 14;
-    public const int BubbleTraceListener = 15;
-    public const int BubbleVerticalOffset = 16;
-    public const int BubbleWaitingMerge = 17;
-    public const int CollidedWithBubble = 18;
-    public const int Destroyed = 19;
-    public const int DestroyedListener = 20;
-    public const int Direction = 21;
-    public const int EntityTag = 22;
-    public const int EntityTagIndexer = 23;
-    public const int GameEvent = 24;
-    public const int GameStarted = 25;
-    public const int Layer = 26;
-    public const int LayerListener = 27;
-    public const int LinkedView = 28;
-    public const int Moving = 29;
-    public const int Position = 30;
-    public const int PositionListener = 31;
-    public const int Rotation = 32;
-    public const int RotationListener = 33;
-    public const int Scale = 34;
-    public const int ScaleListener = 35;
-    public const int ScaleTo = 36;
-    public const int Speed = 37;
-    public const int StableBubble = 38;
-    public const int Throwable = 39;
-    public const int Thrown = 40;
-    public const int TranslateTo = 41;
-    public const int Trigger2DEvent = 42;
-    public const int Trigger2DEventListener = 43;
-    public const int TriggerEnter2D = 44;
-    public const int TriggerEnter2DListener = 45;
-    public const int TriggerExit2D = 46;
-    public const int TriggerExit2DListener = 47;
-    public const int UnstableBubble = 48;
+    public const int BubblePredictionHit = 8;
+    public const int BubblePredictionHitListener = 9;
+    public const int BubbleProjectileReload = 10;
+    public const int BubbleSlot = 11;
+    public const int BubbleSlotIndexer = 12;
+    public const int BubbleSlotLimitsIndex = 13;
+    public const int BubblesReadyToMerge = 14;
+    public const int BubblesScrollCheck = 15;
+    public const int BubbleTrace = 16;
+    public const int BubbleTraceListener = 17;
+    public const int BubbleVerticalOffset = 18;
+    public const int BubbleWaitingMerge = 19;
+    public const int CollidedWithBubble = 20;
+    public const int Destroyed = 21;
+    public const int DestroyedListener = 22;
+    public const int Direction = 23;
+    public const int EntityTag = 24;
+    public const int EntityTagIndexer = 25;
+    public const int GameEvent = 26;
+    public const int GameStarted = 27;
+    public const int Layer = 28;
+    public const int LayerListener = 29;
+    public const int LinkedView = 30;
+    public const int Moving = 31;
+    public const int Position = 32;
+    public const int PositionListener = 33;
+    public const int Rotation = 34;
+    public const int RotationListener = 35;
+    public const int Scale = 36;
+    public const int ScaleListener = 37;
+    public const int ScaleTo = 38;
+    public const int Speed = 39;
+    public const int StableBubble = 40;
+    public const int Throwable = 41;
+    public const int Thrown = 42;
+    public const int TranslateTo = 43;
+    public const int Trigger2DEvent = 44;
+    public const int Trigger2DEventListener = 45;
+    public const int TriggerEnter2D = 46;
+    public const int TriggerEnter2DListener = 47;
+    public const int TriggerExit2D = 48;
+    public const int TriggerExit2DListener = 49;
+    public const int UnstableBubble = 50;
 
-    public const int TotalComponents = 49;
+    public const int TotalComponents = 51;
 
     public static readonly string[] componentNames = {
         "AnyBubbleProjectileReloadListener",
@@ -69,6 +71,8 @@ public static class GameComponentsLookup {
         "Bubble",
         "BubbleNumber",
         "BubbleNumberListener",
+        "BubblePredictionHit",
+        "BubblePredictionHitListener",
         "BubbleProjectileReload",
         "BubbleSlot",
         "BubbleSlotIndexer",
@@ -121,6 +125,8 @@ public static class GameComponentsLookup {
         typeof(BubbleComponent),
         typeof(BubbleNumberComponent),
         typeof(BubbleNumberListenerComponent),
+        typeof(BubblePredictionHit),
+        typeof(BubblePredictionHitListenerComponent),
         typeof(BubbleProjectileReload),
         typeof(BubbleSlotComponent),
         typeof(BubbleSlotIndexerComponent),

@@ -18,7 +18,7 @@ public class BubbleWorldPositionSystem : ReactiveSystem<GameEntity>
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.BubbleSlot);
+        return context.CreateCollector(GameMatcher.AllOf(GameMatcher.BubbleSlot, GameMatcher.Bubble));
     }
 
     protected override bool Filter(GameEntity entity)

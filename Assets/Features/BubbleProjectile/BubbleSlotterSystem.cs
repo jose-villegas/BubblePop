@@ -52,6 +52,9 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
                 continue;
             }
 
+            // check if the predicted index is out of bounds
+            //if (newSlotIndex.x < 0 || newSlotIndex.x > 5) continue;
+
             var finalPosition = newSlotIndex.IndexToPosition(_contexts.game, _configuration);
 
             // new slot to store this bubble
