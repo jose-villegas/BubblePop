@@ -28,10 +28,13 @@ public class MergeMarkingSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
+        var foundMatch = false;
+        var matchingNumber = 0;
+
         foreach (var item in entities)
         {
             var neighbors = _contexts.game.GetBubbleNeighbors(item.bubbleSlot);
-            var foundMatch = false;
+            matchingNumber = item.bubbleNumber.Value;
 
             // check which ones match the merge number
             foreach (var neighbor in neighbors)
@@ -43,18 +46,14 @@ public class MergeMarkingSystem : ReactiveSystem<GameEntity>
                     foundMatch = true;
                 }
             }
+        }
 
-            // since there is no more matching neighbors, it's ready for merging
-            if (!foundMatch)
-            {
-                var group = _contexts.game.GetGroup(GameMatcher.BubbleWaitingMerge);
-
-                foreach (var gameEntity in group.AsEnumerable().ToList())
-                {
-                    gameEntity.isBubbleWaitingMerge = false;
-                    gameEntity.isBubbleReadyToMerge = true;
-                }
-            }
+        // since there is no more matching neighbors, it's ready for merging
+        if (!foundMatch)
+        {
+            var e = _contexts.game.CreateEntity();
+            e.ReplaceBubblesReadyToMerge(matchingNumber);
+            Debug.Log("Match");
         }
     }
 }

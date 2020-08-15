@@ -23,26 +23,17 @@ public class BubbleWorldPositionSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isBubble && entity.hasBubbleSlot;
+        return entity.isBubble && entity.hasBubbleSlot && !entity.isMoving && !entity.isBubbleWaitingMerge;
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
         var screenWidth = Screen.width;
-        var configuration = _contexts.configuration.gameConfiguration.value;
-        var offset = _contexts.game.hasBubbleVerticalOffset ? _contexts.game.bubbleVerticalOffset.Value : 0;
 
         foreach (var gameEntity in entities)
         {
             var slot = gameEntity.bubbleSlot.Value;
-
-            var position = new Vector3
-            (
-                (slot.x - 5) * configuration.BubblesSeparation.x - configuration.BubblesSeparation.x / 2f,
-                slot.y * configuration.BubblesSeparation.y + _configuration.SlotPositioningVerticalHeight + offset,
-                0
-            );
-
+            var position = slot.IndexToPosition(_contexts.game, _configuration);
             gameEntity.ReplacePosition(position);
         }
     }

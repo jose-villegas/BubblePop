@@ -8,11 +8,13 @@ using UnityEngine;
 /// </summary>
 public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
 {
-    private Contexts _contexts;
+    private readonly Contexts _contexts;
+    private readonly IGameConfiguration _configuration;
 
     public BubbleSlotterSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
+        _configuration = _contexts.configuration.gameConfiguration.value;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -50,19 +52,29 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
                 continue;
             }
 
+            var finalPosition = newSlotIndex.IndexToPosition(_contexts.game, _configuration);
+
             // new slot to store this bubble
             gameEntity.ReplaceBubbleSlot(newSlotIndex);
 
+            // move to final position
+            gameEntity.AddTranslateTo(_configuration.ProjectileSpeed, finalPosition);
+            gameEntity.isMoving = true;
+
+            // set to merge after movement
+            gameEntity.OnComponentRemoved += OnDynamicsCompleted;
+        }
+    }
+
+    private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)
+    {
+        var gameEntity = (GameEntity) entity;
+
+        if (component is TranslateToComponent)
+        {
+            gameEntity.isMoving = false;
             // let the merge system now take charge
             gameEntity.isBubbleWaitingMerge = true;
-
-            // // todo: actually mark as stable when done merging
-            // gameEntity.ReplaceLayer(LayerMask.NameToLayer("StableBubbles"));
-            // gameEntity.isStableBubble = true;
-
-            // // send reload event
-            // var e = _contexts.game.CreateEntity();
-            // e.isBubbleProjectileReload = true;
         }
     }
 }

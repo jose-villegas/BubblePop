@@ -21,7 +21,7 @@ public class BubbleNumberingSystem : ReactiveSystem<GameEntity>
         foreach (var item in entities)
         {
             var power = Random.Range(1, _configuration.MaximumSpawnExponent + 1);
-            item.ReplaceBubbleNumber(1 << power);
+            item.AddBubbleNumber(1 << power);
         }
     }
 

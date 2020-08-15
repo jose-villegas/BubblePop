@@ -17,7 +17,7 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
         _contexts = contexts;
         _configuration = _contexts.configuration.gameConfiguration.value;
 
-        _group = _contexts.game.GetGroup(GameMatcher.BubbleSlot);
+        _group = _contexts.game.GetGroup(GameMatcher.StableBubble);
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -129,7 +129,7 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
         foreach (var bubble in _group)
         {
             var position = bubble.position.Value;
-            bubble.ReplaceTranslateTo(_configuration.ScrollingSpeed,
+            bubble.AddTranslateTo(_configuration.ScrollingSpeed,
                 position + _configuration.BubblesSeparation.y * Vector3.up * sign);
 
             // a single subscription should suffice
@@ -148,9 +148,12 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
 
     private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)
     {
-        entity.OnComponentRemoved -= OnDynamicsCompleted;
+        if (component is TranslateToComponent)
+        {
+            entity.OnComponentRemoved -= OnDynamicsCompleted;
 
-        var e = _contexts.game.CreateEntity();
-        e.isBubbleProjectileReload = true;
+            var e = _contexts.game.CreateEntity();
+            e.isBubbleProjectileReload = true;
+        }
     }
 }

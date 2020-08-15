@@ -12,7 +12,7 @@ public static class GameContextExtensions
         {
             var horizontalShift = 0;
 
-            /// top or bottom neighbors only increase horizontally by a single unit
+            // top or bottom neighbors only increase horizontally by a single unit
             if (i == -1 || i == 1)
             {
                 horizontalShift = 1;
@@ -108,10 +108,14 @@ public static class GameContextExtensions
 
     public static void ConvertToStableBubble(this GameEntity bubble)
     {
-        bubble.isBubbleReadyToMerge = false;
         bubble.isBubbleWaitingMerge = false;
         bubble.isStableBubble = true;
         bubble.ReplaceLayer(LayerMask.NameToLayer("StableBubbles"));
+
+        if (bubble.hasTranslateTo)
+        {
+            bubble.RemoveTranslateTo();
+        }
 
         if (bubble.hasBubbleChosenAsMergeTo)
         {
@@ -122,5 +126,18 @@ public static class GameContextExtensions
         {
             bubble.RemoveCollidedWithBubble();
         }
+    }
+
+    public static Vector3 IndexToPosition(this Vector2Int slot, GameContext context, IGameConfiguration configuration)
+    {
+        var offset = context.hasBubbleVerticalOffset ? context.bubbleVerticalOffset.Value : 0;
+
+        var position = new Vector3
+        (
+            (slot.x - 5) * configuration.BubblesSeparation.x - configuration.BubblesSeparation.x / 2f,
+            slot.y * configuration.BubblesSeparation.y + configuration.SlotPositioningVerticalHeight + offset,
+            0
+        );
+        return position;
     }
 }

@@ -29,7 +29,7 @@ public class BubbleSloIndexerSystem : ReactiveSystem<GameEntity>, IDestroyedList
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.BubbleSlot);
+        return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Bubble, GameMatcher.BubbleSlot));
     }
 
     protected override bool Filter(GameEntity entity)

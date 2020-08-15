@@ -11,35 +11,37 @@ public class ProcessReadyToMergeSystem : ReactiveSystem<GameEntity>
 {
     private readonly Contexts _contexts;
     private readonly IGameConfiguration _configuration;
+    private IGroup<GameEntity> _group;
 
     public ProcessReadyToMergeSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
         _configuration = contexts.configuration.gameConfiguration.value;
+        _group = _contexts.game.GetGroup(GameMatcher.BubbleWaitingMerge);
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.BubbleReadyToMerge);
+        return context.CreateCollector(GameMatcher.BubblesReadyToMerge);
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isBubble && entity.isBubbleReadyToMerge && entity.hasBubbleNumber;
+        return entity.hasBubblesReadyToMerge;
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
         var maxPriority = 0;
-        var matchingCount = entities.Count;
-        var mergingNumber = entities[0].bubbleNumber.Value;
+        var matchingCount = _group.count;
+        var mergingNumber = entities[0].bubblesReadyToMerge.Value;
 
         var finalNumber = Mathf.Min(mergingNumber << (matchingCount - 1), 1 << _configuration.MaximumExponent);
 
         // find which entity is neighboring the final number, the system prioritizes further merges
         var matchingPriorities = new List<GameEntity>();
 
-        foreach (var gameEntity in entities)
+        foreach (var gameEntity in _group)
         {
             var neighbors = _contexts.game.GetBubbleNeighbors(gameEntity.bubbleSlot);
 
@@ -72,11 +74,12 @@ public class ProcessReadyToMergeSystem : ReactiveSystem<GameEntity>
             }
         }
 
-        if (_contexts.game.hasBubbleChosenAsMergeTo)
-        {
-            _contexts.game.RemoveBubbleChosenAsMergeTo();
-        }
+        choosenEntity.ReplaceBubbleChosenAsMergeTo(finalNumber);
 
-        choosenEntity?.ReplaceBubbleChosenAsMergeTo(finalNumber);
+        // consume ready to merge
+        foreach (var gameEntity in entities)
+        {
+            gameEntity.Destroy();
+        }
     }
 }

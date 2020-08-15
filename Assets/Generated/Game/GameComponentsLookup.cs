@@ -17,10 +17,10 @@ public static class GameComponentsLookup {
     public const int BubbleNumber = 6;
     public const int BubbleNumberListener = 7;
     public const int BubbleProjectileReload = 8;
-    public const int BubbleReadyToMerge = 9;
-    public const int BubbleSlot = 10;
-    public const int BubbleSlotIndexer = 11;
-    public const int BubbleSlotLimitsIndex = 12;
+    public const int BubbleSlot = 9;
+    public const int BubbleSlotIndexer = 10;
+    public const int BubbleSlotLimitsIndex = 11;
+    public const int BubblesReadyToMerge = 12;
     public const int BubblesScrollCheck = 13;
     public const int BubbleVerticalOffset = 14;
     public const int BubbleWaitingMerge = 15;
@@ -68,10 +68,10 @@ public static class GameComponentsLookup {
         "BubbleNumber",
         "BubbleNumberListener",
         "BubbleProjectileReload",
-        "BubbleReadyToMerge",
         "BubbleSlot",
         "BubbleSlotIndexer",
         "BubbleSlotLimitsIndex",
+        "BubblesReadyToMerge",
         "BubblesScrollCheck",
         "BubbleVerticalOffset",
         "BubbleWaitingMerge",
@@ -118,10 +118,10 @@ public static class GameComponentsLookup {
         typeof(BubbleNumberComponent),
         typeof(BubbleNumberListenerComponent),
         typeof(BubbleProjectileReload),
-        typeof(BubbleReadyToMergeComponent),
         typeof(BubbleSlotComponent),
         typeof(BubbleSlotIndexerComponent),
         typeof(BubbleSlotLimitsIndexComponent),
+        typeof(BubblesReadyToMergeComponent),
         typeof(BubblesScrollCheckComponent),
         typeof(BubbleVerticalOffsetComponent),
         typeof(BubbleWaitingMergeComponent),

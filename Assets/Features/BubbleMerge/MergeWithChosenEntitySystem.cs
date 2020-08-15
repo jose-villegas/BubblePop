@@ -10,14 +10,14 @@ using UnityEngine;
 public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
 {
     private readonly Contexts _contexts;
-    private IGroup<GameEntity> _readyToMergeGroup;
+    private IGroup<GameEntity> _mergeGroup;
     private IGameConfiguration _configuration;
     private int _expectedDestroyCount;
 
     public MergeWithChosenEntitySystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
-        _readyToMergeGroup = _contexts.game.GetGroup(GameMatcher.BubbleReadyToMerge);
+        _mergeGroup = _contexts.game.GetGroup(GameMatcher.BubbleWaitingMerge);
         _configuration = _contexts.configuration.gameConfiguration.value;
     }
 
@@ -28,23 +28,28 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isBubbleReadyToMerge && entity.isBubble && entity.hasBubbleChosenAsMergeTo;
+        return entity.isBubble && entity.hasBubbleChosenAsMergeTo;
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
         var target = _contexts.game.bubbleChosenAsMergeToEntity;
 
-        if (_readyToMergeGroup.count > 1)
+        if (_mergeGroup.count > 1)
         {
-            _expectedDestroyCount = _readyToMergeGroup.count - 1;
+            _expectedDestroyCount = _mergeGroup.count - 1;
 
-            foreach (var readyBubble in _readyToMergeGroup.AsEnumerable().ToList())
+            foreach (var readyBubble in _mergeGroup.AsEnumerable().ToList())
             {
+                // no longer waiting to be merged
+                readyBubble.isBubbleWaitingMerge = false;
+
+                // avoid moving target
                 if (readyBubble == target) continue;
 
                 readyBubble.AddTranslateTo(_configuration.MergeTranslateSpeed, target.position.Value);
                 readyBubble.isMoving = true;
+
                 // wait for translation complete to removed merged bubbles
                 readyBubble.OnComponentRemoved += OnDynamicsCompleted;
                 readyBubble.OnDestroyEntity += OnReadyBubbleDestroyed;
@@ -52,11 +57,12 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
         }
         else
         {
-            foreach (var readyBubble in _readyToMergeGroup.AsEnumerable().ToList())
+            foreach (var readyBubble in _mergeGroup.AsEnumerable().ToList())
             {
                 readyBubble.ConvertToStableBubble();
             }
 
+            Debug.Log("ScrollCall");
             // trigger scroll check
             var e = _contexts.game.CreateEntity();
             e.isBubblesScrollCheck = true;
@@ -77,6 +83,7 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
                 var finalNumber = chosen.bubbleChosenAsMergeTo.Value;
                 chosen.ConvertToStableBubble();
                 chosen.ReplaceBubbleNumber(finalNumber);
+
                 // set chosen as waiting to merge, checking if there is further moves
                 chosen.isBubbleWaitingMerge = true;
             }
