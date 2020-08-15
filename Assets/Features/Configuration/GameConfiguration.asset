@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maximumExponent: 11
   _maximumSpawnExponent: 7
-  _initialRowCount: 8
+  _initialRowCount: 6
   _slotPositioningVerticalHeight: 1.65
   _bubblesSeparation: {x: 0.375, y: 0.65}
   bubbleScale: {x: 4, y: 4, z: 4}

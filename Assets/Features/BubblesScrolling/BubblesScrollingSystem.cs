@@ -71,6 +71,8 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
     private void HandleScrollDownCase()
     {
         HandleScroll(-1);
+        // create line up top
+
     }
 
     private void HandleScrollUpCase()

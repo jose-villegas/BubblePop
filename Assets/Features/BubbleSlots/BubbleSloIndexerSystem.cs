@@ -12,6 +12,7 @@ public class BubbleSloIndexerSystem : ReactiveSystem<GameEntity>, IDestroyedList
     readonly Contexts _contexts;
 
     private GameEntity _indexerEntity;
+    private GameEntity _limits;
 
     public BubbleSloIndexerSystem(Contexts contexts) : base(contexts.game)
     {
@@ -20,6 +21,10 @@ public class BubbleSloIndexerSystem : ReactiveSystem<GameEntity>, IDestroyedList
         // create indexer
         _indexerEntity = _contexts.game.CreateEntity();
         _indexerEntity.AddBubbleSlotIndexer(new Dictionary<Vector2Int, IEntity>());
+
+        // create limits
+        _limits = _contexts.game.CreateEntity();
+        _limits.ReplaceBubbleSlotLimitsIndex(int.MinValue, int.MaxValue);
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -40,6 +45,19 @@ public class BubbleSloIndexerSystem : ReactiveSystem<GameEntity>, IDestroyedList
             _indexerEntity.bubbleSlotIndexer.Value[gameEntity.bubbleSlot.Value] = gameEntity;
             // in case its destroyed
             gameEntity.AddDestroyedListener(this);
+
+            // update limits
+            if (gameEntity.bubbleSlot.Value.y > _limits.bubbleSlotLimitsIndex.MaximumVertical)
+            {
+                _limits.ReplaceBubbleSlotLimitsIndex(gameEntity.bubbleSlot.Value.y,
+                    _limits.bubbleSlotLimitsIndex.MinimumVertical);
+            }
+
+            if (gameEntity.bubbleSlot.Value.y < _limits.bubbleSlotLimitsIndex.MinimumVertical)
+            {
+                _limits.ReplaceBubbleSlotLimitsIndex(_limits.bubbleSlotLimitsIndex.MaximumVertical,
+                    gameEntity.bubbleSlot.Value.y);
+            }
         }
     }
 
@@ -51,6 +69,26 @@ public class BubbleSloIndexerSystem : ReactiveSystem<GameEntity>, IDestroyedList
             if (keyValuePair.Value == null || !keyValuePair.Value.isEnabled)
             {
                 _indexerEntity.bubbleSlotIndexer.Value.Remove(keyValuePair.Key);
+            }
+        }
+
+        // update limits
+        _limits.ReplaceBubbleSlotLimitsIndex(int.MinValue, int.MaxValue);
+
+        foreach (var value in _indexerEntity.bubbleSlotIndexer.Value.Values)
+        {
+            var gameEntity = (GameEntity)value;
+
+            if (gameEntity.bubbleSlot.Value.y > _limits.bubbleSlotLimitsIndex.MaximumVertical)
+            {
+                _limits.ReplaceBubbleSlotLimitsIndex(gameEntity.bubbleSlot.Value.y,
+                    _limits.bubbleSlotLimitsIndex.MinimumVertical);
+            }
+
+            if (gameEntity.bubbleSlot.Value.y < _limits.bubbleSlotLimitsIndex.MinimumVertical)
+            {
+                _limits.ReplaceBubbleSlotLimitsIndex(_limits.bubbleSlotLimitsIndex.MaximumVertical,
+                    gameEntity.bubbleSlot.Value.y);
             }
         }
     }
