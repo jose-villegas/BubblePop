@@ -7,6 +7,11 @@ using UnityEngine;
 public interface IGameConfiguration
 {
     /// <summary>
+    /// This contains specific setup per exponent
+    /// </summary>
+    List<ExponentConfiguration> ExponentConfigurations { get; }
+
+    /// <summary>
     /// Determines the maximum possible value for a bubble
     /// </summary>
     int MaximumExponent { get; }

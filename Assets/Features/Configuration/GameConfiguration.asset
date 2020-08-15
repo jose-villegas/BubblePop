@@ -14,10 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maximumExponent: 11
   _maximumSpawnExponent: 7
+  _exponentConfigurations:
+  - _color: {r: 0.6666667, g: 0.7372549, b: 1, a: 1}
+  - _color: {r: 0.6666667, g: 0.80784315, b: 0.98039216, a: 1}
+  - _color: {r: 0.68235296, g: 0.8745098, b: 0.95686275, a: 1}
+  - _color: {r: 0.7254902, g: 0.92941177, b: 0.93333334, a: 1}
+  - _color: {r: 0.81960785, g: 0.9764706, b: 0.90588236, a: 1}
+  - _color: {r: 1, g: 1, b: 0.8784314, a: 1}
+  - _color: {r: 1, g: 0.7921569, b: 0.7254902, a: 1}
+  - _color: {r: 0.99215686, g: 0.57254905, b: 0.5686275, a: 1}
+  - _color: {r: 0.90588236, g: 0.3647059, b: 0.43529412, a: 1}
+  - _color: {r: 0.77254903, g: 0.16470589, b: 0.32156864, a: 1}
+  - _color: {r: 0.5764706, g: 0, b: 0.22745098, a: 1}
   _initialRowCount: 6
   _slotPositioningVerticalHeight: 1.65
   _bubblesSeparation: {x: 0.375, y: 0.65}
-  bubbleScale: {x: 4, y: 4, z: 4}
+  bubbleScale: {x: 3.85, y: 3.85, z: 3.85}
   _mergeTranslateSpeed: 15
   _reloadSpeed: 10
   _projectileSpeed: 20
