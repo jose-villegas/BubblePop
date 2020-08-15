@@ -3,15 +3,14 @@ using Entitas;
 using UnityEngine;
 
 /// <summary>
-/// This system detects when a thrown bubble collider with one of the bounding limits
-/// changing its direction to bounce
+/// This system stops a projectile bubble as soon it hits another stable bubble
 /// </summary>
-public class BubbleBounceSystem : ReactiveSystem<GameEntity>, ITriggerEnter2DListener
+public class BubbleProjectileStopSystem : ReactiveSystem<GameEntity>, ITriggerEnter2DListener
 {
     private readonly Contexts _contexts;
     private IGroup<GameEntity> _group;
 
-    public BubbleBounceSystem(Contexts contexts) : base(contexts.game)
+    public BubbleProjectileStopSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
 
@@ -41,11 +40,12 @@ public class BubbleBounceSystem : ReactiveSystem<GameEntity>, ITriggerEnter2DLis
         var tag = value.tag;
 
         // we have collided with a limit
-        if (tag == "LimitLeft" || tag == "LimitRight")
+        if (tag == "Bubble")
         {
-            var currentDirection = entity.direction.Value;
-            var newDirection = Vector3.Reflect(currentDirection, tag == "LimitRight" ? Vector3.left : Vector3.right);
-            entity.ReplaceDirection(newDirection);
+            // remove thrown and throwable components
+            entity.isThrown = false;
+            entity.RemoveDirection();
+            entity.RemoveSpeed();
         }
     }
 }

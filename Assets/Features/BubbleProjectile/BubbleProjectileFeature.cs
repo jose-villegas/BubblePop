@@ -6,5 +6,6 @@
         Add(new BubbleDirectionSystem(contexts));
         Add(new BubbleShootSystem(contexts));
         Add(new BubbleBounceSystem(contexts));
+        Add(new BubbleProjectileStopSystem(contexts));
     }
 }

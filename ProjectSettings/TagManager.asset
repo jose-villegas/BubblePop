@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LimitLeft
   - LimitRight
+  - Bubble
   layers:
   - Default
   - TransparentFX
