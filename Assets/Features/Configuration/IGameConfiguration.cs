@@ -75,4 +75,5 @@ public interface IGameConfiguration
     float ScrollingSpeed { get; }
     float NudgeDistance { get; }
     float NudgeSpeed { get; }
+    float CircleCastRadius { get; }
 }

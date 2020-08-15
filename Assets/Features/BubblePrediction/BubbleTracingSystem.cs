@@ -6,6 +6,7 @@ using UnityEngine;
 public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
 {
     private readonly Contexts _contexts;
+    private readonly IGameConfiguration _configuration;
     private readonly IGroup<GameEntity> _group;
 
     private Camera _camera;
@@ -14,6 +15,7 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
     public BubbleTracingSystem(Contexts contexts)
     {
         _contexts = contexts;
+        _configuration = _contexts.configuration.gameConfiguration.value;
 
         // listener to game start
         var e = _contexts.game.CreateEntity();
@@ -37,25 +39,27 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
             var screenPos = _camera.WorldToScreenPoint(pos);
             var direction = bubble.direction.Value;
 
-            // cast ray in given direction
-            var hit = Physics2D.Raycast(pos, direction, 20, _hitLayer);
+            // cast ray in given direction, 
+            var circleCast = Physics2D.CircleCast(pos, _configuration.CircleCastRadius, direction, 15, _hitLayer);
 
-            if (hit.collider != null)
+            // todo: circle cast skips a bit, precision could be improved
+            if (circleCast.collider != null)
             {
                 var trace = new List<Vector3>() {pos};
 
                 // limit the number of bounces, though it shouldn't be more than 2 usually
                 for (int i = 0; i < 10; i++)
                 {
-                    if (hit.collider != null)
+                    if (circleCast.collider != null)
                     {
-                        trace.Add(hit.point);
+                        trace.Add(circleCast.point);
 
-                        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("StableBubbles"))
+
+                        if (circleCast.collider.gameObject.layer == LayerMask.NameToLayer("StableBubbles"))
                         {
                             // obtain bubble entity
-                            var e = hit.collider.GetComponent<ILinkedView>();
-                            _contexts.game.ReplaceBubblePredictionHit(e.LinkedEntity as GameEntity, hit.point);
+                            var e = circleCast.collider.GetComponent<ILinkedView>();
+                            _contexts.game.ReplaceBubblePredictionHit(e.LinkedEntity as GameEntity, circleCast.point);
                             break;
                         }
                     }
@@ -68,9 +72,13 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
 
                     // reflect vector at hit point
                     direction = Vector3.Reflect(direction,
-                        hit.collider.tag == "LimitRight" ? Vector3.left : Vector3.right);
+                        circleCast.collider.tag == "LimitRight" ? Vector3.left : Vector3.right).normalized;
 
-                    hit = Physics2D.Raycast(hit.point, direction, 20, _hitLayer);
+                    // shift next sphere cast position to avoid constant colliding with limits
+                    var shift = direction * _configuration.CircleCastRadius * Mathf.PI;
+
+                    circleCast = Physics2D.CircleCast(circleCast.point + new Vector2(shift.x, shift.y),
+                        _configuration.CircleCastRadius, direction, 15, _hitLayer);
                 }
 
                 _contexts.game.ReplaceBubbleTrace(trace);

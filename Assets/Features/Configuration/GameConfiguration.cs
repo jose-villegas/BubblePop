@@ -39,6 +39,7 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     [SerializeField] private float _nudgeDistance;
 
     [SerializeField] private float _nudgeSpeed;
+    [SerializeField] private  float _circleCastRadius;
 
     public List<ExponentConfiguration> ExponentConfigurations => _exponentConfigurations;
 
@@ -73,6 +74,8 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public float NudgeDistance => _nudgeDistance;
 
     public float NudgeSpeed => _nudgeSpeed;
+
+    public float CircleCastRadius => _circleCastRadius;
 
     public Vector2 SpawnScaleSpeedRange => _spawnScaleSpeedRange;
 }

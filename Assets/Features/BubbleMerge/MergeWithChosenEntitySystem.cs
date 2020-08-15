@@ -5,7 +5,8 @@ using UnityEngine;
 
 /// <summary>
 /// This system completes the merge process, merging all bubbles
-/// that are ready to merge with the chosen bubble
+/// that are ready to merge with the chosen bubble, the process is repeated
+/// just in case the chosen bubble can also be merged
 /// </summary>
 public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
 {
