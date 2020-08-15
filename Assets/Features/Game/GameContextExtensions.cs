@@ -27,12 +27,18 @@ public static class GameContextExtensions
 
             if (slotIndexer.TryGetValue(leftIndex, out var leftNeighbor))
             {
-                neighbors.Add((GameEntity) leftNeighbor);
+                if (!((GameEntity) leftNeighbor).isBubbleDisconnected)
+                {
+                    neighbors.Add((GameEntity) leftNeighbor);
+                }
             }
 
             if (slotIndexer.TryGetValue(rightIndex, out var rightNeighbor))
             {
-                neighbors.Add((GameEntity) rightNeighbor);
+                if (!((GameEntity) rightNeighbor).isBubbleDisconnected)
+                {
+                    neighbors.Add((GameEntity) rightNeighbor);
+                }
             }
         }
 
@@ -141,7 +147,8 @@ public static class GameContextExtensions
         return position;
     }
 
-    public static void CreateStabeBubble(this GameContext context, IGameConfiguration configuration, Vector2Int slotIndex)
+    public static void CreateStabeBubble(this GameContext context, IGameConfiguration configuration,
+        Vector2Int slotIndex)
     {
         var e = context.CreateEntity();
         e.isBubble = true;

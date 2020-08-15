@@ -7,6 +7,7 @@
         Add(new BubbleProjectileFeature(contexts));
         Add(new BubblesFeature(contexts));
         Add(new BubblePredictionFeature(contexts));
+        Add(new BubbleDisconnectFeature(contexts));
         Add(new WorldFeature(contexts));
         Add(new InputFeature(contexts));
         Add(new ProjectilesFeature(contexts));
