@@ -33,12 +33,11 @@ public class BubbleDirectionSystem : IExecuteSystem, IAnyGameStartedListener
         {
             var pos = bubble.position.Value;
             var screenPos = _camera.WorldToScreenPoint(pos);
-
             var direction = (mousePos - screenPos).normalized;
+
             bubble.ReplaceDirection(direction);
-#if UNITY_EDITOR
-            Debug.DrawRay(pos, direction, Color.blue);
-#endif
+
+            Debug.DrawRay(pos, direction, Color.magenta);
         }
     }
 
