@@ -63,6 +63,7 @@ public interface IGameConfiguration
 
     float ReloadSpeed { get; }
 
-    float MinimumBubblePosition { get; }
+    Vector2 ScrollingBubblePositionBounds { get; }
+
     float ScrollingSpeed { get; }
 }

@@ -29,7 +29,7 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     [SerializeField] private Vector3 nextBubbleScale;
     [SerializeField] private float _overlapCircleRadius;
 
-    [Header("Scrolling")] [SerializeField] private float _minimumBubblePosition;
+    [Header("Scrolling")] [SerializeField] private Vector2 _scrollingBubblePositionBounds;
     [SerializeField] private float _scrollingSpeed;
 
     public int MaximumExponent => _maximumExponent;
@@ -56,7 +56,7 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
 
     public float ReloadSpeed => _reloadSpeed;
 
-    public float MinimumBubblePosition => _minimumBubblePosition;
+    public Vector2 ScrollingBubblePositionBounds => _scrollingBubblePositionBounds;
 
     public float ScrollingSpeed => _scrollingSpeed;
 }

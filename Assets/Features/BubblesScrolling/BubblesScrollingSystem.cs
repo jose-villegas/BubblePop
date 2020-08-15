@@ -21,37 +21,84 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.BubbleProjectileReload);
+        return context.CreateCollector(GameMatcher.BubblesScrollCheck);
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        // don't care about filtering
-        return true;
+        return entity.isBubblesScrollCheck;
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
+        var minimumPosition = float.MaxValue;
+
         foreach (var bubble in _group)
         {
+            var pos = bubble.position.Value;
+
+            if (pos.y <= minimumPosition)
+            {
+                minimumPosition = pos.y;
+            }
+
             // in this case we need to scroll up
-            if (bubble.position.Value.y <= _configuration.MinimumBubblePosition)
+            if (pos.y <= _configuration.ScrollingBubblePositionBounds.x)
             {
                 HandleScrollUpCase();
                 return;
             }
         }
+        
+        // all the bubbles are above the minimum position - scroll down case
+        if (minimumPosition >= _configuration.ScrollingBubblePositionBounds.y)
+        {
+            HandleScrollDownCase();
+            return;
+        }
+
+        // we didn't find any matching case - simply reload
+        var e = _contexts.game.CreateEntity();
+        e.isBubbleProjectileReload = true;
+    }
+
+    private void HandleScrollDownCase()
+    {
+        HandleScroll(-1);
     }
 
     private void HandleScrollUpCase()
     {
+        HandleScroll(1);
+    }
+
+    private void HandleScroll(float sign)
+    {
+        var subscribed = false;
+
         foreach (var bubble in _group)
         {
             var position = bubble.position.Value;
-            bubble.ReplaceTranslateTo(_configuration.ScrollingSpeed, position + _configuration.BubblesSeparation.y * Vector3.up);
+            bubble.ReplaceTranslateTo(_configuration.ScrollingSpeed, position + _configuration.BubblesSeparation.y * Vector3.up * sign);
+
+            if (!subscribed)
+            {
+                subscribed = true;
+                // wait for translation completion to activate the projectile reload
+                bubble.OnComponentRemoved += OnDynamicsCompleted;
+            }
+
         }
 
         var offset = _contexts.game.hasBubbleVerticalOffset ? _contexts.game.bubbleVerticalOffset.Value : 0;
-        _contexts.game.ReplaceBubbleVerticalOffset(offset + _configuration.BubblesSeparation.y);
+        _contexts.game.ReplaceBubbleVerticalOffset(offset + sign * _configuration.BubblesSeparation.y);
+    }
+
+    private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)
+    {
+        entity.OnComponentRemoved -= OnDynamicsCompleted;
+
+        var e = _contexts.game.CreateEntity();
+        e.isBubbleProjectileReload = true;
     }
 }

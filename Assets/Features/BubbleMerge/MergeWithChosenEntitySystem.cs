@@ -57,9 +57,9 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
                 readyBubble.ConvertToStableBubble();
             }
 
-            // trigger reload
+            // trigger scroll check
             var e = _contexts.game.CreateEntity();
-            e.isBubbleProjectileReload = true;
+            e.isBubblesScrollCheck = true;
         }
     }
 
