@@ -76,5 +76,7 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
             // let the merge system now take charge
             gameEntity.isBubbleWaitingMerge = true;
         }
+
+        entity.OnComponentRemoved -= OnDynamicsCompleted;
     }
 }

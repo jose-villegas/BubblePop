@@ -53,7 +53,6 @@ public class MergeMarkingSystem : ReactiveSystem<GameEntity>
         {
             var e = _contexts.game.CreateEntity();
             e.ReplaceBubblesReadyToMerge(matchingNumber);
-            Debug.Log("Match");
         }
     }
 }

@@ -62,7 +62,6 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
                 readyBubble.ConvertToStableBubble();
             }
 
-            Debug.Log("ScrollCall");
             // trigger scroll check
             var e = _contexts.game.CreateEntity();
             e.isBubblesScrollCheck = true;
@@ -88,6 +87,8 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
                 chosen.isBubbleWaitingMerge = true;
             }
         }
+
+        entity.OnDestroyEntity -= OnReadyBubbleDestroyed;
     }
 
     private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)
@@ -97,5 +98,7 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
             var gameEntity = (GameEntity) entity;
             gameEntity.isDestroyed = true;
         }
+
+        entity.OnComponentRemoved -= OnDynamicsCompleted;
     }
 }
