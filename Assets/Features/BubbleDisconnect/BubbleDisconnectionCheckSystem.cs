@@ -108,14 +108,6 @@ public class BubbleDisconnectionCheckSystem : ReactiveSystem<GameEntity>
                     entity.ReplaceLayer(LayerMask.NameToLayer("FallingBubbles"));
                 }
             }
-
-            // trigger scroll check
-            var e = _contexts.game.CreateEntity();
-            e.isBubblesScrollCheck = true;
-
-            // trigger reload behavior
-            e = _contexts.game.CreateEntity();
-            e.isBubbleProjectileReload = true;
         }
     }
 }

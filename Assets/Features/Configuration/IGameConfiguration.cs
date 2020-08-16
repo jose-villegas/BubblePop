@@ -128,4 +128,9 @@ public interface IGameConfiguration
     float FallingDeadZoneHeight { get; }
 
     float FallingGravity { get; }
+
+    /// <summary>
+    /// The angle area allowed to thrown the bubble projectile
+    /// </summary>
+    Vector2 AimAngleRange { get; }
 }

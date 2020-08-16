@@ -32,12 +32,30 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
 
         var mousePos = Input.mousePosition;
 
+        if (Input.GetMouseButtonUp(0))
+        {
+            _contexts.game.ReplaceBubbleTrace(null);
+            _contexts.game.ReplaceBubblePredictionHit(null, Vector3.zero);
+            return;
+        }
+
+        if (!Input.GetMouseButton(0)) return;
+
         // throwable position
         foreach (var bubble in _group)
         {
             var pos = bubble.position.Value;
             var screenPos = _camera.WorldToScreenPoint(pos);
             var direction = bubble.direction.Value;
+
+            var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            if (angle < _configuration.AimAngleRange.x || angle > _configuration.AimAngleRange.y)
+            {
+                _contexts.game.ReplaceBubbleTrace(null);
+                _contexts.game.ReplaceBubblePredictionHit(null, Vector3.zero);
+                return;
+            }
 
             // cast ray in given direction, 
             var circleCast = Physics2D.CircleCast(pos, _configuration.CircleCastRadius, direction, 15, _hitLayer);

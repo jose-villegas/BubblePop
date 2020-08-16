@@ -25,12 +25,14 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     private float _mergeTranslateSpeed;
 
     [Header("Projectile Bubble")] [SerializeField]
-    private float _reloadSpeed;
+    private Vector2 _aimAngleRange;
 
+    [SerializeField] private float _reloadSpeed;
     [SerializeField] private float _projectileSpeed;
     [SerializeField] private float _projectileBubblesHeight;
     [SerializeField] private Vector3 nextBubbleScale;
     [SerializeField] private float _overlapCircleRadius;
+
 
     [Header("Scrolling")] [SerializeField] private Vector2 _scrollingBubblePositionBounds;
     [SerializeField] private float _scrollingSpeed;
@@ -88,6 +90,8 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public float FallingDeadZoneHeight => _fallingDeadZoneHeight;
 
     public float FallingGravity => _fallingGravity;
+
+    public Vector2 AimAngleRange => _aimAngleRange;
 
     public Vector2 SpawnScaleSpeedRange => _spawnScaleSpeedRange;
 }

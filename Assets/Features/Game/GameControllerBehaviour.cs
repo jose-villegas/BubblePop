@@ -27,5 +27,16 @@ public class GameControllerBehaviour : MonoBehaviour
         var deadZone0 = Vector3.up * _configuration.FallingDeadZoneHeight + Vector3.right * 10;
         var deadZone1 = Vector3.up * _configuration.FallingDeadZoneHeight + Vector3.left * 10;
         Debug.DrawLine(deadZone0, deadZone1, Color.red);
+
+        // aim angle
+        var angle0 = new Vector3(Mathf.Cos(_configuration.AimAngleRange.x * Mathf.Deg2Rad),
+            Mathf.Sin(_configuration.AimAngleRange.x * Mathf.Deg2Rad));
+        var angle1 = new Vector3(Mathf.Cos(_configuration.AimAngleRange.y * Mathf.Deg2Rad),
+            Mathf.Sin(_configuration.AimAngleRange.y * Mathf.Deg2Rad));
+
+        var origin = Vector3.up * _configuration.ProjectileBubblesHeight;
+
+        Debug.DrawLine(origin, origin + angle0 * 10, Color.yellow);
+        Debug.DrawLine(origin, origin + angle1 * 10, Color.yellow);
     }
 }

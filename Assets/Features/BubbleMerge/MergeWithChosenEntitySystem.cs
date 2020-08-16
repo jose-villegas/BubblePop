@@ -63,9 +63,13 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
                 readyBubble.ConvertToStableBubble();
             }
 
-            // trigger connection check
+            // trigger scroll check
             var e = _contexts.game.CreateEntity();
-            e.isBubbleConnectionCheck = true;
+            e.isBubblesScrollCheck = true;
+
+            // trigger reload behavior
+            e = _contexts.game.CreateEntity();
+            e.isBubbleProjectileReload = true;
         }
     }
 
@@ -83,6 +87,10 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
                 var finalNumber = chosen.bubbleChosenAsMergeTo.Value;
                 chosen.ConvertToStableBubble();
                 chosen.ReplaceBubbleNumber(finalNumber);
+
+                // trigger connection check
+                var e = _contexts.game.CreateEntity();
+                e.isBubbleConnectionCheck = true;
 
                 // set chosen as waiting to merge, checking if there is further moves
                 chosen.isBubbleWaitingMerge = true;

@@ -32,6 +32,7 @@ MonoBehaviour:
   _bubblesSeparation: {x: 0.375, y: 0.65}
   bubbleScale: {x: 3.85, y: 3.85, z: 3.85}
   _mergeTranslateSpeed: 12.5
+  _aimAngleRange: {x: 35, y: 145}
   _reloadSpeed: 15
   _projectileSpeed: 20
   _projectileBubblesHeight: -4
@@ -39,6 +40,7 @@ MonoBehaviour:
   _overlapCircleRadius: 0.35
   _scrollingBubblePositionBounds: {x: -1, y: 0}
   _scrollingSpeed: 15
+  _linesHeight: 3.5
   _nudgeDistance: 0.1
   _nudgeSpeed: 17.5
   _circleCastRadius: 0.25
