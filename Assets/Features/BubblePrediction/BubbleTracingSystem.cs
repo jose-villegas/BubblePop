@@ -70,16 +70,20 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
                 {
                     if (circleCast.collider != null)
                     {
-                        trace.Add(circleCast.point);
+                        var hitBubble = circleCast.collider.gameObject.layer == LayerMask.NameToLayer("StableBubbles");
 
-
-                        if (circleCast.collider.gameObject.layer == LayerMask.NameToLayer("StableBubbles"))
+                        if (hitBubble)
                         {
+                            // shift trace position for a bit more precise end point
+                            var centroidShift = direction * _configuration.CircleCastRadius * Mathf.PI / 4;
+                            trace.Add(circleCast.centroid + new Vector2(centroidShift.x, centroidShift.y));
                             // obtain bubble entity
                             var e = circleCast.collider.GetComponent<ILinkedView>();
                             _contexts.game.ReplaceBubblePredictionHit(e.LinkedEntity as GameEntity, circleCast.point);
                             break;
                         }
+
+                        trace.Add(circleCast.point);
                     }
                     else
                     {

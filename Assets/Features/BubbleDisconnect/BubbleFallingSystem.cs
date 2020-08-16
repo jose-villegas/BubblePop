@@ -21,11 +21,15 @@ public class BubbleFallingSystem : IExecuteSystem
     {
         foreach (var bubble in _group)
         {
+            // this bubble is being moved by another system, override
+            if (bubble.hasTranslateTo) bubble.RemoveTranslateTo();
+
             var velocity = bubble.bubbleFalling.Velocity;
             bubble.ReplaceBubbleFalling(velocity + Vector3.down * Time.deltaTime * _configuration.FallingGravity);
 
             var position = bubble.position.Value;
             bubble.ReplacePosition(position + bubble.bubbleFalling.Velocity * Time.deltaTime);
+            bubble.isMoving = true;
 
             if (position.y < _configuration.FallingDeadZoneHeight)
             {
