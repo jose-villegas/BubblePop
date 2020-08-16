@@ -61,12 +61,7 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
         if (minimumPosition >= _configuration.ScrollingBubblePositionBounds.y)
         {
             HandleScrollDownCase();
-            return;
         }
-
-        // we didn't find any matching case - simply reload
-        var e = _contexts.game.CreateEntity();
-        e.isBubbleProjectileReload = true;
     }
 
     private void HandleScrollDownCase()
@@ -92,8 +87,11 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
 
         foreach (Vector2Int slotIndex in iterator)
         {
-            var entity = _contexts.game.bubbleSlotIndexer.Value[slotIndex] as GameEntity;
-            entity.isDestroyed = true;
+            if (_contexts.game.bubbleSlotIndexer.Value.TryGetValue(slotIndex, out var entity))
+            {
+                var gameEntity = entity as GameEntity;
+                gameEntity.isDestroyed = true;
+            }
         }
     }
 
@@ -133,10 +131,6 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
 
         var offset = _contexts.game.hasBubbleVerticalOffset ? _contexts.game.bubbleVerticalOffset.Value : 0;
         _contexts.game.ReplaceBubbleVerticalOffset(offset + sign * _configuration.BubblesSeparation.y);
-
-        // trigger reload behavior
-        var e = _contexts.game.CreateEntity();
-        e.isBubbleProjectileReload = true;
     }
 
     private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)

@@ -35,11 +35,15 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     [Header("Scrolling")] [SerializeField] private Vector2 _scrollingBubblePositionBounds;
     [SerializeField] private float _scrollingSpeed;
 
-    [Header("Feedback")]
-    [SerializeField] private float _nudgeDistance;
+    [Header("Feedback")] [SerializeField] private float _nudgeDistance;
 
     [SerializeField] private float _nudgeSpeed;
-    [SerializeField] private  float _circleCastRadius;
+    [SerializeField] private float _circleCastRadius;
+
+    [Header("Falling Bubbles")] [SerializeField]
+    private float _fallingDeadZoneHeight;
+
+    [SerializeField] private float _fallingGravity;
 
     public List<ExponentConfiguration> ExponentConfigurations => _exponentConfigurations;
 
@@ -76,6 +80,10 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public float NudgeSpeed => _nudgeSpeed;
 
     public float CircleCastRadius => _circleCastRadius;
+
+    public float FallingDeadZoneHeight => _fallingDeadZoneHeight;
+
+    public float FallingGravity => _fallingGravity;
 
     public Vector2 SpawnScaleSpeedRange => _spawnScaleSpeedRange;
 }

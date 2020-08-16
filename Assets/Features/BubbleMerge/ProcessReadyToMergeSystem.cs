@@ -63,18 +63,19 @@ public class ProcessReadyToMergeSystem : ReactiveSystem<GameEntity>
 
         // for all the matching entities with the same priority chose the highest in world space
         maxPriority = int.MinValue;
-        GameEntity choosenEntity = null;
+        GameEntity chosen = null;
 
         foreach (var matchingPriority in matchingPriorities)
         {
             if (matchingPriority.bubbleSlot.Value.y > maxPriority)
             {
                 maxPriority = matchingPriority.bubbleSlot.Value.y;
-                choosenEntity = matchingPriority;
+                chosen = matchingPriority;
             }
         }
 
-        choosenEntity.ReplaceBubbleChosenAsMergeTo(finalNumber);
+        Debug.Log("Set Chosen for Merge");
+        chosen.ReplaceBubbleChosenAsMergeTo(finalNumber);
 
         // consume ready to merge
         foreach (var gameEntity in entities)

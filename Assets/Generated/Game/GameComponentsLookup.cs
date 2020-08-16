@@ -16,7 +16,7 @@ public static class GameComponentsLookup {
     public const int Bubble = 5;
     public const int BubbleConnected = 6;
     public const int BubbleConnectionCheck = 7;
-    public const int BubbleDisconnected = 8;
+    public const int BubbleFalling = 8;
     public const int BubbleNudge = 9;
     public const int BubbleNumber = 10;
     public const int BubbleNumberListener = 11;
@@ -50,21 +50,25 @@ public static class GameComponentsLookup {
     public const int RotationListener = 39;
     public const int Scale = 40;
     public const int ScaleListener = 41;
-    public const int ScaleTo = 42;
-    public const int Speed = 43;
-    public const int StableBubble = 44;
-    public const int Throwable = 45;
-    public const int Thrown = 46;
-    public const int TranslateTo = 47;
-    public const int Trigger2DEvent = 48;
-    public const int Trigger2DEventListener = 49;
-    public const int TriggerEnter2D = 50;
-    public const int TriggerEnter2DListener = 51;
-    public const int TriggerExit2D = 52;
-    public const int TriggerExit2DListener = 53;
-    public const int UnstableBubble = 54;
+    public const int ScaleToCompleted = 42;
+    public const int ScaleToCompletedListener = 43;
+    public const int ScaleTo = 44;
+    public const int Speed = 45;
+    public const int StableBubble = 46;
+    public const int Throwable = 47;
+    public const int Thrown = 48;
+    public const int TranslateToCompleted = 49;
+    public const int TranslateToCompletedListener = 50;
+    public const int TranslateTo = 51;
+    public const int Trigger2DEvent = 52;
+    public const int Trigger2DEventListener = 53;
+    public const int TriggerEnter2D = 54;
+    public const int TriggerEnter2DListener = 55;
+    public const int TriggerExit2D = 56;
+    public const int TriggerExit2DListener = 57;
+    public const int UnstableBubble = 58;
 
-    public const int TotalComponents = 55;
+    public const int TotalComponents = 59;
 
     public static readonly string[] componentNames = {
         "AnyBubbleProjectileReloadListener",
@@ -75,7 +79,7 @@ public static class GameComponentsLookup {
         "Bubble",
         "BubbleConnected",
         "BubbleConnectionCheck",
-        "BubbleDisconnected",
+        "BubbleFalling",
         "BubbleNudge",
         "BubbleNumber",
         "BubbleNumberListener",
@@ -109,11 +113,15 @@ public static class GameComponentsLookup {
         "RotationListener",
         "Scale",
         "ScaleListener",
+        "ScaleToCompleted",
+        "ScaleToCompletedListener",
         "ScaleTo",
         "Speed",
         "StableBubble",
         "Throwable",
         "Thrown",
+        "TranslateToCompleted",
+        "TranslateToCompletedListener",
         "TranslateTo",
         "Trigger2DEvent",
         "Trigger2DEventListener",
@@ -133,7 +141,7 @@ public static class GameComponentsLookup {
         typeof(BubbleComponent),
         typeof(BubbleConnectedComponent),
         typeof(BubbleConnectionCheckComponent),
-        typeof(BubbleDisconnectedComponent),
+        typeof(BubbleFallingComponent),
         typeof(BubbleNudgeComponent),
         typeof(BubbleNumberComponent),
         typeof(BubbleNumberListenerComponent),
@@ -167,11 +175,15 @@ public static class GameComponentsLookup {
         typeof(RotationListenerComponent),
         typeof(ScaleComponent),
         typeof(ScaleListenerComponent),
+        typeof(ScaleToCompletedComponent),
+        typeof(ScaleToCompletedListenerComponent),
         typeof(ScaleToComponent),
         typeof(SpeedComponent),
         typeof(StableBubbleComponent),
         typeof(ThrowableComponent),
         typeof(ThrownComponent),
+        typeof(TranslateToCompletedComponent),
+        typeof(TranslateToCompletedListenerComponent),
         typeof(TranslateToComponent),
         typeof(Trigger2DEventComponent),
         typeof(Trigger2DEventListenerComponent),

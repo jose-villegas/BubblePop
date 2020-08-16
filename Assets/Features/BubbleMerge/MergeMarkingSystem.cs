@@ -51,6 +51,7 @@ public class MergeMarkingSystem : ReactiveSystem<GameEntity>
         // since there is no more matching neighbors, it's ready for merging
         if (!foundMatch)
         {
+            Debug.Log("Set Ready for Merge");
             var e = _contexts.game.CreateEntity();
             e.ReplaceBubblesReadyToMerge(matchingNumber);
         }

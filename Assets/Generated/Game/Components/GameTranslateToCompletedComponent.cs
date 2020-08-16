@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly BubbleDisconnectedComponent bubbleDisconnectedComponent = new BubbleDisconnectedComponent();
+    static readonly TranslateToCompletedComponent translateToCompletedComponent = new TranslateToCompletedComponent();
 
-    public bool isBubbleDisconnected {
-        get { return HasComponent(GameComponentsLookup.BubbleDisconnected); }
+    public bool isTranslateToCompleted {
+        get { return HasComponent(GameComponentsLookup.TranslateToCompleted); }
         set {
-            if (value != isBubbleDisconnected) {
-                var index = GameComponentsLookup.BubbleDisconnected;
+            if (value != isTranslateToCompleted) {
+                var index = GameComponentsLookup.TranslateToCompleted;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : bubbleDisconnectedComponent;
+                            : translateToCompletedComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherBubbleDisconnected;
+    static Entitas.IMatcher<GameEntity> _matcherTranslateToCompleted;
 
-    public static Entitas.IMatcher<GameEntity> BubbleDisconnected {
+    public static Entitas.IMatcher<GameEntity> TranslateToCompleted {
         get {
-            if (_matcherBubbleDisconnected == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.BubbleDisconnected);
+            if (_matcherTranslateToCompleted == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.TranslateToCompleted);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherBubbleDisconnected = matcher;
+                _matcherTranslateToCompleted = matcher;
             }
 
-            return _matcherBubbleDisconnected;
+            return _matcherTranslateToCompleted;
         }
     }
 }

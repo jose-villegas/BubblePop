@@ -3,11 +3,11 @@
     public GameSystems(Contexts contexts)
     {
         Add(new SlotsFeature(contexts));
-        Add(new BubbleMergeFeature(contexts));
-        Add(new BubbleProjectileFeature(contexts));
         Add(new BubblesFeature(contexts));
-        Add(new BubblePredictionFeature(contexts));
+        Add(new BubbleProjectileFeature(contexts));
+        Add(new BubbleMergeFeature(contexts));
         Add(new BubbleDisconnectFeature(contexts));
+        Add(new BubblePredictionFeature(contexts));
         Add(new WorldFeature(contexts));
         Add(new InputFeature(contexts));
         Add(new ProjectilesFeature(contexts));

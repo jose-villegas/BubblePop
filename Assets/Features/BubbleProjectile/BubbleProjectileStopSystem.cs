@@ -30,17 +30,12 @@ public class BubbleProjectileStopSystem : IExecuteSystem
 
             foreach (var collider in colliders)
             {
-                // we have collided with a limit
-                if (collider.tag != "Bubble") continue;
-
                 // determine if we have collision with an stable bubble
                 var linkedView = collider.GetComponent<ILinkedView>();
 
                 if (linkedView == null) return;
 
                 var colliderEntity = (GameEntity)linkedView.LinkedEntity;
-
-                if (!colliderEntity.isStableBubble) return;
 
                 // remove thrown and throwable components
                 gameEntity.isThrown = false;
@@ -55,6 +50,7 @@ public class BubbleProjectileStopSystem : IExecuteSystem
                     gameEntity.RemoveSpeed();
                 }
 
+                Debug.Log("Ready for Slotter");
                 // get collider linked entity - save collider data
                 gameEntity.ReplaceCollidedWithBubble(colliderEntity);
             }

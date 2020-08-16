@@ -19,12 +19,12 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.AllOf(GameMatcher.UnstableBubble, GameMatcher.CollidedWithBubble));
+        return context.CreateCollector(GameMatcher.AllOf(GameMatcher.CollidedWithBubble));
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isUnstableBubble && entity.hasCollidedWithBubble;
+        return entity.isBubble && entity.hasCollidedWithBubble;
     }
 
     protected override void Execute(List<GameEntity> entities)
@@ -52,9 +52,6 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
                 continue;
             }
 
-            // check if the predicted index is out of bounds
-            //if (newSlotIndex.x < 0 || newSlotIndex.x > 5) continue;
-
             var finalPosition = newSlotIndex.IndexToPosition(_contexts.game, _configuration);
 
             // new slot to store this bubble
@@ -63,7 +60,7 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
             // move to final position
             gameEntity.AddTranslateTo(_configuration.ProjectileSpeed, finalPosition);
             gameEntity.isMoving = true;
-
+            
             // set to merge after movement
             gameEntity.OnComponentRemoved += OnDynamicsCompleted;
 
@@ -87,6 +84,7 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
 
         if (component is TranslateToComponent)
         {
+            Debug.Log("Set Waiting for Merge");
             gameEntity.isMoving = false;
             // let the merge system now take charge
             gameEntity.isBubbleWaitingMerge = true;

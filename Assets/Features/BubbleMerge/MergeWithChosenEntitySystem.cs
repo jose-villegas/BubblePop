@@ -63,13 +63,10 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
                 readyBubble.ConvertToStableBubble();
             }
 
+            Debug.Log("Set for Connection Check");
             // trigger connection check
             var e = _contexts.game.CreateEntity();
             e.isBubbleConnectionCheck = true;
-
-            // trigger scroll check
-            e = _contexts.game.CreateEntity();
-            e.isBubblesScrollCheck = true;
         }
     }
 

@@ -26,15 +26,20 @@ MonoBehaviour:
   - _color: {r: 0.90588236, g: 0.3647059, b: 0.43529412, a: 1}
   - _color: {r: 0.77254903, g: 0.16470589, b: 0.32156864, a: 1}
   - _color: {r: 0.5764706, g: 0, b: 0.22745098, a: 1}
-  _initialRowCount: 6
+  _initialRowCount: 4
+  _spawnScaleSpeedRange: {x: 7.5, y: 15}
   _slotPositioningVerticalHeight: 1.65
   _bubblesSeparation: {x: 0.375, y: 0.65}
   bubbleScale: {x: 3.85, y: 3.85, z: 3.85}
-  _mergeTranslateSpeed: 15
-  _reloadSpeed: 10
+  _mergeTranslateSpeed: 12.5
+  _reloadSpeed: 15
   _projectileSpeed: 20
   _projectileBubblesHeight: -4
   nextBubbleScale: {x: 3.5, y: 3.5, z: 3.5}
   _overlapCircleRadius: 0.35
   _scrollingBubblePositionBounds: {x: -1, y: 0}
   _scrollingSpeed: 15
+  _nudgeDistance: 0.1
+  _nudgeSpeed: 17.5
+  _circleCastRadius: 0.25
+  _fallingDeadZoneHeight: -4.25

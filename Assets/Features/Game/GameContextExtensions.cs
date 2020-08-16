@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class GameContextExtensions
@@ -27,18 +28,12 @@ public static class GameContextExtensions
 
             if (slotIndexer.TryGetValue(leftIndex, out var leftNeighbor))
             {
-                if (!((GameEntity) leftNeighbor).isBubbleDisconnected)
-                {
-                    neighbors.Add((GameEntity) leftNeighbor);
-                }
+                neighbors.Add((GameEntity) leftNeighbor);
             }
 
             if (slotIndexer.TryGetValue(rightIndex, out var rightNeighbor))
             {
-                if (!((GameEntity) rightNeighbor).isBubbleDisconnected)
-                {
-                    neighbors.Add((GameEntity) rightNeighbor);
-                }
+                neighbors.Add((GameEntity) rightNeighbor);
             }
         }
 
@@ -116,6 +111,7 @@ public static class GameContextExtensions
     {
         bubble.isBubbleWaitingMerge = false;
         bubble.isStableBubble = true;
+        bubble.isUnstableBubble = false;
         bubble.ReplaceLayer(LayerMask.NameToLayer("StableBubbles"));
 
         if (bubble.hasTranslateTo)
@@ -153,6 +149,7 @@ public static class GameContextExtensions
         var e = context.CreateEntity();
         e.isBubble = true;
         e.isStableBubble = true;
+        e.isBubbleConnected = true;
 
         var scaleSpeed = Random.Range(configuration.SpawnScaleSpeedRange.x, configuration.SpawnScaleSpeedRange.y);
         // add components
@@ -164,5 +161,40 @@ public static class GameContextExtensions
 
         // establish link with slot entity
         e.AddBubbleSlot(slotIndex);
+    }
+
+    public static void RemoveSlotIndex(this GameContext context, GameEntity entity)
+    {
+        var indexer = context.bubbleSlotIndexer.Value;
+        var limits = context.bubbleSlotLimitsIndex;
+
+        // clean up indexer
+        foreach (var keyValuePair in indexer.ToList())
+        {
+            if (keyValuePair.Key == entity.bubbleSlot.Value)
+            {
+                indexer.Remove(keyValuePair.Key);
+            }
+        }
+
+        // update limits
+        context.ReplaceBubbleSlotLimitsIndex(int.MinValue, int.MaxValue);
+
+        foreach (var value in indexer.Values)
+        {
+            var gameEntity = (GameEntity) value;
+
+            if (gameEntity.bubbleSlot.Value.y > limits.MaximumVertical)
+            {
+                context.ReplaceBubbleSlotLimitsIndex(gameEntity.bubbleSlot.Value.y, limits.MinimumVertical);
+            }
+
+            if (gameEntity.bubbleSlot.Value.y < limits.MinimumVertical)
+            {
+                context.ReplaceBubbleSlotLimitsIndex(limits.MaximumVertical, gameEntity.bubbleSlot.Value.y);
+            }
+        }
+
+        entity.RemoveBubbleSlot();
     }
 }
