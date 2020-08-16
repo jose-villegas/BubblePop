@@ -28,15 +28,8 @@ public class BubbleProjectileStopSystem : IExecuteSystem
             var colliders = Physics2D.OverlapCircleAll(gameEntity.position.Value, _configuration.OverlapCircleRadius,
                 _bubblesLayer);
 
-            foreach (var collider in colliders)
+            if (colliders.Length > 0)
             {
-                // determine if we have collision with an stable bubble
-                var linkedView = collider.GetComponent<ILinkedView>();
-
-                if (linkedView == null) return;
-
-                var colliderEntity = (GameEntity)linkedView.LinkedEntity;
-
                 // remove thrown and throwable components
                 gameEntity.isThrown = false;
 
@@ -44,16 +37,18 @@ public class BubbleProjectileStopSystem : IExecuteSystem
                 {
                     gameEntity.RemoveDirection();
                 }
-                
+
                 if (gameEntity.hasSpeed)
                 {
                     gameEntity.RemoveSpeed();
                 }
 
-                Debug.Log("Ready for Slotter");
-
-                // get collider linked entity - save collider data
-                gameEntity.ReplaceCollidedWithBubble(colliderEntity);
+                gameEntity.ReplaceCollidedWithBubbles(colliders.Select(collider =>
+                {
+                    // determine if we have collision with an stable bubble
+                    var linkedView = collider.GetComponent<ILinkedView>();
+                    return (GameEntity) linkedView.LinkedEntity;
+                }).ToArray());
             }
         }
     }

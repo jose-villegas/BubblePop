@@ -32,7 +32,7 @@ public static class GameComponentsLookup {
     public const int BubbleTraceListener = 21;
     public const int BubbleVerticalOffset = 22;
     public const int BubbleWaitingMerge = 23;
-    public const int CollidedWithBubble = 24;
+    public const int CollidedWithBubbles = 24;
     public const int Destroyed = 25;
     public const int DestroyedListener = 26;
     public const int Direction = 27;
@@ -92,7 +92,7 @@ public static class GameComponentsLookup {
         "BubbleTraceListener",
         "BubbleVerticalOffset",
         "BubbleWaitingMerge",
-        "CollidedWithBubble",
+        "CollidedWithBubbles",
         "Destroyed",
         "DestroyedListener",
         "Direction",
@@ -151,7 +151,7 @@ public static class GameComponentsLookup {
         typeof(BubbleTraceListenerComponent),
         typeof(BubbleVerticalOffsetComponent),
         typeof(BubbleWaitingMergeComponent),
-        typeof(CollidedWithBubbleComponent),
+        typeof(CollidedWithBubblesComponent),
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),
         typeof(DirectionComponent),

@@ -124,9 +124,9 @@ public static class GameContextExtensions
             bubble.RemoveBubbleChosenAsMergeTo();
         }
 
-        if (bubble.hasCollidedWithBubble)
+        if (bubble.hasCollidedWithBubbles)
         {
-            bubble.RemoveCollidedWithBubble();
+            bubble.RemoveCollidedWithBubbles();
         }
     }
 
