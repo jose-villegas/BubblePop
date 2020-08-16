@@ -49,6 +49,8 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     [Header("Falling Bubbles")] [SerializeField]
     private float _fallingDeadZoneHeight;
 
+    [SerializeField] private float _fallingDissapearZoneHeight;
+
     [SerializeField] private float _fallingGravity;
 
     public List<ExponentConfiguration> ExponentConfigurations => _exponentConfigurations;
@@ -92,6 +94,8 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public float CircleCastRadius => _circleCastRadius;
 
     public float FallingDeadZoneHeight => _fallingDeadZoneHeight;
+
+    public float FallingDissapearZoneDistance => _fallingDissapearZoneHeight;
 
     public float FallingGravity => _fallingGravity;
 

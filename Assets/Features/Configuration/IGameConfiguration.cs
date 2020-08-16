@@ -132,6 +132,8 @@ public interface IGameConfiguration
     /// </summary>
     float FallingDeadZoneHeight { get; }
 
+    float FallingDissapearZoneDistance { get; }
+
     float FallingGravity { get; }
 
     /// <summary>

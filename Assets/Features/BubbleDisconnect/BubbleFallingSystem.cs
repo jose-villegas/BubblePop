@@ -31,6 +31,18 @@ public class BubbleFallingSystem : IExecuteSystem
             bubble.ReplacePosition(position + bubble.bubbleFalling.Velocity * Time.deltaTime);
             bubble.isMoving = true;
 
+            var distanceToDeadZone = Mathf.Abs(position.y - _configuration.FallingDeadZoneHeight);
+
+            if (distanceToDeadZone <= _configuration.FallingDissapearZoneDistance)
+            {
+                if (!bubble.hasScaleTo)
+                {
+                    bubble.ReplaceScaleTo(_configuration.MergeScaleSpeed, Vector3.zero);
+                }
+
+                bubble.isBubblePlayFX = true;
+            }
+
             if (position.y < _configuration.FallingDeadZoneHeight)
             {
                 bubble.isDestroyed = true;
