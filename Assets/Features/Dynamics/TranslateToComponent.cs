@@ -1,7 +1,9 @@
 ﻿using Entitas;
+using Entitas.CodeGeneration.Attributes;
 using UnityEngine;
+using EventType = Entitas.CodeGeneration.Attributes.EventType;
 
-[Game]
+[Game, Event(EventTarget.Self, EventType.Removed)]
 public class TranslateToComponent : IComponent
 {
     public float Speed;

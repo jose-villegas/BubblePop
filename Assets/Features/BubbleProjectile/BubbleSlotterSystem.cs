@@ -6,7 +6,7 @@ using UnityEngine;
 /// After a bubble is stopped and marked as unstable this system
 /// links it to a new slot, yet unmerged
 /// </summary>
-public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
+public class BubbleSlotterSystem : ReactiveSystem<GameEntity>, ITranslateToRemovedListener
 {
     private readonly Contexts _contexts;
     private readonly IGameConfiguration _configuration;
@@ -29,6 +29,8 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
+        Debug.Log("Setting into slot position 0");
+
         foreach (var gameEntity in entities)
         {
             var colliderEntity = gameEntity.collidedWithBubble.Value;
@@ -47,6 +49,8 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
             // check if this slot is already occupied we may be taking the wrong collider
             var indexer = _contexts.game.bubbleSlotIndexer.Value;
 
+            Debug.Log("Setting into slot position 1");
+
             if (indexer.ContainsKey(newSlotIndex))
             {
                 continue;
@@ -56,13 +60,11 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
 
             // new slot to store this bubble
             gameEntity.ReplaceBubbleSlot(newSlotIndex);
-
+           
             // move to final position
             gameEntity.AddTranslateTo(_configuration.ProjectileSpeed, finalPosition);
+            gameEntity.AddTranslateToRemovedListener(this);
             gameEntity.isMoving = true;
-            
-            // set to merge after movement
-            gameEntity.OnComponentRemoved += OnDynamicsCompleted;
 
             // find which neighbors to nudge
             var neighbors = _contexts.game.GetBubbleNeighbors(gameEntity.bubbleSlot);
@@ -78,19 +80,14 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>
         }
     }
 
-    private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)
+    public void OnTranslateToRemoved(GameEntity entity)
     {
-        var gameEntity = (GameEntity) entity;
+        Debug.Log("Set Waiting for Merge");
+        entity.isMoving = false;
+        // let the merge system now take charge
+        entity.isBubbleWaitingMerge = true;
+        entity.isUnstableBubble = false;
 
-        if (component is TranslateToComponent)
-        {
-            Debug.Log("Set Waiting for Merge");
-            gameEntity.isMoving = false;
-            // let the merge system now take charge
-            gameEntity.isBubbleWaitingMerge = true;
-            gameEntity.isUnstableBubble = false;
-        }
-
-        entity.OnComponentRemoved -= OnDynamicsCompleted;
+        entity.RemoveTranslateToRemovedListener(this);
     }
 }

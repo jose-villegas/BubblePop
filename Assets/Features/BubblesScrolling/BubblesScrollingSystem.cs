@@ -110,31 +110,15 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
 
     private void HandleScroll(float sign)
     {
-        var subscribed = false;
-
         foreach (var bubble in _group)
         {
             var position = bubble.hasBubbleNudge ? bubble.bubbleNudge.Origin : bubble.position.Value;
 
             bubble.AddTranslateTo(_configuration.ScrollingSpeed,
                 position + _configuration.BubblesSeparation.y * Vector3.up * sign);
-
-            // a single subscription should suffice
-            if (!subscribed)
-            {
-                subscribed = true;
-
-                // wait for translation completion to activate the projectile reload
-                bubble.OnComponentRemoved += OnDynamicsCompleted;
-            }
         }
 
         var offset = _contexts.game.hasBubbleVerticalOffset ? _contexts.game.bubbleVerticalOffset.Value : 0;
         _contexts.game.ReplaceBubbleVerticalOffset(offset + sign * _configuration.BubblesSeparation.y);
-    }
-
-    private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)
-    {
-        entity.OnComponentRemoved -= OnDynamicsCompleted;
     }
 }

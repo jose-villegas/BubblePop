@@ -8,7 +8,7 @@ using UnityEngine;
 /// that are ready to merge with the chosen bubble, the process is repeated
 /// just in case the chosen bubble can also be merged
 /// </summary>
-public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
+public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslateToRemovedListener
 {
     private readonly Contexts _contexts;
     private IGroup<GameEntity> _mergeGroup;
@@ -49,10 +49,10 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
                 if (readyBubble == target) continue;
 
                 readyBubble.ReplaceTranslateTo(_configuration.MergeTranslateSpeed, target.position.Value);
+                readyBubble.AddTranslateToRemovedListener(this);
                 readyBubble.isMoving = true;
 
                 // wait for translation complete to removed merged bubbles
-                readyBubble.OnComponentRemoved += OnDynamicsCompleted;
                 readyBubble.OnDestroyEntity += OnReadyBubbleDestroyed;
             }
         }
@@ -93,14 +93,9 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>
         entity.OnDestroyEntity -= OnReadyBubbleDestroyed;
     }
 
-    private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)
+    public void OnTranslateToRemoved(GameEntity entity)
     {
-        if (component is TranslateToComponent)
-        {
-            var gameEntity = (GameEntity) entity;
-            gameEntity.isDestroyed = true;
-        }
-
-        entity.OnComponentRemoved -= OnDynamicsCompleted;
+        entity.isDestroyed = true;
+        entity.RemoveTranslateToRemovedListener(this);
     }
 }

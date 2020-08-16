@@ -6,31 +6,31 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class TranslateToCompletedEventSystem : Entitas.ReactiveSystem<GameEntity> {
+public sealed class TranslateToRemovedEventSystem : Entitas.ReactiveSystem<GameEntity> {
 
-    readonly System.Collections.Generic.List<ITranslateToCompletedListener> _listenerBuffer;
+    readonly System.Collections.Generic.List<ITranslateToRemovedListener> _listenerBuffer;
 
-    public TranslateToCompletedEventSystem(Contexts contexts) : base(contexts.game) {
-        _listenerBuffer = new System.Collections.Generic.List<ITranslateToCompletedListener>();
+    public TranslateToRemovedEventSystem(Contexts contexts) : base(contexts.game) {
+        _listenerBuffer = new System.Collections.Generic.List<ITranslateToRemovedListener>();
     }
 
     protected override Entitas.ICollector<GameEntity> GetTrigger(Entitas.IContext<GameEntity> context) {
         return Entitas.CollectorContextExtension.CreateCollector(
-            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.TranslateToCompleted)
+            context, Entitas.TriggerOnEventMatcherExtension.Removed(GameMatcher.TranslateTo)
         );
     }
 
     protected override bool Filter(GameEntity entity) {
-        return entity.isTranslateToCompleted && entity.hasTranslateToCompletedListener;
+        return !entity.hasTranslateTo && entity.hasTranslateToRemovedListener;
     }
 
     protected override void Execute(System.Collections.Generic.List<GameEntity> entities) {
         foreach (var e in entities) {
             
             _listenerBuffer.Clear();
-            _listenerBuffer.AddRange(e.translateToCompletedListener.value);
+            _listenerBuffer.AddRange(e.translateToRemovedListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnTranslateToCompleted(e);
+                listener.OnTranslateToRemoved(e);
             }
         }
     }

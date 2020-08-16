@@ -51,6 +51,7 @@ public class BubbleProjectileStopSystem : IExecuteSystem
                 }
 
                 Debug.Log("Ready for Slotter");
+
                 // get collider linked entity - save collider data
                 gameEntity.ReplaceCollidedWithBubble(colliderEntity);
             }

@@ -50,25 +50,22 @@ public static class GameComponentsLookup {
     public const int RotationListener = 39;
     public const int Scale = 40;
     public const int ScaleListener = 41;
-    public const int ScaleToCompleted = 42;
-    public const int ScaleToCompletedListener = 43;
-    public const int ScaleTo = 44;
-    public const int Speed = 45;
-    public const int StableBubble = 46;
-    public const int Throwable = 47;
-    public const int Thrown = 48;
-    public const int TranslateToCompleted = 49;
-    public const int TranslateToCompletedListener = 50;
-    public const int TranslateTo = 51;
-    public const int Trigger2DEvent = 52;
-    public const int Trigger2DEventListener = 53;
-    public const int TriggerEnter2D = 54;
-    public const int TriggerEnter2DListener = 55;
-    public const int TriggerExit2D = 56;
-    public const int TriggerExit2DListener = 57;
-    public const int UnstableBubble = 58;
+    public const int ScaleTo = 42;
+    public const int Speed = 43;
+    public const int StableBubble = 44;
+    public const int Throwable = 45;
+    public const int Thrown = 46;
+    public const int TranslateTo = 47;
+    public const int TranslateToRemovedListener = 48;
+    public const int Trigger2DEvent = 49;
+    public const int Trigger2DEventListener = 50;
+    public const int TriggerEnter2D = 51;
+    public const int TriggerEnter2DListener = 52;
+    public const int TriggerExit2D = 53;
+    public const int TriggerExit2DListener = 54;
+    public const int UnstableBubble = 55;
 
-    public const int TotalComponents = 59;
+    public const int TotalComponents = 56;
 
     public static readonly string[] componentNames = {
         "AnyBubbleProjectileReloadListener",
@@ -113,16 +110,13 @@ public static class GameComponentsLookup {
         "RotationListener",
         "Scale",
         "ScaleListener",
-        "ScaleToCompleted",
-        "ScaleToCompletedListener",
         "ScaleTo",
         "Speed",
         "StableBubble",
         "Throwable",
         "Thrown",
-        "TranslateToCompleted",
-        "TranslateToCompletedListener",
         "TranslateTo",
+        "TranslateToRemovedListener",
         "Trigger2DEvent",
         "Trigger2DEventListener",
         "TriggerEnter2D",
@@ -175,16 +169,13 @@ public static class GameComponentsLookup {
         typeof(RotationListenerComponent),
         typeof(ScaleComponent),
         typeof(ScaleListenerComponent),
-        typeof(ScaleToCompletedComponent),
-        typeof(ScaleToCompletedListenerComponent),
         typeof(ScaleToComponent),
         typeof(SpeedComponent),
         typeof(StableBubbleComponent),
         typeof(ThrowableComponent),
         typeof(ThrownComponent),
-        typeof(TranslateToCompletedComponent),
-        typeof(TranslateToCompletedListenerComponent),
         typeof(TranslateToComponent),
+        typeof(TranslateToRemovedListenerComponent),
         typeof(Trigger2DEventComponent),
         typeof(Trigger2DEventListenerComponent),
         typeof(TriggerEnter2DComponent),

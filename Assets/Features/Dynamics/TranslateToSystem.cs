@@ -32,8 +32,6 @@ public class TranslateToSystem : IExecuteSystem
             {
                 gameEntity.ReplacePosition(target);
                 gameEntity.RemoveTranslateTo();
-                // trigger completion event
-                gameEntity.isTranslateToCompleted = true;
             }
         }
     }

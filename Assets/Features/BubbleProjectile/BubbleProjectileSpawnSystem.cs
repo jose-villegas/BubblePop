@@ -2,7 +2,8 @@
 using Entitas;
 using UnityEngine;
 
-public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbleProjectileReloadListener
+public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbleProjectileReloadListener,
+    ITranslateToRemovedListener
 {
     private Contexts _contexts;
     private GameEntity _nextBubble;
@@ -39,26 +40,11 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbl
         // reload projectiles
         _nextBubble.AddTranslateTo(_configuration.ReloadSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
         _nextBubble.AddScaleTo(_configuration.ReloadSpeed, _configuration.BubbleScale);
+        _nextBubble.AddTranslateToRemovedListener(this);
         _nextBubble.isMoving = true;
-
-        // handle when translation is done, converting it to a normal throwable bubble
-        _nextBubble.OnComponentRemoved += OnDynamicsCompleted;
 
         // remove reload entity
         entity.Destroy();
-    }
-
-    private void OnDynamicsCompleted(IEntity entity, int index, IComponent component)
-    {
-        entity.OnComponentRemoved -= OnDynamicsCompleted;
-
-        if (component is TranslateToComponent || component is ScaleToComponent)
-        {
-            _nextBubble.isThrowable = true;
-            _nextBubble.AddSpeed(_configuration.ProjectileSpeed);
-
-            CreateNextBubbleToThrow();
-        }
     }
 
     private void CreateNextBubbleToThrow()
@@ -94,5 +80,14 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbl
         e.AddTranslateTo(_configuration.ReloadSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
         e.AddScaleTo(_configuration.ReloadSpeed, _configuration.BubbleScale);
         e.isMoving = true;
+    }
+
+    public void OnTranslateToRemoved(GameEntity entity)
+    {
+        entity.isThrowable = true;
+        entity.AddSpeed(_configuration.ProjectileSpeed);
+        CreateNextBubbleToThrow();
+
+        entity.RemoveTranslateToRemovedListener(this);
     }
 }

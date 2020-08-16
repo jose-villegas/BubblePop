@@ -32,7 +32,6 @@ public class ScaleToSystem : IExecuteSystem
             {
                 gameEntity.RemoveScaleTo();
                 gameEntity.ReplaceScale(target);
-                gameEntity.isScaleToCompleted = true;
             }
         }
     }
