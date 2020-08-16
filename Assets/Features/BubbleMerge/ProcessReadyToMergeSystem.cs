@@ -74,7 +74,6 @@ public class ProcessReadyToMergeSystem : ReactiveSystem<GameEntity>
             }
         }
 
-        Debug.Log("Set Chosen for Merge");
         chosen.ReplaceBubbleChosenAsMergeTo(finalNumber);
 
         // consume ready to merge

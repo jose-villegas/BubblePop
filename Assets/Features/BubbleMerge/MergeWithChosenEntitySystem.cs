@@ -63,7 +63,6 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
                 readyBubble.ConvertToStableBubble();
             }
 
-            Debug.Log("Set for Connection Check");
             // trigger connection check
             var e = _contexts.game.CreateEntity();
             e.isBubbleConnectionCheck = true;

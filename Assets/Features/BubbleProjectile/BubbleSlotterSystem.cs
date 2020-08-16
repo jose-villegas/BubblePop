@@ -84,7 +84,6 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>, ITranslateToRemov
 
     public void OnTranslateToRemoved(GameEntity entity)
     {
-        Debug.Log("Set Waiting for Merge");
         entity.isMoving = false;
         // let the merge system now take charge
         entity.isBubbleWaitingMerge = true;

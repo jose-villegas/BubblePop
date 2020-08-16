@@ -34,6 +34,8 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
 
     [Header("Scrolling")] [SerializeField] private Vector2 _scrollingBubblePositionBounds;
     [SerializeField] private float _scrollingSpeed;
+    [SerializeField] private float _linesHeight;
+
 
     [Header("Feedback")] [SerializeField] private float _nudgeDistance;
 
@@ -72,6 +74,8 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public float ReloadSpeed => _reloadSpeed;
 
     public Vector2 ScrollingBubblePositionBounds => _scrollingBubblePositionBounds;
+
+    public float LinesHeight => _linesHeight;
 
     public float ScrollingSpeed => _scrollingSpeed;
 

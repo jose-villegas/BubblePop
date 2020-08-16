@@ -96,6 +96,12 @@ public interface IGameConfiguration
     Vector2 ScrollingBubblePositionBounds { get; }
 
     /// <summary>
+    /// This determines the height of the top-most
+    /// line, if lines are under this value, new are created
+    /// </summary>
+    float LinesHeight { get; }
+
+    /// <summary>
     /// Scrolling animation speed
     /// </summary>
     float ScrollingSpeed { get; }

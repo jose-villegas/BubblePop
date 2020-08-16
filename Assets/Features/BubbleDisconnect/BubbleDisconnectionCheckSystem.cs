@@ -94,8 +94,6 @@ public class BubbleDisconnectionCheckSystem : ReactiveSystem<GameEntity>
             }
         }
 
-        Debug.Log("All Baseline connections checked: " + allConnectionsChecked);
-
         if (allConnectionsChecked)
         {
             // mark disconnected bubbles
@@ -110,8 +108,6 @@ public class BubbleDisconnectionCheckSystem : ReactiveSystem<GameEntity>
                     entity.ReplaceLayer(LayerMask.NameToLayer("FallingBubbles"));
                 }
             }
-
-            Debug.Log("Set for Falling Bubbles");
 
             // trigger scroll check
             var e = _contexts.game.CreateEntity();

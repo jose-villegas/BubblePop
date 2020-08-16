@@ -20,6 +20,10 @@ public class GameControllerBehaviour : MonoBehaviour
         var bottomScrollBound1 = Vector3.up * _configuration.ScrollingBubblePositionBounds.x + Vector3.left * 10;
         Debug.DrawLine(bottomScrollBound0, bottomScrollBound1, Color.green);
 
+        var lineHeight0 = Vector3.up * _configuration.LinesHeight + Vector3.right * 10;
+        var lineHeight1 = Vector3.up * _configuration.LinesHeight + Vector3.left * 10;
+        Debug.DrawLine(lineHeight0, lineHeight1, Color.blue);
+
         var deadZone0 = Vector3.up * _configuration.FallingDeadZoneHeight + Vector3.right * 10;
         var deadZone1 = Vector3.up * _configuration.FallingDeadZoneHeight + Vector3.left * 10;
         Debug.DrawLine(deadZone0, deadZone1, Color.red);

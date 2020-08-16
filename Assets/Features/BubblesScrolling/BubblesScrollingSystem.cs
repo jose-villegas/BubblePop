@@ -39,6 +39,8 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
         }
 
         var minimumPosition = float.MaxValue;
+        var maximumPosition = float.MinValue;
+        var scrolled = false;
 
         foreach (var bubble in _group)
         {
@@ -49,18 +51,36 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
                 minimumPosition = pos.y;
             }
 
+            if (pos.y >= maximumPosition)
+            {
+                maximumPosition = pos.y;
+            }
+
             // in this case we need to scroll up
-            if (pos.y <= _configuration.ScrollingBubblePositionBounds.x)
+            if (!scrolled && pos.y <= _configuration.ScrollingBubblePositionBounds.x)
             {
                 HandleScrollUpCase();
-                return;
+                scrolled = true;
             }
         }
 
-        // all the bubbles are above the minimum position - scroll down case
-        if (minimumPosition >= _configuration.ScrollingBubblePositionBounds.y)
+        if (!scrolled)
         {
-            HandleScrollDownCase();
+            // all the bubbles are above the minimum position - scroll down case
+            if (minimumPosition >= _configuration.ScrollingBubblePositionBounds.y)
+            {
+                HandleScrollDownCase();
+            }
+        }
+
+        // meet line height requirement
+        if (maximumPosition < _configuration.LinesHeight)
+        {
+            while (maximumPosition < _configuration.LinesHeight)
+            {
+                CreateNewLine();
+                maximumPosition += _configuration.BubblesSeparation.y;
+            }
         }
     }
 
