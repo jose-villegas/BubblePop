@@ -18,7 +18,7 @@ public class MergeMarkingSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isBubble && entity.isBubbleWaitingMerge && entity.hasBubbleNumber;
+        return entity.isBubble && entity.isBubbleWaitingMerge && entity.hasBubbleNumber && entity.hasBubbleSlot;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)

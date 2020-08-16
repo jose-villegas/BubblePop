@@ -17,13 +17,6 @@ public interface IGameConfiguration
     int MaximumExponent { get; }
 
     /// <summary>
-    /// When bubbles are spawned, this determined their
-    /// maximum assigned value, unlike <see cref="MaximumExponent"/>
-    /// that can be reached through merging
-    /// </summary>
-    int MaximumSpawnExponent { get; }
-
-    /// <summary>
     /// This defines how many rows will be filled with
     /// starting bubbles at game start
     /// </summary>

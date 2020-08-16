@@ -7,7 +7,6 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     [Header("Bubble Number")] [SerializeField]
     private int _maximumExponent;
 
-    [SerializeField] private int _maximumSpawnExponent;
     [SerializeField] private List<ExponentConfiguration> _exponentConfigurations;
 
     [Header("Bubble Instancing")] [SerializeField]
@@ -56,8 +55,6 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public List<ExponentConfiguration> ExponentConfigurations => _exponentConfigurations;
 
     public int MaximumExponent => _maximumExponent;
-
-    public int MaximumSpawnExponent => _maximumSpawnExponent;
 
     public int InitialRowCount => _initialRowCount;
 

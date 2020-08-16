@@ -80,8 +80,7 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>, ITranslateToRemov
                 var angleRight = Mathf.Atan2(counterClockWiseDir.y, counterClockWiseDir.x);
 
                 var indexedLeft = HasAvailableIndexAtAngle(collider.bubbleSlot, angleLeft, out var leftIndex);
-                var indexedRight =
-                    HasAvailableIndexAtAngle(collider.bubbleSlot, angleRight, out var rightIndex);
+                var indexedRight = HasAvailableIndexAtAngle(collider.bubbleSlot, angleRight, out var rightIndex);
 
                 // if both are valid find the nearest to the original direction
                 if (indexedLeft && indexedRight)
@@ -119,6 +118,7 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>, ITranslateToRemov
         if (!HasAvailableIndexAtAngle(colliderSlot, angle, out var newSlotIndex)) return false;
 
         var finalPosition = newSlotIndex.IndexToPosition(_contexts.game, _configuration);
+
 
         // new slot to store this bubble
         gameEntity.ReplaceBubbleSlot(newSlotIndex);
