@@ -10,12 +10,14 @@ using UnityEngine;
 public class BubbleDisconnectionCheckSystem : ReactiveSystem<GameEntity>
 {
     private readonly Contexts _contexts;
-    private readonly IGroup<GameEntity> _group;
+    private readonly IGroup<GameEntity> _stableBubbles;
+    private readonly IGroup<GameEntity> _connectionChecks;
 
     public BubbleDisconnectionCheckSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
-        _group = contexts.game.GetGroup(GameMatcher.StableBubble);
+        _stableBubbles = contexts.game.GetGroup(GameMatcher.StableBubble);
+        _connectionChecks = contexts.game.GetGroup(GameMatcher.BubbleConnectionCheck);
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -32,82 +34,63 @@ public class BubbleDisconnectionCheckSystem : ReactiveSystem<GameEntity>
     {
         // in this case we have received a connection check as trigger event
         // add top most bubbles to be checked
-        if (entities.Count == 1 && !entities[0].isBubble)
-        {
-            entities[0].Destroy();
-
-            // mark all bubbles as disconnected bubbles
-            foreach (var entity in _group.AsEnumerable().ToList())
-            {
-                entity.isBubbleConnected = false;
-                entity.isBubbleConnectionCheck = false;
-            }
-
-            var limit = _contexts.game.bubbleSlotLimitsIndex.MaximumVertical;
-            var iterator = new BubbleSlotIterator(6, limit + 1, limit);
-
-            foreach (Vector2Int slotIndex in iterator)
-            {
-                if (_contexts.game.bubbleSlotIndexer.Value.TryGetValue(slotIndex, out var entity))
-                {
-                    var gameEntity = (GameEntity) entity;
-
-                    // since this is the top line, it's connected, we need to check for its neighbors
-                    gameEntity.isBubbleConnected = true;
-
-                    var neighbors = _contexts.game.GetBubbleNeighbors(gameEntity.bubbleSlot);
-
-                    foreach (var neighbor in neighbors)
-                    {
-                        // only consider neighbors below
-                        if (neighbor.bubbleSlot.Value.y >= gameEntity.bubbleSlot.Value.y) continue;
-
-                        // the neighbor is connected as they are connected to the top line
-                        neighbor.isBubbleConnected = true;
-                        // still need to connect with the neighbor's neighbors
-                        neighbor.isBubbleConnectionCheck = true;
-                    }
-                }
-            }
-
-            return;
-        }
-
-        bool allConnectionsChecked = true;
-
         foreach (var gameEntity in entities)
         {
-            var neighbors = _contexts.game.GetBubbleNeighbors(gameEntity.bubbleSlot);
+            gameEntity.Destroy();
+        }
 
-            // first we check if we are connected
-            foreach (var neighbor in neighbors)
+        // mark all bubbles as disconnected bubbles
+        foreach (var entity in _stableBubbles.AsEnumerable().ToList())
+        {
+            entity.isBubbleConnected = false;
+        }
+
+        var limit = _contexts.game.bubbleSlotLimitsIndex.MaximumVertical;
+        var iterator = new BubbleSlotIterator(6, limit + 1, limit);
+
+        foreach (Vector2Int slotIndex in iterator)
+        {
+            if (_contexts.game.bubbleSlotIndexer.Value.TryGetValue(slotIndex, out var entity))
             {
-                if (!neighbor.isBubbleConnected)
-                {
-                    // since we are connected it means that our neighbors are also connected
-                    neighbor.isBubbleConnected = true;
-                    // still need to connect with the neighbor's neighbors
-                    neighbor.isBubbleConnectionCheck = true;
-                    // we haven't reached the point where all neighbors are connected
-                    allConnectionsChecked = false;
-                }
+                var gameEntity = (GameEntity) entity;
+
+                // since this is the top line, it's connected, we need to check for its neighbors
+                TraverseConnectedNeighbors(gameEntity);
             }
         }
 
-        if (allConnectionsChecked)
-        {
-            // mark disconnected bubbles
-            foreach (var entity in _group.AsEnumerable().ToList())
-            {
-                if (!entity.isBubbleConnected)
-                {
-                    _contexts.game.RemoveSlotIndex(entity);
+        // since we have traverse all the bubble structure, only disconnected bubbles will stay as disconnected
+        MarkFallingBubbles();
+    }
 
-                    entity.AddBubbleFalling(Vector3.zero);
-                    entity.isStableBubble = false;
-                    entity.ReplaceLayer(LayerMask.NameToLayer("FallingBubbles"));
-                }
+    private void MarkFallingBubbles()
+    {
+        // mark disconnected bubbles
+        foreach (var entity in _stableBubbles.AsEnumerable().ToList())
+        {
+            if (!entity.isBubbleConnected)
+            {
+                _contexts.game.RemoveSlotIndex(entity);
+
+                entity.AddBubbleFalling(Vector3.zero);
+                entity.isStableBubble = false;
+                entity.ReplaceLayer(LayerMask.NameToLayer("FallingBubbles"));
             }
+        }
+
+        // trigger scroll check
+        _contexts.game.isBubblesScrollCheck = true;
+    }
+
+    public void TraverseConnectedNeighbors(GameEntity entity)
+    {
+        entity.isBubbleConnected = true;
+
+        var neighbors = _contexts.game.GetBubbleNeighbors(entity.bubbleSlot);
+
+        foreach (var gameEntity in neighbors)
+        {
+            if (!gameEntity.isBubbleConnected) TraverseConnectedNeighbors(gameEntity);
         }
     }
 }

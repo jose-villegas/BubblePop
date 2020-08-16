@@ -152,6 +152,7 @@ public static class GameContextExtensions
         e.isBubbleConnected = true;
 
         var scaleSpeed = Random.Range(configuration.SpawnScaleSpeedRange.x, configuration.SpawnScaleSpeedRange.y);
+
         // add components
         e.AddPosition(Vector3.zero);
         e.AddScale(Vector3.zero);

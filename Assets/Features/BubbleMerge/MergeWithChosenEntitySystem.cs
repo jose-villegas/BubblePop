@@ -35,43 +35,23 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
     protected override void Execute(List<GameEntity> entities)
     {
         var target = _contexts.game.bubbleChosenAsMergeToEntity;
+        _expectedDestroyCount = _mergeGroup.count - 1;
 
-        if (_mergeGroup.count > 1)
+        foreach (var readyBubble in _mergeGroup.AsEnumerable().ToList())
         {
-            _expectedDestroyCount = _mergeGroup.count - 1;
+            if (readyBubble == _contexts.game.bubbleChosenAsMergeToEntity) continue;
 
-            foreach (var readyBubble in _mergeGroup.AsEnumerable().ToList())
-            {
-                // no longer waiting to be merged
-                readyBubble.isBubbleWaitingMerge = false;
+            // no longer waiting to be merged
+            readyBubble.isBubbleWaitingMerge = false;
 
-                // avoid moving target
-                if (readyBubble == target) continue;
+            readyBubble.ReplaceTranslateTo(_configuration.MergeTranslateSpeed, target.position.Value);
+            readyBubble.ReplaceScaleTo(_configuration.MergeScaleSpeed, Vector3.zero);
+            readyBubble.AddTranslateToRemovedListener(this);
+            readyBubble.isBubblePlayFX = true;
+            readyBubble.isMoving = true;
 
-                readyBubble.ReplaceTranslateTo(_configuration.MergeTranslateSpeed, target.position.Value);
-                readyBubble.ReplaceScaleTo(_configuration.MergeScaleSpeed, Vector3.zero);
-                readyBubble.AddTranslateToRemovedListener(this);
-                readyBubble.isBubblePlayFX = true;
-                readyBubble.isMoving = true;
-
-                // wait for translation complete to removed merged bubbles
-                readyBubble.OnDestroyEntity += OnReadyBubbleDestroyed;
-            }
-        }
-        else
-        {
-            foreach (var readyBubble in _mergeGroup.AsEnumerable().ToList())
-            {
-                readyBubble.ConvertToStableBubble();
-            }
-
-            // trigger scroll check
-            var e = _contexts.game.CreateEntity();
-            e.isBubblesScrollCheck = true;
-
-            // trigger reload behavior
-            e = _contexts.game.CreateEntity();
-            e.isBubbleProjectileReload = true;
+            // wait for translation complete to removed merged bubbles
+            readyBubble.OnDestroyEntity += OnReadyBubbleDestroyed;
         }
     }
 
@@ -93,20 +73,9 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
                 // set chosen as waiting to merge, checking if there is further moves
                 chosen.isBubbleWaitingMerge = true;
             }
-            else if (chosen != null && chosen.hasBubbleFalling)
-            {
-                // trigger scroll check
-                var e = _contexts.game.CreateEntity();
-                e.isBubblesScrollCheck = true;
-
-                // trigger reload behavior
-                e = _contexts.game.CreateEntity();
-                e.isBubbleProjectileReload = true;
-            }
 
             // trigger connection check
-            var c = _contexts.game.CreateEntity();
-            c.isBubbleConnectionCheck = true;
+            _contexts.game.isBubbleConnectionCheck = true;
         }
 
         entity.OnDestroyEntity -= OnReadyBubbleDestroyed;
@@ -114,6 +83,7 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
 
     public void OnTranslateToRemoved(GameEntity entity)
     {
+
         entity.isDestroyed = true;
         entity.RemoveTranslateToRemovedListener(this);
     }

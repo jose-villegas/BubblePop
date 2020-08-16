@@ -70,18 +70,12 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
             if (minimumPosition >= _configuration.ScrollingBubblePositionBounds.y)
             {
                 HandleScrollDownCase();
+                scrolled = true;
             }
         }
 
-        // meet line height requirement
-        if (maximumPosition < _configuration.LinesHeight)
-        {
-            while (maximumPosition < _configuration.LinesHeight)
-            {
-                CreateNewLine();
-                maximumPosition += _configuration.BubblesSeparation.y;
-            }
-        }
+        // trigger reload behavior
+        _contexts.game.isBubbleProjectileReload = true;
     }
 
     private void HandleScrollDownCase()

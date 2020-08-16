@@ -15,9 +15,9 @@ MonoBehaviour:
   _maximumExponent: 11
   _exponentConfigurations:
   - _color: {r: 0.54509807, g: 0.7647059, b: 0.2901961, a: 1}
-    _probability: 50
+    _probability: 30
   - _color: {r: 0, g: 0.5882353, b: 0.53333336, a: 1}
-    _probability: 40
+    _probability: 30
   - _color: {r: 0.011764706, g: 0.6627451, b: 0.95686275, a: 1}
     _probability: 0
   - _color: {r: 0.21960784, g: 0.5568628, b: 0.23529412, a: 1}
@@ -44,7 +44,7 @@ MonoBehaviour:
   _mergeTranslateSpeed: 12.5
   _mergeScaleSpeed: 2.5
   _aimAngleRange: {x: 35, y: 145}
-  _reloadSpeed: 15
+  _reloadSpeed: 17.5
   _projectileSpeed: 20
   _projectileBubblesHeight: -4
   nextBubbleScale: {x: 3.5, y: 3.5, z: 3.5}

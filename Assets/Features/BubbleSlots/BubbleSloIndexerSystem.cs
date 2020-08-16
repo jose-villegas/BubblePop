@@ -77,7 +77,7 @@ public class BubbleSloIndexerSystem : ReactiveSystem<GameEntity>, IDestroyedList
 
         foreach (var value in _indexerEntity.bubbleSlotIndexer.Value.Values)
         {
-            var gameEntity = (GameEntity)value;
+            var gameEntity = (GameEntity) value;
 
             if (gameEntity.bubbleSlot.Value.y > _limits.bubbleSlotLimitsIndex.MaximumVertical)
             {

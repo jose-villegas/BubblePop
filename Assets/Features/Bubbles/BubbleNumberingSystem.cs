@@ -12,6 +12,16 @@ public class BubbleNumberingSystem : ReactiveSystem<GameEntity>
     private readonly IGameConfiguration _configuration;
     private List<Vector2> _probabilitiesRanges;
 
+    protected override bool Filter(GameEntity entity)
+    {
+        return entity.isBubble;
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return context.CreateCollector(GameMatcher.Bubble);
+    }
+
     public BubbleNumberingSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
@@ -50,15 +60,5 @@ public class BubbleNumberingSystem : ReactiveSystem<GameEntity>
 
             item.AddBubbleNumber(1 << exponent);
         }
-    }
-
-    protected override bool Filter(GameEntity entity)
-    {
-        return entity.isBubble;
-    }
-
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-    {
-        return context.CreateCollector(GameMatcher.Bubble);
     }
 }

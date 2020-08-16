@@ -119,12 +119,11 @@ public class BubbleSlotterSystem : ReactiveSystem<GameEntity>, ITranslateToRemov
 
         var finalPosition = newSlotIndex.IndexToPosition(_contexts.game, _configuration);
 
-
         // new slot to store this bubble
         gameEntity.ReplaceBubbleSlot(newSlotIndex);
 
         // move to final position
-        gameEntity.AddTranslateTo(_configuration.ProjectileSpeed, finalPosition);
+        gameEntity.ReplaceTranslateTo(_configuration.ProjectileSpeed, finalPosition);
         gameEntity.AddTranslateToRemovedListener(this);
         gameEntity.isMoving = true;
 

@@ -8,6 +8,7 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbl
     private Contexts _contexts;
     private GameEntity _nextBubble;
     private IGameConfiguration _configuration;
+    private int _calls;
 
     public BubbleProjectileSpawnSystem(Contexts contexts) : base(contexts.game)
     {
@@ -37,11 +38,15 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbl
 
     public void OnAnyBubbleProjectileReload(GameEntity entity)
     {
-        // reload projectiles
-        _nextBubble.AddTranslateTo(_configuration.ReloadSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
-        _nextBubble.AddScaleTo(_configuration.ReloadSpeed, _configuration.BubbleScale);
-        _nextBubble.AddTranslateToRemovedListener(this);
-        _nextBubble.isMoving = true;
+        // we don't need to reload if there is already a throwable bubble
+        if (_contexts.game.GetGroup(GameMatcher.Throwable).count == 0)
+        {
+            // reload projectiles
+            _nextBubble.AddTranslateTo(_configuration.ReloadSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
+            _nextBubble.ReplaceScaleTo(_configuration.ReloadSpeed, _configuration.BubbleScale);
+            _nextBubble.AddTranslateToRemovedListener(this);
+            _nextBubble.isMoving = true;
+        }
 
         // remove reload entity
         entity.Destroy();
