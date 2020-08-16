@@ -5,15 +5,17 @@ using UnityEngine;
 
 /// <summary>
 /// This systems handles marking as waiting for merge 
-/// all matching bubble entities
+/// all matching bubble entities, if the bubbles are
+/// of maximum value this system marks them to be destroyed
+/// as well its neighbors
 /// </summary>
-public class MergeMarkingSystem : ReactiveSystem<GameEntity>
+public class BubbleFlaggingSystem : ReactiveSystem<GameEntity>
 {
     private readonly Contexts _contexts;
     private readonly IGameConfiguration _configuration;
     private readonly IGroup<GameEntity> _group;
 
-    public MergeMarkingSystem(Contexts contexts) : base(contexts.game)
+    public BubbleFlaggingSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
         _configuration = _contexts.configuration.gameConfiguration.value;
@@ -57,25 +59,14 @@ public class MergeMarkingSystem : ReactiveSystem<GameEntity>
         {
             var maxNumber = 1 << _configuration.MaximumExponent;
 
-
             if (matchingNumber == maxNumber)
             {
-                var _group = _contexts.game.GetGroup(GameMatcher.BubbleWaitingMerge);
-
                 foreach (var waitingMerge in _group.AsEnumerable().ToList())
                 {
                     waitingMerge.isBubbleWaitingMerge = false;
-
-                    var neighbors = _contexts.game.GetBubbleNeighbors(waitingMerge.bubbleSlot);
-
-                    foreach (var gameEntity in neighbors)
-                    {
-                        gameEntity.isBubblePlayFX = true;
-                        gameEntity.isDestroyed = true;
-                    }
-
-                    waitingMerge.isBubblePlayFX = true;
-                    waitingMerge.isDestroyed = true;
+                    waitingMerge.isStableBubble = false;
+                    waitingMerge.isBubbleConnected = false;
+                    waitingMerge.isBubbleExplode = true;
                 }
             }
             else if (_group.count > 1)
@@ -83,7 +74,7 @@ public class MergeMarkingSystem : ReactiveSystem<GameEntity>
                 _contexts.game.ReplaceBubblesReadyToMerge(matchingNumber);
             }
 
-            if (_group.count == 1 || matchingNumber == maxNumber)
+            if (_group.count == 1)
             {
                 foreach (var waitingMerge in _group.AsEnumerable().ToList())
                 {
