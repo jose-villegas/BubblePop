@@ -20,52 +20,54 @@ public static class GameComponentsLookup {
     public const int BubbleNudge = 9;
     public const int BubbleNumber = 10;
     public const int BubbleNumberListener = 11;
-    public const int BubblePredictionHit = 12;
-    public const int BubblePredictionHitListener = 13;
-    public const int BubbleProjectileReload = 14;
-    public const int BubbleSlot = 15;
-    public const int BubbleSlotIndexer = 16;
-    public const int BubbleSlotLimitsIndex = 17;
-    public const int BubblesReadyToMerge = 18;
-    public const int BubblesScrollCheck = 19;
-    public const int BubbleTrace = 20;
-    public const int BubbleTraceListener = 21;
-    public const int BubbleVerticalOffset = 22;
-    public const int BubbleWaitingMerge = 23;
-    public const int CollidedWithBubbles = 24;
-    public const int Destroyed = 25;
-    public const int DestroyedListener = 26;
-    public const int Direction = 27;
-    public const int EntityTag = 28;
-    public const int EntityTagIndexer = 29;
-    public const int GameEvent = 30;
-    public const int GameStarted = 31;
-    public const int Layer = 32;
-    public const int LayerListener = 33;
-    public const int LinkedView = 34;
-    public const int Moving = 35;
-    public const int Position = 36;
-    public const int PositionListener = 37;
-    public const int Rotation = 38;
-    public const int RotationListener = 39;
-    public const int Scale = 40;
-    public const int ScaleListener = 41;
-    public const int ScaleTo = 42;
-    public const int Speed = 43;
-    public const int StableBubble = 44;
-    public const int Throwable = 45;
-    public const int Thrown = 46;
-    public const int TranslateTo = 47;
-    public const int TranslateToRemovedListener = 48;
-    public const int Trigger2DEvent = 49;
-    public const int Trigger2DEventListener = 50;
-    public const int TriggerEnter2D = 51;
-    public const int TriggerEnter2DListener = 52;
-    public const int TriggerExit2D = 53;
-    public const int TriggerExit2DListener = 54;
-    public const int UnstableBubble = 55;
+    public const int BubblePlayFX = 12;
+    public const int BubblePlayFXListener = 13;
+    public const int BubblePredictionHit = 14;
+    public const int BubblePredictionHitListener = 15;
+    public const int BubbleProjectileReload = 16;
+    public const int BubbleSlot = 17;
+    public const int BubbleSlotIndexer = 18;
+    public const int BubbleSlotLimitsIndex = 19;
+    public const int BubblesReadyToMerge = 20;
+    public const int BubblesScrollCheck = 21;
+    public const int BubbleTrace = 22;
+    public const int BubbleTraceListener = 23;
+    public const int BubbleVerticalOffset = 24;
+    public const int BubbleWaitingMerge = 25;
+    public const int CollidedWithBubbles = 26;
+    public const int Destroyed = 27;
+    public const int DestroyedListener = 28;
+    public const int Direction = 29;
+    public const int EntityTag = 30;
+    public const int EntityTagIndexer = 31;
+    public const int GameEvent = 32;
+    public const int GameStarted = 33;
+    public const int Layer = 34;
+    public const int LayerListener = 35;
+    public const int LinkedView = 36;
+    public const int Moving = 37;
+    public const int Position = 38;
+    public const int PositionListener = 39;
+    public const int Rotation = 40;
+    public const int RotationListener = 41;
+    public const int Scale = 42;
+    public const int ScaleListener = 43;
+    public const int ScaleTo = 44;
+    public const int Speed = 45;
+    public const int StableBubble = 46;
+    public const int Throwable = 47;
+    public const int Thrown = 48;
+    public const int TranslateTo = 49;
+    public const int TranslateToRemovedListener = 50;
+    public const int Trigger2DEvent = 51;
+    public const int Trigger2DEventListener = 52;
+    public const int TriggerEnter2D = 53;
+    public const int TriggerEnter2DListener = 54;
+    public const int TriggerExit2D = 55;
+    public const int TriggerExit2DListener = 56;
+    public const int UnstableBubble = 57;
 
-    public const int TotalComponents = 56;
+    public const int TotalComponents = 58;
 
     public static readonly string[] componentNames = {
         "AnyBubbleProjectileReloadListener",
@@ -80,6 +82,8 @@ public static class GameComponentsLookup {
         "BubbleNudge",
         "BubbleNumber",
         "BubbleNumberListener",
+        "BubblePlayFX",
+        "BubblePlayFXListener",
         "BubblePredictionHit",
         "BubblePredictionHitListener",
         "BubbleProjectileReload",
@@ -139,6 +143,8 @@ public static class GameComponentsLookup {
         typeof(BubbleNudgeComponent),
         typeof(BubbleNumberComponent),
         typeof(BubbleNumberListenerComponent),
+        typeof(BubblePlayFXComponent),
+        typeof(BubblePlayFXListenerComponent),
         typeof(BubblePredictionHit),
         typeof(BubblePredictionHitListenerComponent),
         typeof(BubbleProjectileReload),

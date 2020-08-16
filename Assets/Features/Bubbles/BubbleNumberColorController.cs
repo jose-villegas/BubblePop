@@ -20,7 +20,7 @@ public class BubbleNumberColorController : MonoBehaviour, IBubbleNumberListener
 
     private void Awake()
     {
-        _view = GetComponent<LinkedViewController>();
+        _view = GetComponentInParent<LinkedViewController>();
         _renderer = GetComponent<SpriteRenderer>();
 
         _view.OnViewLinked += OnViewLinked;
@@ -31,7 +31,6 @@ public class BubbleNumberColorController : MonoBehaviour, IBubbleNumberListener
         entity.AddBubbleNumberListener(this);
 
         if (!entity.hasBubbleNumber) return;
-
 
         OnBubbleNumber(entity, entity.bubbleNumber.Value);
     }

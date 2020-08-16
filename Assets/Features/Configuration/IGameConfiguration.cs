@@ -78,6 +78,11 @@ public interface IGameConfiguration
     float MergeTranslateSpeed { get; }
 
     /// <summary>
+    /// Translation speed for bubbles to merge
+    /// </summary>
+    float MergeScaleSpeed { get; }
+
+    /// <summary>
     /// The translation and scale animation speed on reload
     /// </summary>
     float ReloadSpeed { get; }

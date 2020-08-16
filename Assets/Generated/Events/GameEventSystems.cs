@@ -10,6 +10,7 @@ public sealed class GameEventSystems : Feature {
 
     public GameEventSystems(Contexts contexts) {
         Add(new BubbleNumberEventSystem(contexts)); // priority: 0
+        Add(new BubblePlayFXEventSystem(contexts)); // priority: 0
         Add(new BubblePredictionHitEventSystem(contexts)); // priority: 0
         Add(new AnyBubbleProjectileReloadEventSystem(contexts)); // priority: 0
         Add(new BubbleTraceEventSystem(contexts)); // priority: 0

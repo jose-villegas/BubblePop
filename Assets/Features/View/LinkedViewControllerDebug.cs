@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(ILinkedView))]
 public partial class LinkedViewController : MonoBehaviour
 {
 #if UNITY_EDITOR

@@ -24,6 +24,8 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     [Header("Bubble Merge")] [SerializeField]
     private float _mergeTranslateSpeed;
 
+    [SerializeField] private float _mergeScaleSpeed;
+
     [Header("Projectile Bubble")] [SerializeField]
     private Vector2 _aimAngleRange;
 
@@ -72,6 +74,8 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public float OverlapCircleRadius => _overlapCircleRadius;
 
     public float MergeTranslateSpeed => _mergeTranslateSpeed;
+
+    public float MergeScaleSpeed => _mergeScaleSpeed;
 
     public float ReloadSpeed => _reloadSpeed;
 
