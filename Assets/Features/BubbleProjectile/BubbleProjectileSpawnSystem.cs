@@ -41,6 +41,9 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbl
         // we don't need to reload if there is already a throwable bubble
         if (_contexts.game.GetGroup(GameMatcher.Throwable).count == 0)
         {
+            // trigger scroll check behavior
+            _contexts.game.isBubblesScrollCheck = true;
+
             // reload projectiles
             _nextBubble.AddTranslateTo(_configuration.ReloadSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
             _nextBubble.ReplaceScaleTo(_configuration.ReloadSpeed, _configuration.BubbleScale);

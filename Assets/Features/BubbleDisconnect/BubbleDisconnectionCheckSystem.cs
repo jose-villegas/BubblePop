@@ -79,7 +79,7 @@ public class BubbleDisconnectionCheckSystem : ReactiveSystem<GameEntity>
         }
 
         // trigger scroll check
-        _contexts.game.isBubblesScrollCheck = true;
+        _contexts.game.isBubbleProjectileReload = true;
     }
 
     public void TraverseConnectedNeighbors(GameEntity entity)

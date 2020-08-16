@@ -40,7 +40,7 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
 
         var minimumPosition = float.MaxValue;
         var maximumPosition = float.MinValue;
-        var scrolled = false;
+        bool scrolled = false;
 
         foreach (var bubble in _group)
         {
@@ -74,8 +74,12 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
             }
         }
 
-        // trigger reload behavior
-        _contexts.game.isBubbleProjectileReload = true;
+        // we need to adapt the offset to match
+        while (maximumPosition < _configuration.LinesHeight)
+        {
+            HandleScroll(1);
+            maximumPosition += _configuration.BubblesSeparation.y;
+        }
     }
 
     private void HandleScrollDownCase()
@@ -124,15 +128,15 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
 
     private void HandleScroll(float sign)
     {
+        var offset = _contexts.game.hasBubbleVerticalOffset ? _contexts.game.bubbleVerticalOffset.Value : 0;
+        _contexts.game.ReplaceBubbleVerticalOffset(offset + sign * _configuration.BubblesSeparation.y);
+
         foreach (var bubble in _group)
         {
             var position = bubble.hasBubbleNudge ? bubble.bubbleNudge.Origin : bubble.position.Value;
 
-            bubble.AddTranslateTo(_configuration.ScrollingSpeed,
-                position + _configuration.BubblesSeparation.y * Vector3.up * sign);
+            bubble.ReplaceTranslateTo(_configuration.ScrollingSpeed,
+                bubble.bubbleSlot.Value.IndexToPosition(_contexts.game, _configuration));
         }
-
-        var offset = _contexts.game.hasBubbleVerticalOffset ? _contexts.game.bubbleVerticalOffset.Value : 0;
-        _contexts.game.ReplaceBubbleVerticalOffset(offset + sign * _configuration.BubblesSeparation.y);
     }
 }

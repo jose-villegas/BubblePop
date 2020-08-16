@@ -92,7 +92,7 @@ public class MergeMarkingSystem : ReactiveSystem<GameEntity>
                 }
 
                 // trigger scroll check
-                _contexts.game.isBubblesScrollCheck = true;
+                _contexts.game.isBubbleProjectileReload = true;
             }
         }
     }
