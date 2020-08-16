@@ -6,31 +6,31 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class BubblePlayFXEventSystem : Entitas.ReactiveSystem<GameEntity> {
+public sealed class BubblePlayDestroyFXEventSystem : Entitas.ReactiveSystem<GameEntity> {
 
-    readonly System.Collections.Generic.List<IBubblePlayFXListener> _listenerBuffer;
+    readonly System.Collections.Generic.List<IBubblePlayDestroyFXListener> _listenerBuffer;
 
-    public BubblePlayFXEventSystem(Contexts contexts) : base(contexts.game) {
-        _listenerBuffer = new System.Collections.Generic.List<IBubblePlayFXListener>();
+    public BubblePlayDestroyFXEventSystem(Contexts contexts) : base(contexts.game) {
+        _listenerBuffer = new System.Collections.Generic.List<IBubblePlayDestroyFXListener>();
     }
 
     protected override Entitas.ICollector<GameEntity> GetTrigger(Entitas.IContext<GameEntity> context) {
         return Entitas.CollectorContextExtension.CreateCollector(
-            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.BubblePlayFX)
+            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.BubblePlayDestroyFX)
         );
     }
 
     protected override bool Filter(GameEntity entity) {
-        return entity.isBubblePlayFX && entity.hasBubblePlayFXListener;
+        return entity.isBubblePlayDestroyFX && entity.hasBubblePlayDestroyFXListener;
     }
 
     protected override void Execute(System.Collections.Generic.List<GameEntity> entities) {
         foreach (var e in entities) {
             
             _listenerBuffer.Clear();
-            _listenerBuffer.AddRange(e.bubblePlayFXListener.value);
+            _listenerBuffer.AddRange(e.bubblePlayDestroyFXListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnBubblePlayFX(e);
+                listener.OnBubblePlayDestroyFX(e);
             }
         }
     }

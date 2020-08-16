@@ -43,7 +43,7 @@ MonoBehaviour:
   bubbleScale: {x: 3.85, y: 3.85, z: 3.85}
   _mergeTranslateSpeed: 12.5
   _mergeScaleSpeed: 2.5
-  _aimAngleRange: {x: 35, y: 145}
+  _aimAngleRange: {x: 30, y: 150}
   _reloadSpeed: 17.5
   _projectileSpeed: 20
   _projectileBubblesHeight: -4

@@ -40,7 +40,7 @@ public class BubbleFallingSystem : IExecuteSystem
                     bubble.ReplaceScaleTo(_configuration.MergeScaleSpeed, Vector3.zero);
                 }
 
-                bubble.isBubblePlayFX = true;
+                bubble.isBubblePlayDestroyFX = true;
             }
 
             if (position.y < _configuration.FallingDeadZoneHeight)

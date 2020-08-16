@@ -3,9 +3,11 @@
 /// <summary>
 /// Handles special effects to bubbles
 /// </summary>
-public class BubbleFXController : MonoBehaviour, IBubbleNumberListener, IBubblePlayFXListener
+public class BubbleFXController : MonoBehaviour, IBubbleNumberListener, IBubblePlayDestroyFXListener,
+    IBubblePlayExplosionFXListener
 {
     [SerializeField] private ParticleSystem _destroyFX;
+    [SerializeField] private ParticleSystem _explosionFX;
 
     private Color _color;
     private LinkedViewController _view;
@@ -20,7 +22,8 @@ public class BubbleFXController : MonoBehaviour, IBubbleNumberListener, IBubbleP
     private void OnViewLinked(GameEntity entity)
     {
         entity.AddBubbleNumberListener(this);
-        entity.AddBubblePlayFXListener(this);
+        entity.AddBubblePlayDestroyFXListener(this);
+        entity.AddBubblePlayExplosionFXListener(this);
 
         if (!entity.hasBubbleNumber) return;
 
@@ -40,9 +43,17 @@ public class BubbleFXController : MonoBehaviour, IBubbleNumberListener, IBubbleP
         }
     }
 
-    public void OnBubblePlayFX(GameEntity entity)
+    public void OnBubblePlayDestroyFX(GameEntity entity)
     {
         var ps = Instantiate(_destroyFX, transform.position, Quaternion.identity);
+
+        ParticleSystem.MainModule main = ps.main;
+        main.startColor = _color;
+    }
+
+    public void OnBubblePlayExplosionFX(GameEntity entity)
+    {
+        var ps = Instantiate(_explosionFX, transform.position, Quaternion.identity);
 
         ParticleSystem.MainModule main = ps.main;
         main.startColor = _color;

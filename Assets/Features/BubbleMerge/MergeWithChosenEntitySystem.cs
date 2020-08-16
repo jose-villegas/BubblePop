@@ -47,7 +47,7 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
             readyBubble.ReplaceTranslateTo(_configuration.MergeTranslateSpeed, target.position.Value);
             readyBubble.ReplaceScaleTo(_configuration.MergeScaleSpeed, Vector3.zero);
             readyBubble.AddTranslateToRemovedListener(this);
-            readyBubble.isBubblePlayFX = true;
+            readyBubble.isBubblePlayDestroyFX = true;
             readyBubble.isMoving = true;
 
             // wait for translation complete to removed merged bubbles
@@ -83,7 +83,6 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
 
     public void OnTranslateToRemoved(GameEntity entity)
     {
-
         entity.isDestroyed = true;
         entity.RemoveTranslateToRemovedListener(this);
     }

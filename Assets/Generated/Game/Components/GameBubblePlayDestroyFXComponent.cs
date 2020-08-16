@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly BubblePlayFXComponent bubblePlayFXComponent = new BubblePlayFXComponent();
+    static readonly BubblePlayDestroyFXComponent bubblePlayDestroyFXComponent = new BubblePlayDestroyFXComponent();
 
-    public bool isBubblePlayFX {
-        get { return HasComponent(GameComponentsLookup.BubblePlayFX); }
+    public bool isBubblePlayDestroyFX {
+        get { return HasComponent(GameComponentsLookup.BubblePlayDestroyFX); }
         set {
-            if (value != isBubblePlayFX) {
-                var index = GameComponentsLookup.BubblePlayFX;
+            if (value != isBubblePlayDestroyFX) {
+                var index = GameComponentsLookup.BubblePlayDestroyFX;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : bubblePlayFXComponent;
+                            : bubblePlayDestroyFXComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherBubblePlayFX;
+    static Entitas.IMatcher<GameEntity> _matcherBubblePlayDestroyFX;
 
-    public static Entitas.IMatcher<GameEntity> BubblePlayFX {
+    public static Entitas.IMatcher<GameEntity> BubblePlayDestroyFX {
         get {
-            if (_matcherBubblePlayFX == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.BubblePlayFX);
+            if (_matcherBubblePlayDestroyFX == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.BubblePlayDestroyFX);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherBubblePlayFX = matcher;
+                _matcherBubblePlayDestroyFX = matcher;
             }
 
-            return _matcherBubblePlayFX;
+            return _matcherBubblePlayDestroyFX;
         }
     }
 }

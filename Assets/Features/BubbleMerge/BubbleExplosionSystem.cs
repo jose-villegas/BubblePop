@@ -32,11 +32,11 @@ public class BubbleExplosionSystem : ReactiveSystem<GameEntity>
 
             foreach (var neighbor in neighbors)
             {
-                neighbor.isBubblePlayFX = true;
+                neighbor.isBubblePlayExplosionFX = true;
                 neighbor.isDestroyed = true;
             }
 
-            gameEntity.isBubblePlayFX = true;
+            gameEntity.isBubblePlayExplosionFX = true;
             gameEntity.isDestroyed = true;
         }
 

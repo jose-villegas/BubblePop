@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 2162535567892872742}
   - component: {fileID: 8090269965345598537}
   - component: {fileID: -293645893864319229}
+  - component: {fileID: 2863831251330972773}
   m_Layer: 9
   m_Name: Bubble
   m_TagString: Bubble
@@ -338,3 +339,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyFX: {fileID: 6359301945872945241, guid: af1443418f0f6574da91e832a6fe994d,
     type: 3}
+  _explosionFX: {fileID: 5779010479461131399, guid: 221c70ed621901747a05172ae2226281,
+    type: 3}
+--- !u!95 &2863831251330972773
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8090269965345598548}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e7f14b7a57122e447a11f1a2edda6cf6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -6,6 +6,6 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public interface IBubblePlayFXListener {
-    void OnBubblePlayFX(GameEntity entity);
+public interface IBubblePlayExplosionFXListener {
+    void OnBubblePlayExplosionFX(GameEntity entity);
 }
