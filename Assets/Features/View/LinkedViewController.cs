@@ -3,7 +3,7 @@ using Entitas;
 using Entitas.Unity;
 using UnityEngine;
 
-public class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionListener, IRotationListener,
+public partial class LinkedViewController : MonoBehaviour, IUnityTransform, IPositionListener, IRotationListener,
     IScaleListener, IDestroyedListener, ILayerListener
 {
     public IEntity LinkedEntity { get; private set; }

@@ -37,7 +37,7 @@ MonoBehaviour:
   _projectileSpeed: 20
   _projectileBubblesHeight: -4
   nextBubbleScale: {x: 3.5, y: 3.5, z: 3.5}
-  _overlapCircleRadius: 0.35
+  _overlapCircleRadius: 0.25
   _scrollingBubblePositionBounds: {x: -1, y: 0}
   _scrollingSpeed: 15
   _linesHeight: 3.5

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Entitas;
+using Entitas.VisualDebugging.Unity;
 using UnityEngine;
 
 /// <summary>
@@ -24,8 +25,11 @@ public class BubbleProjectileStopSystem : IExecuteSystem
     {
         foreach (var gameEntity in _group.AsEnumerable().ToList())
         {
+            // shift the overlap circle for earlier detection, physics has issues on Update cycle
+            var shift = gameEntity.direction.Value * _configuration.OverlapCircleRadius * Mathf.PI;
+
             // we using this function because, unity default trigger detection was all fuzzy, this detects immediately
-            var colliders = Physics2D.OverlapCircleAll(gameEntity.position.Value, _configuration.OverlapCircleRadius,
+            var colliders = Physics2D.OverlapCircleAll(gameEntity.position.Value + shift, _configuration.OverlapCircleRadius,
                 _bubblesLayer);
 
             if (colliders.Length > 0)
