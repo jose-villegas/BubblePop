@@ -88,7 +88,7 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
                     else
                     {
                         trace = null;
-                        _contexts.game.ReplaceBubblePredictionHit(null, direction);
+                        _contexts.game.ReplaceBubblePredictionHit(null, Vector3.zero);
                         break;
                     }
 

@@ -45,4 +45,4 @@ MonoBehaviour:
   _nudgeSpeed: 17.5
   _circleCastRadius: 0.25
   _fallingDeadZoneHeight: -4.25
-  _fallingGravity: 9.8
+  _fallingGravity: 14.7

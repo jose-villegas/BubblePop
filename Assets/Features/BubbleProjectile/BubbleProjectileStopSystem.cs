@@ -17,7 +17,7 @@ public class BubbleProjectileStopSystem : IExecuteSystem
     {
         _contexts = contexts;
         _configuration = _contexts.configuration.gameConfiguration.value;
-        _bubblesLayer = LayerMask.GetMask("StableBubbles");
+        _bubblesLayer = LayerMask.GetMask("StableBubbles", "TopLimit");
         _group = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Bubble, GameMatcher.Thrown));
     }
 
@@ -29,7 +29,8 @@ public class BubbleProjectileStopSystem : IExecuteSystem
             var shift = gameEntity.direction.Value * _configuration.OverlapCircleRadius * Mathf.PI;
 
             // we using this function because, unity default trigger detection was all fuzzy, this detects immediately
-            var colliders = Physics2D.OverlapCircleAll(gameEntity.position.Value + shift, _configuration.OverlapCircleRadius,
+            var colliders = Physics2D.OverlapCircleAll(gameEntity.position.Value + shift,
+                _configuration.OverlapCircleRadius,
                 _bubblesLayer);
 
             if (colliders.Length > 0)
@@ -47,12 +48,30 @@ public class BubbleProjectileStopSystem : IExecuteSystem
                     gameEntity.RemoveSpeed();
                 }
 
-                gameEntity.ReplaceCollidedWithBubbles(colliders.Select(collider =>
+                // check if we have reached the top limit
+                if (colliders.All(x => x.gameObject.layer == LayerMask.NameToLayer("TopLimits")))
                 {
-                    // determine if we have collision with an stable bubble
-                    var linkedView = collider.GetComponent<ILinkedView>();
-                    return (GameEntity) linkedView.LinkedEntity;
-                }).ToArray());
+                    gameEntity.isDestroyed = true;
+
+                    // trigger scroll check
+                    var e = _contexts.game.CreateEntity();
+                    e.isBubblesScrollCheck = true;
+
+                    // trigger reload behavior
+                    e = _contexts.game.CreateEntity();
+                    e.isBubbleProjectileReload = true;
+
+                    return;
+                }
+
+                gameEntity.ReplaceCollidedWithBubbles(colliders
+                    .Where(x => x.gameObject.layer == LayerMask.NameToLayer("StableBubbles"))
+                    .Select(collider =>
+                    {
+                        // determine if we have collision with an stable bubble
+                        var linkedView = collider.GetComponent<ILinkedView>();
+                        return (GameEntity) linkedView.LinkedEntity;
+                    }).ToArray());
             }
         }
     }
