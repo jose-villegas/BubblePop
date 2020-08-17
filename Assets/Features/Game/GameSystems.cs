@@ -13,7 +13,6 @@
         Add(new InputFeature(contexts));
         Add(new ProjectilesFeature(contexts));
         Add(new DynamicsFeature(contexts));
-        Add(new BubblesPerfectFeature(contexts));
         Add(new ViewFeature(contexts));
 
         // events

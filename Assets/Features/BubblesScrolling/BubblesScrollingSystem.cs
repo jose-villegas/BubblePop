@@ -64,21 +64,29 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
             }
         }
 
-        if (!scrolled)
+        if (_group.count == 0)
         {
-            // all the bubbles are above the minimum position - scroll down case
-            if (minimumPosition >= _configuration.ScrollingBubblePositionBounds.y)
-            {
-                HandleScrollDownCase();
-                scrolled = true;
-            }
+            var line = _contexts.game.bubbleSlotLimitsIndex.MaximumVertical;
+            CreateNewLine(line - 1);
         }
-
-        // we need to adapt the offset to match
-        while (maximumPosition < _configuration.LinesHeight)
+        else
         {
-            HandleScroll(1);
-            maximumPosition += _configuration.BubblesSeparation.y;
+            if (!scrolled)
+            {
+                // all the bubbles are above the minimum position - scroll down case
+                if (minimumPosition >= _configuration.ScrollingBubblePositionBounds.y)
+                {
+                    HandleScrollDownCase();
+                    scrolled = true;
+                }
+            }
+
+            // we need to adapt the offset to match
+            while (maximumPosition < _configuration.LinesHeight)
+            {
+                HandleScroll(1);
+                maximumPosition += _configuration.BubblesSeparation.y;
+            }
         }
     }
 
@@ -87,7 +95,8 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
         HandleScroll(-1);
 
         // create line up top
-        CreateNewLine();
+        var line = _contexts.game.bubbleSlotLimitsIndex.MaximumVertical;
+        CreateNewLine(line);
     }
 
     private void HandleScrollUpCase()
@@ -113,9 +122,8 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
         }
     }
 
-    private void CreateNewLine()
+    private void CreateNewLine(int limit)
     {
-        var limit = _contexts.game.bubbleSlotLimitsIndex.MaximumVertical;
         var configuration = _contexts.configuration.gameConfiguration.value;
         var iterator = new BubbleSlotIterator(6, limit + 2, limit + 1);
 

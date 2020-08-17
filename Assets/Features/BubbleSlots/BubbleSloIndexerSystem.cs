@@ -73,22 +73,25 @@ public class BubbleSloIndexerSystem : ReactiveSystem<GameEntity>, IDestroyedList
         }
 
         // update limits
-        _limits.ReplaceBubbleSlotLimitsIndex(int.MinValue, int.MaxValue);
-
-        foreach (var value in _indexerEntity.bubbleSlotIndexer.Value.Values)
+        if (_indexerEntity.bubbleSlotIndexer.Value.Count > 0)
         {
-            var gameEntity = (GameEntity) value;
+            _limits.ReplaceBubbleSlotLimitsIndex(int.MinValue, int.MaxValue);
 
-            if (gameEntity.bubbleSlot.Value.y > _limits.bubbleSlotLimitsIndex.MaximumVertical)
+            foreach (var value in _indexerEntity.bubbleSlotIndexer.Value.Values)
             {
-                _limits.ReplaceBubbleSlotLimitsIndex(gameEntity.bubbleSlot.Value.y,
-                    _limits.bubbleSlotLimitsIndex.MinimumVertical);
-            }
+                var gameEntity = (GameEntity) value;
 
-            if (gameEntity.bubbleSlot.Value.y < _limits.bubbleSlotLimitsIndex.MinimumVertical)
-            {
-                _limits.ReplaceBubbleSlotLimitsIndex(_limits.bubbleSlotLimitsIndex.MaximumVertical,
-                    gameEntity.bubbleSlot.Value.y);
+                if (gameEntity.bubbleSlot.Value.y > _limits.bubbleSlotLimitsIndex.MaximumVertical)
+                {
+                    _limits.ReplaceBubbleSlotLimitsIndex(gameEntity.bubbleSlot.Value.y,
+                        _limits.bubbleSlotLimitsIndex.MinimumVertical);
+                }
+
+                if (gameEntity.bubbleSlot.Value.y < _limits.bubbleSlotLimitsIndex.MinimumVertical)
+                {
+                    _limits.ReplaceBubbleSlotLimitsIndex(_limits.bubbleSlotLimitsIndex.MaximumVertical,
+                        gameEntity.bubbleSlot.Value.y);
+                }
             }
         }
     }
