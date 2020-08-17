@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using Entitas;
-using TMPro.EditorUtilities;
-using UnityEngine;
 
 public class BubbleExplosionSystem : ReactiveSystem<GameEntity>
 {

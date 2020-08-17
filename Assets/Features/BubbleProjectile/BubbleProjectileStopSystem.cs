@@ -48,6 +48,8 @@ public class BubbleProjectileStopSystem : IExecuteSystem
                     gameEntity.RemoveSpeed();
                 }
 
+                gameEntity.isMoving = false;
+
                 // check if we have reached the top limit
                 if (colliders.Any(x => x.gameObject.layer == LayerMask.NameToLayer("TopLimit")))
                 {
