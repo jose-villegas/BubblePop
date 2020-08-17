@@ -40,6 +40,11 @@ public class BubbleFallingSystem : IExecuteSystem
                     bubble.ReplaceScaleTo(_configuration.MergeScaleSpeed, Vector3.zero);
                 }
 
+                if (!bubble.isBubblePlayDestroyFX)
+                {
+                    bubble.ReplacePlayAudio("bubble-pop");
+                }
+
                 bubble.isBubblePlayDestroyFX = true;
             }
 

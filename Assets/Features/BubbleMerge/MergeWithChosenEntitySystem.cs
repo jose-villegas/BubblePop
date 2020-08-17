@@ -44,7 +44,11 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
             var currentScore = _contexts.game.hasScore ? _contexts.game.score.Value : 0;
             _contexts.game.ReplaceScore(currentScore + readyBubble.bubbleNumber.Value);
 
-            if (readyBubble == _contexts.game.bubbleChosenAsMergeToEntity) continue;
+            if (readyBubble == _contexts.game.bubbleChosenAsMergeToEntity)
+            {
+                readyBubble.ReplacePlayAudio("bubble-pop");
+                continue;
+            }
 
             // no longer waiting to be merged
             readyBubble.isBubbleWaitingMerge = false;

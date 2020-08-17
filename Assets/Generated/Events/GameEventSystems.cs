@@ -20,6 +20,7 @@ public sealed class GameEventSystems : Feature {
         Add(new AnyGameEventEventSystem(contexts)); // priority: 0
         Add(new AnyGameStartedEventSystem(contexts)); // priority: 0
         Add(new LayerEventSystem(contexts)); // priority: 0
+        Add(new AnyPlayAudioEventSystem(contexts)); // priority: 0
         Add(new PositionEventSystem(contexts)); // priority: 0
         Add(new RotationEventSystem(contexts)); // priority: 0
         Add(new ScaleEventSystem(contexts)); // priority: 0

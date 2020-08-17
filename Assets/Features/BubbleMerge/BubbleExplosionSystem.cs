@@ -35,6 +35,7 @@ public class BubbleExplosionSystem : ReactiveSystem<GameEntity>
                 neighbor.isDestroyed = true;
             }
 
+            gameEntity.ReplacePlayAudio("bubble-pop");
             gameEntity.isBubblePlayExplosionFX = true;
             gameEntity.isStableBubble = false;
             gameEntity.isDestroyed = true;
