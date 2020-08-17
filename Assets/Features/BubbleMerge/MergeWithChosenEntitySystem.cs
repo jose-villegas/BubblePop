@@ -46,7 +46,7 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
 
             if (readyBubble == _contexts.game.bubbleChosenAsMergeToEntity)
             {
-                readyBubble.ReplacePlayAudio("bubble-pop");
+                _contexts.game.CreateEntity().AddPlayAudio("bubble-pop");
                 continue;
             }
 

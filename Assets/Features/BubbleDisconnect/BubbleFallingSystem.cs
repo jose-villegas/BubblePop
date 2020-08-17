@@ -42,7 +42,7 @@ public class BubbleFallingSystem : IExecuteSystem
 
                 if (!bubble.isBubblePlayDestroyFX)
                 {
-                    bubble.ReplacePlayAudio("bubble-pop");
+                    _contexts.game.CreateEntity().AddPlayAudio("bubble-pop");
                 }
 
                 bubble.isBubblePlayDestroyFX = true;

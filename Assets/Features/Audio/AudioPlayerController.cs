@@ -43,5 +43,7 @@ public class AudioPlayerController : MonoBehaviour, IAnyPlayAudioListener
             audioSource.clip = audioClip;
             audioSource.Play();
         }
+
+        entity.Destroy();
     }
 }
