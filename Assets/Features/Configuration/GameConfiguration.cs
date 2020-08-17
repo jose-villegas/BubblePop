@@ -51,9 +51,11 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     [SerializeField] private float _fallingDissapearZoneHeight;
 
     [SerializeField] private float _fallingGravity;
+    [SerializeField] private float _fallingPushStrength;
 
     [Header("Progression")] [SerializeField]
     private List<int> _scoreProgression;
+
 
     public List<ExponentConfiguration> ExponentConfigurations => _exponentConfigurations;
 
@@ -98,6 +100,8 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public float FallingDissapearZoneDistance => _fallingDissapearZoneHeight;
 
     public float FallingGravity => _fallingGravity;
+
+    public float FallingPushStrength => _fallingPushStrength;
 
     public Vector2 AimAngleRange => _aimAngleRange;
 

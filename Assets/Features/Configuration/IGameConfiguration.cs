@@ -130,6 +130,12 @@ public interface IGameConfiguration
     float FallingGravity { get; }
 
     /// <summary>
+    /// When a bubble is set to fall a random velocity vector is assigned
+    /// using a unitary sphere, this value controls the magnitude of that vector
+    /// </summary>
+    float FallingPushStrength { get; }
+
+    /// <summary>
     /// The angle area allowed to thrown the bubble projectile
     /// </summary>
     Vector2 AimAngleRange { get; }

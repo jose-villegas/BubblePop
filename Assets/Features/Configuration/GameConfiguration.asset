@@ -41,13 +41,13 @@ MonoBehaviour:
   _slotPositioningVerticalHeight: 1.65
   _bubblesSeparation: {x: 0.375, y: 0.65}
   bubbleScale: {x: 3.85, y: 3.85, z: 3.85}
-  _mergeTranslateSpeed: 12.5
+  _mergeTranslateSpeed: 15
   _mergeScaleSpeed: 2.5
   _aimAngleRange: {x: 30, y: 150}
   _reloadSpeed: 17.5
   _projectileSpeed: 20
   _projectileBubblesHeight: -4
-  nextBubbleScale: {x: 3.5, y: 3.5, z: 3.5}
+  nextBubbleScale: {x: 3, y: 3, z: 3}
   _overlapCircleRadius: 0.25
   _scrollingBubblePositionBounds: {x: -1.5, y: -0.25}
   _scrollingSpeed: 12.5
@@ -58,4 +58,5 @@ MonoBehaviour:
   _fallingDeadZoneHeight: -4.25
   _fallingDissapearZoneHeight: 0.25
   _fallingGravity: 14.7
-  _scoreProgression: e8030000d0070000b80b0000a00f00008813000070170000581b0000401f00002823000010270000f82a0000e02e0000c8320000b0360000983a0000
+  _fallingPushStrength: 0.75
+  _scoreProgression: e8030000d0070000b80b0000a00f00008813000070170000581b0000401f00002823000010270000f82a0000e02e0000c8320000b03600006842000050460000384a0000c05d000030750000

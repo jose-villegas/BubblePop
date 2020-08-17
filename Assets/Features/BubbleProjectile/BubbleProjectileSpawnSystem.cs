@@ -48,7 +48,7 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbl
             _contexts.game.isBubblesScrollCheck = true;
 
             // reload projectiles
-            _nextBubble.AddTranslateTo(_configuration.ReloadSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
+            _nextBubble.ReplaceTranslateTo(_configuration.ReloadSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
             _nextBubble.ReplaceScaleTo(_configuration.ReloadSpeed, _configuration.BubbleScale);
             _nextBubble.AddTranslateToRemovedListener(this);
             _nextBubble.isMoving = true;
@@ -64,10 +64,10 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbl
         _nextBubble.isBubble = true;
         _nextBubble.isUnstableBubble = true;
 
-        _nextBubble.AddPosition(Vector3.up * _configuration.ProjectileBubblesHeight + Vector3.left);
-        _nextBubble.AddScale(Vector3.zero);
-        _nextBubble.AddLayer(LayerMask.NameToLayer("FlyingBubble"));
-        _nextBubble.AddAsset("Bubble");
+        _nextBubble.ReplacePosition(Vector3.up * _configuration.ProjectileBubblesHeight + Vector3.left);
+        _nextBubble.ReplaceScale(Vector3.zero);
+        _nextBubble.ReplaceLayer(LayerMask.NameToLayer("FlyingBubble"));
+        _nextBubble.ReplaceAsset("Bubble");
 
         // animate entry
         _nextBubble.AddScaleTo(_configuration.ReloadSpeed, _configuration.NextBubbleScale);
@@ -81,22 +81,22 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbl
         e.isThrowable = true;
         e.isUnstableBubble = true;
 
-        e.AddPosition(Vector3.up * _configuration.ProjectileBubblesHeight + Vector3.left);
-        e.AddScale(Vector3.zero);
-        e.AddSpeed(_configuration.ProjectileSpeed);
-        e.AddLayer(LayerMask.NameToLayer("FlyingBubble"));
-        e.AddAsset("Bubble");
+        e.ReplacePosition(Vector3.up * _configuration.ProjectileBubblesHeight + Vector3.left);
+        e.ReplaceScale(Vector3.zero);
+        e.ReplaceSpeed(_configuration.ProjectileSpeed);
+        e.ReplaceLayer(LayerMask.NameToLayer("FlyingBubble"));
+        e.ReplaceAsset("Bubble");
 
         // animate emtry
-        e.AddTranslateTo(_configuration.ReloadSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
-        e.AddScaleTo(_configuration.ReloadSpeed, _configuration.BubbleScale);
+        e.ReplaceTranslateTo(_configuration.ReloadSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);
+        e.ReplaceScaleTo(_configuration.ReloadSpeed, _configuration.BubbleScale);
         e.isMoving = true;
     }
 
     public void OnTranslateToRemoved(GameEntity entity)
     {
         entity.isThrowable = true;
-        entity.AddSpeed(_configuration.ProjectileSpeed);
+        entity.ReplaceSpeed(_configuration.ProjectileSpeed);
         CreateNextBubbleToThrow();
 
         entity.RemoveTranslateToRemovedListener(this);

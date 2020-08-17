@@ -12,10 +12,12 @@ public class BubbleDisconnectionCheckSystem : ReactiveSystem<GameEntity>
     private readonly Contexts _contexts;
     private readonly IGroup<GameEntity> _stableBubbles;
     private readonly IGroup<GameEntity> _connectionChecks;
+    private readonly IGameConfiguration _configuration;
 
     public BubbleDisconnectionCheckSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
+        _configuration = _contexts.configuration.gameConfiguration.value;
         _stableBubbles = contexts.game.GetGroup(GameMatcher.StableBubble);
         _connectionChecks = contexts.game.GetGroup(GameMatcher.BubbleConnectionCheck);
     }
@@ -84,7 +86,7 @@ public class BubbleDisconnectionCheckSystem : ReactiveSystem<GameEntity>
                 var replacement = _contexts.game.CreateEntity();
 
                 replacement.AddAsset("Bubble");
-                replacement.AddBubbleFalling(Vector3.zero);
+                replacement.AddBubbleFalling(Random.insideUnitSphere.normalized * _configuration.FallingPushStrength);
                 replacement.AddScale(scale);
                 replacement.AddPosition(position);
                 replacement.AddBubbleNumber(number);
