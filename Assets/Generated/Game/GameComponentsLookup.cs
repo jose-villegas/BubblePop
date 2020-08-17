@@ -57,21 +57,23 @@ public static class GameComponentsLookup {
     public const int Scale = 46;
     public const int ScaleListener = 47;
     public const int ScaleTo = 48;
-    public const int Speed = 49;
-    public const int StableBubble = 50;
-    public const int Throwable = 51;
-    public const int Thrown = 52;
-    public const int TranslateTo = 53;
-    public const int TranslateToRemovedListener = 54;
-    public const int Trigger2DEvent = 55;
-    public const int Trigger2DEventListener = 56;
-    public const int TriggerEnter2D = 57;
-    public const int TriggerEnter2DListener = 58;
-    public const int TriggerExit2D = 59;
-    public const int TriggerExit2DListener = 60;
-    public const int UnstableBubble = 61;
+    public const int Score = 49;
+    public const int ScoreListener = 50;
+    public const int Speed = 51;
+    public const int StableBubble = 52;
+    public const int Throwable = 53;
+    public const int Thrown = 54;
+    public const int TranslateTo = 55;
+    public const int TranslateToRemovedListener = 56;
+    public const int Trigger2DEvent = 57;
+    public const int Trigger2DEventListener = 58;
+    public const int TriggerEnter2D = 59;
+    public const int TriggerEnter2DListener = 60;
+    public const int TriggerExit2D = 61;
+    public const int TriggerExit2DListener = 62;
+    public const int UnstableBubble = 63;
 
-    public const int TotalComponents = 62;
+    public const int TotalComponents = 64;
 
     public static readonly string[] componentNames = {
         "AnyBubbleProjectileReloadListener",
@@ -123,6 +125,8 @@ public static class GameComponentsLookup {
         "Scale",
         "ScaleListener",
         "ScaleTo",
+        "Score",
+        "ScoreListener",
         "Speed",
         "StableBubble",
         "Throwable",
@@ -188,6 +192,8 @@ public static class GameComponentsLookup {
         typeof(ScaleComponent),
         typeof(ScaleListenerComponent),
         typeof(ScaleToComponent),
+        typeof(ScoreComponent),
+        typeof(ScoreListenerComponent),
         typeof(SpeedComponent),
         typeof(StableBubbleComponent),
         typeof(ThrowableComponent),

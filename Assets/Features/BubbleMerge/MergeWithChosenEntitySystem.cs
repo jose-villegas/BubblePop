@@ -39,6 +39,9 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
 
         foreach (var readyBubble in _mergeGroup.AsEnumerable().ToList())
         {
+            var currentScore = _contexts.game.hasScore ? _contexts.game.score.Value : 0;
+            _contexts.game.ReplaceScore(currentScore + readyBubble.bubbleNumber.Value);
+
             if (readyBubble == _contexts.game.bubbleChosenAsMergeToEntity) continue;
 
             // no longer waiting to be merged

@@ -23,6 +23,7 @@ public sealed class GameEventSystems : Feature {
         Add(new PositionEventSystem(contexts)); // priority: 0
         Add(new RotationEventSystem(contexts)); // priority: 0
         Add(new ScaleEventSystem(contexts)); // priority: 0
+        Add(new ScoreEventSystem(contexts)); // priority: 0
         Add(new TranslateToRemovedEventSystem(contexts)); // priority: 0
         Add(new Trigger2DEventEventSystem(contexts)); // priority: 0
         Add(new TriggerEnter2DEventSystem(contexts)); // priority: 0
