@@ -10,10 +10,11 @@ public class BubbleNumberController : MonoBehaviour, IBubbleNumberListener
     public void OnBubbleNumber(GameEntity entity, int value)
     {
         // for bigger than 3 digits number add "K"
-        _textMesh.text = value > 999 ? (value / 1000) + "K" :  value.ToString();
+        _textMesh.text = value > 999 ? (value / 1000) + "K" : value.ToString();
     }
 
-    private void Awake() {
+    private void Awake()
+    {
         _view = GetComponentInParent<LinkedViewController>();
         _textMesh = GetComponent<TextMesh>();
 

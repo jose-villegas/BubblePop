@@ -53,31 +53,33 @@ public static class GameComponentsLookup {
     public const int LayerListener = 42;
     public const int LinkedView = 43;
     public const int Moving = 44;
-    public const int PlayAudio = 45;
-    public const int Position = 46;
-    public const int PositionListener = 47;
-    public const int Rotation = 48;
-    public const int RotationListener = 49;
-    public const int Scale = 50;
-    public const int ScaleListener = 51;
-    public const int ScaleTo = 52;
-    public const int Score = 53;
-    public const int ScoreListener = 54;
-    public const int Speed = 55;
-    public const int StableBubble = 56;
-    public const int Throwable = 57;
-    public const int Thrown = 58;
-    public const int TranslateTo = 59;
-    public const int TranslateToRemovedListener = 60;
-    public const int Trigger2DEvent = 61;
-    public const int Trigger2DEventListener = 62;
-    public const int TriggerEnter2D = 63;
-    public const int TriggerEnter2DListener = 64;
-    public const int TriggerExit2D = 65;
-    public const int TriggerExit2DListener = 66;
-    public const int UnstableBubble = 67;
+    public const int MovingListener = 45;
+    public const int MovingRemovedListener = 46;
+    public const int PlayAudio = 47;
+    public const int Position = 48;
+    public const int PositionListener = 49;
+    public const int Rotation = 50;
+    public const int RotationListener = 51;
+    public const int Scale = 52;
+    public const int ScaleListener = 53;
+    public const int ScaleTo = 54;
+    public const int Score = 55;
+    public const int ScoreListener = 56;
+    public const int Speed = 57;
+    public const int StableBubble = 58;
+    public const int Throwable = 59;
+    public const int Thrown = 60;
+    public const int TranslateTo = 61;
+    public const int TranslateToRemovedListener = 62;
+    public const int Trigger2DEvent = 63;
+    public const int Trigger2DEventListener = 64;
+    public const int TriggerEnter2D = 65;
+    public const int TriggerEnter2DListener = 66;
+    public const int TriggerExit2D = 67;
+    public const int TriggerExit2DListener = 68;
+    public const int UnstableBubble = 69;
 
-    public const int TotalComponents = 68;
+    public const int TotalComponents = 70;
 
     public static readonly string[] componentNames = {
         "AnyBubblePerfectBoardListener",
@@ -125,6 +127,8 @@ public static class GameComponentsLookup {
         "LayerListener",
         "LinkedView",
         "Moving",
+        "MovingListener",
+        "MovingRemovedListener",
         "PlayAudio",
         "Position",
         "PositionListener",
@@ -196,6 +200,8 @@ public static class GameComponentsLookup {
         typeof(LayerListenerComponent),
         typeof(LinkedViewComponent),
         typeof(MovingComponent),
+        typeof(MovingListenerComponent),
+        typeof(MovingRemovedListenerComponent),
         typeof(PlayAudioComponent),
         typeof(PositionComponent),
         typeof(PositionListenerComponent),
