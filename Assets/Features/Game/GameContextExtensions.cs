@@ -163,39 +163,4 @@ public static class GameContextExtensions
         // establish link with slot entity
         e.AddBubbleSlot(slotIndex);
     }
-
-    public static void RemoveSlotIndex(this GameContext context, GameEntity entity)
-    {
-        var indexer = context.bubbleSlotIndexer.Value;
-        var limits = context.bubbleSlotLimitsIndex;
-
-        // clean up indexer
-        foreach (var keyValuePair in indexer.ToList())
-        {
-            if (keyValuePair.Key == entity.bubbleSlot.Value)
-            {
-                indexer.Remove(keyValuePair.Key);
-            }
-        }
-
-        // update limits
-        context.ReplaceBubbleSlotLimitsIndex(int.MinValue, int.MaxValue);
-
-        foreach (var value in indexer.Values)
-        {
-            var gameEntity = (GameEntity) value;
-
-            if (gameEntity.bubbleSlot.Value.y > limits.MaximumVertical)
-            {
-                context.ReplaceBubbleSlotLimitsIndex(gameEntity.bubbleSlot.Value.y, limits.MinimumVertical);
-            }
-
-            if (gameEntity.bubbleSlot.Value.y < limits.MinimumVertical)
-            {
-                context.ReplaceBubbleSlotLimitsIndex(limits.MaximumVertical, gameEntity.bubbleSlot.Value.y);
-            }
-        }
-
-        entity.RemoveBubbleSlot();
-    }
 }

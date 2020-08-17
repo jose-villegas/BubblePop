@@ -68,6 +68,8 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
         {
             var line = _contexts.game.bubbleSlotLimitsIndex.MaximumVertical;
             CreateNewLine(line - 1);
+
+            _contexts.game.isBubblePerfectBoard = true;
         }
         else
         {
@@ -77,8 +79,13 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
                 if (minimumPosition >= _configuration.ScrollingBubblePositionBounds.y)
                 {
                     HandleScrollDownCase();
-                    scrolled = true;
                 }
+            }
+
+            // there are not bubbles below the top-most line, clear board
+            if (minimumPosition > _configuration.LinesHeight)
+            {
+                _contexts.game.isBubblePerfectBoard = true;
             }
 
             // we need to adapt the offset to match

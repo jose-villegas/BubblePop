@@ -70,11 +70,25 @@ public class BubbleDisconnectionCheckSystem : ReactiveSystem<GameEntity>
         {
             if (!entity.isBubbleConnected)
             {
-                _contexts.game.RemoveSlotIndex(entity);
-
+                var position = entity.position.Value;
+                var scale = entity.scale.Value;
+                var number = entity.bubbleNumber.Value;
+                // just in case stills referenced
+                entity.ReplaceLayer(LayerMask.NameToLayer("FallingBubbles"));
                 entity.AddBubbleFalling(Vector3.zero);
                 entity.isStableBubble = false;
-                entity.ReplaceLayer(LayerMask.NameToLayer("FallingBubbles"));
+                // destroy entity and create replacement
+                entity.isDestroyed = true;
+
+                // create substitute
+                var replacement = _contexts.game.CreateEntity();
+
+                replacement.AddAsset("Bubble");
+                replacement.AddBubbleFalling(Vector3.zero);
+                replacement.AddScale(scale);
+                replacement.AddPosition(position);
+                replacement.AddBubbleNumber(number);
+                replacement.AddLayer(LayerMask.NameToLayer("FallingBubbles"));
             }
         }
 
