@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
 [Game]
-public class BubbleExplodeComponent : IComponent
+public sealed class BubbleExplodeComponent : IComponent
 {
 }

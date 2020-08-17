@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Game]
-public class ScaleToComponent : IComponent
+public sealed class ScaleToComponent : IComponent
 {
     public float Speed;
     public Vector3 Value;

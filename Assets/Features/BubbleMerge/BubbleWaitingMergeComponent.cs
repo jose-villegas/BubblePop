@@ -1,6 +1,6 @@
 using Entitas;
 
 [Game]
-public class BubbleWaitingMergeComponent : IComponent
+public sealed class BubbleWaitingMergeComponent : IComponent
 {
 }

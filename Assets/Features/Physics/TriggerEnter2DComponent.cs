@@ -1,3 +1,3 @@
-﻿public class TriggerEnter2DComponent : Trigger2DEventComponent
+﻿public sealed class TriggerEnter2DComponent : Trigger2DEventComponent
 {
 }

@@ -2,6 +2,6 @@
 using Entitas.CodeGeneration.Attributes;
 
 [Game, Unique]
-public class BubbleConnectionCheckComponent : IComponent
+public sealed class BubbleConnectionCheckComponent : IComponent
 {
 }

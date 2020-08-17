@@ -5,7 +5,7 @@ using Entitas.CodeGeneration.Attributes;
 /// Contains the merge number
 /// </summary>
 [Game, Unique]
-public class BubblesReadyToMergeComponent : IComponent
+public sealed class BubblesReadyToMergeComponent : IComponent
 {
     public int Value;
 }

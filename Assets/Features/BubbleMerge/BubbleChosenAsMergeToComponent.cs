@@ -6,7 +6,7 @@ using Entitas.CodeGeneration.Attributes;
 /// stores the final number of the merge process
 /// </summary>
 [Game, Unique]
-public class BubbleChosenAsMergeToComponent : IComponent
+public sealed class BubbleChosenAsMergeToComponent : IComponent
 {
     public int Value;
 }

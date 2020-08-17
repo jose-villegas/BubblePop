@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
-public class SpeedComponent : IComponent
+public sealed class SpeedComponent : IComponent
 {
     public float Value;
 }

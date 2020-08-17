@@ -2,6 +2,7 @@
 using Entitas.CodeGeneration.Attributes;
 
 [Game, Unique, Event(EventTarget.Any)]
-public sealed class BubbleProjectileReloadComponent : IComponent
+public sealed class ScoreComponent : IComponent
 {
+    public int Value;
 }

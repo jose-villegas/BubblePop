@@ -4,7 +4,7 @@ using UnityEngine;
 using EventType = Entitas.CodeGeneration.Attributes.EventType;
 
 [Game, Event(EventTarget.Self, EventType.Removed)]
-public class TranslateToComponent : IComponent
+public sealed class TranslateToComponent : IComponent
 {
     public float Speed;
     public Vector3 Value;

@@ -4,6 +4,6 @@
 /// This represents newly inserted bubble that needs to be merged
 /// and/or positioned
 /// </summary>
-public class UnstableBubbleComponent : IComponent
+public sealed class UnstableBubbleComponent : IComponent
 {
 }

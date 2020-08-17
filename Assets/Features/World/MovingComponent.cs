@@ -1,5 +1,5 @@
 ﻿using Entitas;
 
-public class MovingComponent : IComponent
+public sealed class MovingComponent : IComponent
 {
 }

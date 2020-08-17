@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
 [Game]
-public class BubbleConnectedComponent : IComponent
+public sealed class BubbleConnectedComponent : IComponent
 {
 }

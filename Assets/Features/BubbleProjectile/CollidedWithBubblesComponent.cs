@@ -7,7 +7,7 @@ using Entitas.CodeGeneration.Attributes;
 /// bubble collided with
 /// </summary>
 [Game, Unique]
-public class CollidedWithBubblesComponent : IComponent
+public sealed class CollidedWithBubblesComponent : IComponent
 {
     public GameEntity[] Value;
 }
