@@ -40,9 +40,10 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
         _expectedDestroyCount = _mergeGroup.count - 1;
 
         // determine if we got a perfect clear board
-        if (_stableGroup.count <= 2 && _mergeGroup.count > 0)
+        if (_mergeGroup.count > _stableGroup.count)
         {
-            Debug.Log("Perfect");
+            Debug.Log("here");
+            _contexts.game.isBubblePerfectBoard = true;
         }
 
         foreach (var readyBubble in _mergeGroup.AsEnumerable().ToList())

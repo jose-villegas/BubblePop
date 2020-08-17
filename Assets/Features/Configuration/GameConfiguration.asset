@@ -17,17 +17,17 @@ MonoBehaviour:
   - _color: {r: 0.54509807, g: 0.7647059, b: 0.2901961, a: 1}
     _probability: 30
   - _color: {r: 0, g: 0.5882353, b: 0.53333336, a: 1}
-    _probability: 25
+    _probability: 0
   - _color: {r: 0.011764706, g: 0.6627451, b: 0.95686275, a: 1}
-    _probability: 20
+    _probability: 0
   - _color: {r: 0.21960784, g: 0.5568628, b: 0.23529412, a: 1}
-    _probability: 15
+    _probability: 0
   - _color: {r: 1, g: 0.34117648, b: 0.13333334, a: 1}
-    _probability: 10
+    _probability: 0
   - _color: {r: 0.6117647, g: 0.15294118, b: 0.6901961, a: 1}
-    _probability: 5
+    _probability: 0
   - _color: {r: 0.9137255, g: 0.11764706, b: 0.3882353, a: 1}
-    _probability: 1
+    _probability: 0
   - _color: {r: 0.4745098, g: 0.33333334, b: 0.28235295, a: 1}
     _probability: 0
   - _color: {r: 0.9764706, g: 0.65882355, b: 0.14509805, a: 1}

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Entitas;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class BubbleExplosionSystem : ReactiveSystem<GameEntity>
@@ -44,9 +45,9 @@ public class BubbleExplosionSystem : ReactiveSystem<GameEntity>
         _contexts.game.isBubbleConnectionCheck = true;
 
         // determine if we got a perfect clear board
-        if (_stableGroup.count <= 2)
+        if (_stableGroup.count <= 0)
         {
-            Debug.Log("Perfect");
+            _contexts.game.isBubblePerfectBoard = true;
         }
     }
 }

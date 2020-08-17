@@ -136,7 +136,7 @@ public class BubblesScrollingSystem : ReactiveSystem<GameEntity>
             var position = bubble.hasBubbleNudge ? bubble.bubbleNudge.Origin : bubble.position.Value;
 
             bubble.ReplaceTranslateTo(_configuration.ScrollingSpeed,
-                bubble.bubbleSlot.Value.IndexToPosition(_contexts.game, _configuration));
+                position + _configuration.BubblesSeparation.y * Vector3.up * sign);
         }
     }
 }

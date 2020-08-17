@@ -47,7 +47,6 @@ public class BubbleDisconnectionCheckSystem : ReactiveSystem<GameEntity>
 
         var limit = _contexts.game.bubbleSlotLimitsIndex.MaximumVertical;
         var iterator = new BubbleSlotIterator(6, limit + 1, limit);
-        var foundConnector = false;
 
         foreach (Vector2Int slotIndex in iterator)
         {
@@ -55,15 +54,9 @@ public class BubbleDisconnectionCheckSystem : ReactiveSystem<GameEntity>
             {
                 var gameEntity = (GameEntity) entity;
 
-                foundConnector = true;
                 // since this is the top line, it's connected, we need to check for its neighbors
                 TraverseConnectedNeighbors(gameEntity);
             }
-        }
-
-        if (!foundConnector)
-        {
-            // we have cleared the board
         }
 
         // since we have traverse all the bubble structure, only disconnected bubbles will stay as disconnected
