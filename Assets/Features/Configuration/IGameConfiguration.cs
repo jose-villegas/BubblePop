@@ -133,4 +133,9 @@ public interface IGameConfiguration
     /// The angle area allowed to thrown the bubble projectile
     /// </summary>
     Vector2 AimAngleRange { get; }
+
+    /// <summary>
+    /// Each entry defines a level
+    /// </summary>
+    List<int> ScoreProgression { get; }
 }

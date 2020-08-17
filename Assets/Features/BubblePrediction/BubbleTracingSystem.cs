@@ -22,7 +22,7 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
         e.AddAnyGameStartedListener(this);
 
         _group = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Bubble, GameMatcher.Throwable));
-        _hitLayer = LayerMask.GetMask("Limits", "StableBubbles");
+        _hitLayer = LayerMask.GetMask("Limits", "StableBubbles", "TopLimit");
     }
 
     public void Execute()
@@ -60,7 +60,6 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
             // cast ray in given direction, 
             var circleCast = Physics2D.CircleCast(pos, _configuration.CircleCastRadius, direction, 15, _hitLayer);
 
-            // todo: circle cast skips a bit, precision could be improved
             if (circleCast.collider != null)
             {
                 var trace = new List<Vector3>() {pos};
@@ -71,6 +70,7 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
                     if (circleCast.collider != null)
                     {
                         var hitBubble = circleCast.collider.gameObject.layer == LayerMask.NameToLayer("StableBubbles");
+                        var hitCeiling = circleCast.collider.gameObject.layer == LayerMask.NameToLayer("TopLimit");
 
                         if (hitBubble)
                         {
@@ -84,6 +84,8 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
                         }
 
                         trace.Add(circleCast.point);
+
+                        if (hitCeiling) break;
                     }
                     else
                     {

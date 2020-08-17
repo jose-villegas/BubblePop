@@ -34,14 +34,17 @@ public class BubblePredictionHitSystem : ReactiveSystem<GameEntity>, IInitialize
                 return;
             }
 
-            var hit = gameEntity.bubblePredictionHit.Point;
+            var hitEntity = gameEntity.bubblePredictionHit.Value;
 
-            var direction = (hit - gameEntity.bubblePredictionHit.Value.position.Value).normalized;
+            if (hitEntity.hasBubbleFalling || !hitEntity.hasBubbleSlot) continue;
+
+            var hit = gameEntity.bubblePredictionHit.Point;
+            var direction = (hit - hitEntity.position.Value).normalized;
             // collision angle, used to determine where the bubble will be when slotted
             var angle = Mathf.Atan2(direction.y, direction.x);
 
             // obtain new slot index from the collider slot position
-            var colliderSlot = gameEntity.bubblePredictionHit.Value.bubbleSlot;
+            var colliderSlot = hitEntity.bubbleSlot;
             var newSlotIndex = colliderSlot.CalculateSlotIndexAtAngle(angle);
 
             // check if this slot is already occupied

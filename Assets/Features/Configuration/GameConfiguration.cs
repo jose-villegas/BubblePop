@@ -52,6 +52,9 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
 
     [SerializeField] private float _fallingGravity;
 
+    [Header("Progression")] [SerializeField]
+    private List<int> _scoreProgression;
+
     public List<ExponentConfiguration> ExponentConfigurations => _exponentConfigurations;
 
     public int MaximumExponent => _maximumExponent;
@@ -97,6 +100,8 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public float FallingGravity => _fallingGravity;
 
     public Vector2 AimAngleRange => _aimAngleRange;
+
+    public List<int> ScoreProgression => _scoreProgression;
 
     public Vector2 SpawnScaleSpeedRange => _spawnScaleSpeedRange;
 }

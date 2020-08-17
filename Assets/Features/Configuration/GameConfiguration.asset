@@ -58,3 +58,4 @@ MonoBehaviour:
   _fallingDeadZoneHeight: -4.25
   _fallingDissapearZoneHeight: 0.25
   _fallingGravity: 14.7
+  _scoreProgression: e8030000d0070000b80b0000a00f00008813000070170000581b0000401f00002823000010270000f82a0000e02e0000c8320000b0360000983a0000

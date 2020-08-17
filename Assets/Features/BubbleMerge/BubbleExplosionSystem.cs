@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using Entitas;
+using UnityEngine;
 
 public class BubbleExplosionSystem : ReactiveSystem<GameEntity>
 {
     private readonly Contexts _contexts;
-    private readonly IGameConfiguration _configuration;
-    private readonly IGroup<GameEntity> _group;
+    private readonly IGroup<GameEntity> _stableGroup;
 
     public BubbleExplosionSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
-        _configuration = _contexts.configuration.gameConfiguration.value;
-        _group = _contexts.game.GetGroup(GameMatcher.BubbleWaitingMerge);
+        _stableGroup = _contexts.game.GetGroup(GameMatcher.StableBubble);
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -33,13 +32,21 @@ public class BubbleExplosionSystem : ReactiveSystem<GameEntity>
             foreach (var neighbor in neighbors)
             {
                 neighbor.isBubblePlayExplosionFX = true;
+                neighbor.isStableBubble = false;
                 neighbor.isDestroyed = true;
             }
 
             gameEntity.isBubblePlayExplosionFX = true;
+            gameEntity.isStableBubble = false;
             gameEntity.isDestroyed = true;
         }
 
         _contexts.game.isBubbleConnectionCheck = true;
+
+        // determine if we got a perfect clear board
+        if (_stableGroup.count <= 2)
+        {
+            Debug.Log("Perfect");
+        }
     }
 }

@@ -3,10 +3,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Text))]
-public class ScoreLabelController : MonoBehaviour, IScoreListener
+public class LevelLabelController : MonoBehaviour, IScoreListener
 {
+    [SerializeField] private bool _nextLevelLabel;
+
     private Text _label;
     private GameEntity scoreEntity;
+    private IGameConfiguration _configuration;
 
     private void Awake()
     {
@@ -21,6 +24,8 @@ public class ScoreLabelController : MonoBehaviour, IScoreListener
         var contexts = Contexts.sharedInstance;
         contexts.game.ReplaceScore(lastScore);
 
+        _configuration = contexts.configuration.gameConfiguration.value;
+
         scoreEntity = contexts.game.scoreEntity;
         scoreEntity.AddScoreListener(this);
 
@@ -29,14 +34,14 @@ public class ScoreLabelController : MonoBehaviour, IScoreListener
 
     public void OnScore(GameEntity entity, int value)
     {
-        _label.text = value.ToString("N0", CultureInfo.GetCultureInfo("en-GB"));
-    }
+        var index = _configuration.ScoreProgression.BinarySearch(value);
 
-    private void OnDestroy()
-    {
-        if (scoreEntity == null) return;
+        if (index < 0)
+        {
+            index = ~index;
+        }
 
-        PlayerPrefs.SetInt("Score", scoreEntity.score.Value);
-        PlayerPrefs.Save();
+        index += 1;
+        _label.text = (_nextLevelLabel ? index + 1 : index).ToString("N0", CultureInfo.GetCultureInfo("en-GB"));
     }
 }

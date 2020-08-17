@@ -14,12 +14,14 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
     private IGroup<GameEntity> _mergeGroup;
     private IGameConfiguration _configuration;
     private int _expectedDestroyCount;
+    private IGroup<GameEntity> _stableGroup;
 
     public MergeWithChosenEntitySystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
         _mergeGroup = _contexts.game.GetGroup(GameMatcher.BubbleWaitingMerge);
         _configuration = _contexts.configuration.gameConfiguration.value;
+        _stableGroup = _contexts.game.GetGroup(GameMatcher.StableBubble);
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -36,6 +38,12 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
     {
         var target = _contexts.game.bubbleChosenAsMergeToEntity;
         _expectedDestroyCount = _mergeGroup.count - 1;
+
+        // determine if we got a perfect clear board
+        if (_stableGroup.count <= 2 && _mergeGroup.count > 0)
+        {
+            Debug.Log("Perfect");
+        }
 
         foreach (var readyBubble in _mergeGroup.AsEnumerable().ToList())
         {
