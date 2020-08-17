@@ -26,20 +26,20 @@ public class BubblePerfectBoardRespawnSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        // replace offset as starting over
-        _contexts.game.ReplaceBubbleVerticalOffset(0);
-        // replace limits
-        _contexts.game.ReplaceBubbleSlotLimitsIndex(int.MinValue, int.MaxValue);
+        //// replace offset as starting over
+        //_contexts.game.ReplaceBubbleVerticalOffset(0);
+        //// replace limits
+        //_contexts.game.ReplaceBubbleSlotLimitsIndex(int.MinValue, int.MaxValue);
 
-        var configuration = _contexts.configuration.gameConfiguration.value;
-        var iterator = new BubbleSlotIterator(6, configuration.InitialRowCount);
+        //var configuration = _contexts.configuration.gameConfiguration.value;
+        //var iterator = new BubbleSlotIterator(6, configuration.InitialRowCount);
 
-        foreach (Vector2Int slotIndex in iterator)
-        {
-            // create initial bubbles
-            _contexts.game.CreateStabeBubble(configuration, slotIndex);
-        }
+        //foreach (Vector2Int slotIndex in iterator)
+        //{
+        //    // create initial bubbles
+        //    _contexts.game.CreateStabeBubble(configuration, slotIndex);
+        //}
 
-        _contexts.game.isBubblePerfectBoard = false;
+        //_contexts.game.isBubblePerfectBoard = false;
     }
 }

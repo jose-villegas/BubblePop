@@ -4,6 +4,7 @@
     {
         Add(new SlotsFeature(contexts));
         Add(new BubblesFeature(contexts));
+        Add(new BubblesScrollingFeature(contexts));
         Add(new BubbleProjectileFeature(contexts));
         Add(new BubbleMergeFeature(contexts));
         Add(new BubbleDisconnectFeature(contexts));
@@ -12,7 +13,7 @@
         Add(new InputFeature(contexts));
         Add(new ProjectilesFeature(contexts));
         Add(new DynamicsFeature(contexts));
-        Add(new BubblesScrollingFeature(contexts));
+        Add(new BubblesPerfectFeature(contexts));
         Add(new ViewFeature(contexts));
 
         // events
