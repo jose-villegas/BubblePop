@@ -39,13 +39,6 @@ public class MergeWithChosenEntitySystem : ReactiveSystem<GameEntity>, ITranslat
         var target = _contexts.game.bubbleChosenAsMergeToEntity;
         _expectedDestroyCount = _mergeGroup.count - 1;
 
-        // determine if we got a perfect clear board
-        if (_mergeGroup.count > _stableGroup.count)
-        {
-            Debug.Log("here");
-            _contexts.game.isBubblePerfectBoard = true;
-        }
-
         foreach (var readyBubble in _mergeGroup.AsEnumerable().ToList())
         {
             var currentScore = _contexts.game.hasScore ? _contexts.game.score.Value : 0;

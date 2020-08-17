@@ -5,15 +5,18 @@ using UnityEngine;
 public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbleProjectileReloadListener,
     ITranslateToRemovedListener
 {
-    private Contexts _contexts;
+    private readonly Contexts _contexts;
+    private readonly IGameConfiguration _configuration;
+    private readonly IGroup<GameEntity> _stableGroup;
+
     private GameEntity _nextBubble;
-    private IGameConfiguration _configuration;
     private int _calls;
 
     public BubbleProjectileSpawnSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
         _configuration = _contexts.configuration.gameConfiguration.value;
+        _stableGroup = _contexts.game.GetGroup(GameMatcher.StableBubble);
 
         // create reload listener
         var e = _contexts.game.CreateEntity();
@@ -41,11 +44,17 @@ public class BubbleProjectileSpawnSystem : ReactiveSystem<GameEntity>, IAnyBubbl
         // we don't need to reload if there is already a throwable bubble
         if (_contexts.game.GetGroup(GameMatcher.Throwable).count == 0)
         {
-            if (!_contexts.game.isBubblePerfectBoard)
+            // determine if we got a perfect clear board
+            if (_stableGroup.count <= 0)
+            {
+                _contexts.game.isBubblePerfectBoard = true;
+            }
+            else
             {
                 // trigger scroll check behavior
                 _contexts.game.isBubblesScrollCheck = true;
             }
+
 
             // reload projectiles
             _nextBubble.AddTranslateTo(_configuration.ReloadSpeed, Vector3.up * _configuration.ProjectileBubblesHeight);

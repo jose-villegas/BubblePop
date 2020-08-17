@@ -6,12 +6,10 @@ using UnityEngine;
 public class BubbleExplosionSystem : ReactiveSystem<GameEntity>
 {
     private readonly Contexts _contexts;
-    private readonly IGroup<GameEntity> _stableGroup;
 
     public BubbleExplosionSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
-        _stableGroup = _contexts.game.GetGroup(GameMatcher.StableBubble);
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -43,11 +41,5 @@ public class BubbleExplosionSystem : ReactiveSystem<GameEntity>
         }
 
         _contexts.game.isBubbleConnectionCheck = true;
-
-        // determine if we got a perfect clear board
-        if (_stableGroup.count <= 0)
-        {
-            _contexts.game.isBubblePerfectBoard = true;
-        }
     }
 }
