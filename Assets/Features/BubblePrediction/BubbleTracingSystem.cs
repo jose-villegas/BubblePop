@@ -95,10 +95,10 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
 
                     // reflect vector at hit point
                     direction = Vector3.Reflect(direction,
-                        circleCast.collider.tag == "LimitRight" ? Vector3.left : Vector3.right).normalized;
+                            circleCast.collider.tag == "LimitRight" ? Vector3.left : Vector3.right).normalized;
 
                     // shift next sphere cast position to avoid constant colliding with limits
-                    var shift = direction * _configuration.CircleCastRadius * Mathf.PI;
+                    var shift = direction * _configuration.CircleCastRadius * 2 * Mathf.PI;
 
                     circleCast = Physics2D.CircleCast(circleCast.point + new Vector2(shift.x, shift.y),
                         _configuration.CircleCastRadius, direction, 15, _hitLayer);
