@@ -32,6 +32,14 @@ public class ScoreLabelController : MonoBehaviour, IScoreListener
         _label.text = value.ToString("N0", CultureInfo.GetCultureInfo("en-GB"));
     }
 
+    private void OnApplicationPause()
+    {
+        if (scoreEntity == null) return;
+
+        PlayerPrefs.SetInt("Score", scoreEntity.score.Value);
+        PlayerPrefs.Save();
+    }
+
     private void OnDestroy()
     {
         if (scoreEntity == null) return;

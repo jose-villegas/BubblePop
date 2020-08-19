@@ -4,8 +4,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Slider))]
 public class LevelScoreSliderController : MonoBehaviour, IScoreListener
 {
-    [SerializeField] private bool _nextLevelLabel;
-
     private Slider _slider;
     private GameEntity scoreEntity;
     private IGameConfiguration _configuration;
@@ -38,6 +36,7 @@ public class LevelScoreSliderController : MonoBehaviour, IScoreListener
         if (index < 0)
         {
             index = ~index;
+            index -= 1;
         }
 
         if (index < _configuration.ScoreProgression.Count)
@@ -45,13 +44,19 @@ public class LevelScoreSliderController : MonoBehaviour, IScoreListener
             var ceiling = 0;
             var minimum = 0;
 
-            if (index > 0)
+            if (index + 1 < _configuration.ScoreProgression.Count)
             {
-                ceiling = _configuration.ScoreProgression[index - 1];
-                minimum = index == 1 ? 0 : _configuration.ScoreProgression[index - 2];
+                ceiling = _configuration.ScoreProgression[index + 1];
+                minimum = index < 0 ? 0 : _configuration.ScoreProgression[index];
+            }
+            else
+            {
+                var lastIndex = _configuration.ScoreProgression.Count - 1;
+                ceiling = _configuration.ScoreProgression[lastIndex];
+                minimum = _configuration.ScoreProgression[lastIndex - 1];
             }
 
-            _slider.maxValue = _configuration.ScoreProgression[index] - ceiling;
+            _slider.maxValue = ceiling;
             _slider.minValue = minimum;
             _slider.value = value;
         }
