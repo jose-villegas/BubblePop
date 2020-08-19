@@ -43,14 +43,17 @@ public class LevelScoreSliderController : MonoBehaviour, IScoreListener
         if (index < _configuration.ScoreProgression.Count)
         {
             var ceiling = 0;
+            var minimum = 0;
 
             if (index > 0)
             {
                 ceiling = _configuration.ScoreProgression[index - 1];
+                minimum = index == 1 ? 0 : _configuration.ScoreProgression[index - 2];
             }
 
             _slider.maxValue = _configuration.ScoreProgression[index] - ceiling;
-            _slider.value = value - ceiling;
+            _slider.minValue = minimum;
+            _slider.value = value;
         }
     }
 }

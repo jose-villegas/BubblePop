@@ -144,4 +144,6 @@ public interface IGameConfiguration
     /// Each entry defines a level
     /// </summary>
     List<int> ScoreProgression { get; }
+
+    GameDisplayConfiguration  DisplayConfiguration { get; }
 }

@@ -53,6 +53,9 @@ public class BubbleShootSystem : IInitializeSystem, IAnyMouseUpListener, IAnyGam
             gameEntity.isThrowable = false;
             gameEntity.isThrown = true;
             gameEntity.isMoving = true;
+
+            // play sfx
+            _contexts.game.CreateEntity().AddPlayAudio("whoosh");
         }
     }
 

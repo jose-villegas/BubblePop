@@ -53,6 +53,7 @@ public class BubbleProjectileStopSystem : IExecuteSystem
                 // check if we have reached the top limit
                 if (colliders.Any(x => x.gameObject.layer == LayerMask.NameToLayer("TopLimit")))
                 {
+                    gameEntity.isBubblePlayDestroyFX = true;
                     gameEntity.isDestroyed = true;
 
                     // trigger reload check

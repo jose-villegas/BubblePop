@@ -56,6 +56,9 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     [Header("Progression")] [SerializeField]
     private List<int> _scoreProgression;
 
+    [Header("Display")] [SerializeField] 
+    private GameDisplayConfiguration _displayConfiguration;
+
 
     public List<ExponentConfiguration> ExponentConfigurations => _exponentConfigurations;
 
@@ -106,6 +109,8 @@ public class GameConfiguration : ScriptableObject, IGameConfiguration
     public Vector2 AimAngleRange => _aimAngleRange;
 
     public List<int> ScoreProgression => _scoreProgression;
+
+    public GameDisplayConfiguration DisplayConfiguration => _displayConfiguration;
 
     public Vector2 SpawnScaleSpeedRange => _spawnScaleSpeedRange;
 }

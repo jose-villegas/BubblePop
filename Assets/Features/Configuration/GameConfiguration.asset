@@ -29,9 +29,9 @@ MonoBehaviour:
   - _color: {r: 0.9137255, g: 0.11764706, b: 0.3882353, a: 1}
     _probability: 1
   - _color: {r: 0.4745098, g: 0.33333334, b: 0.28235295, a: 1}
-    _probability: 0
+    _probability: 0.5
   - _color: {r: 0.9764706, g: 0.65882355, b: 0.14509805, a: 1}
-    _probability: 0
+    _probability: 0.1
   - _color: {r: 0.40392157, g: 0.22745098, b: 0.7176471, a: 1}
     _probability: 0
   - _color: {r: 0.3764706, g: 0.49019608, b: 0.54509807, a: 1}
@@ -46,7 +46,7 @@ MonoBehaviour:
   _aimAngleRange: {x: 30, y: 150}
   _reloadSpeed: 17.5
   _projectileSpeed: 20
-  _projectileBubblesHeight: -4
+  _projectileBubblesHeight: -4.25
   nextBubbleScale: {x: 3, y: 3, z: 3}
   _overlapCircleRadius: 0.25
   _scrollingBubblePositionBounds: {x: -1.5, y: -0.25}
@@ -60,3 +60,13 @@ MonoBehaviour:
   _fallingGravity: 14.7
   _fallingPushStrength: 0.75
   _scoreProgression: e8030000d0070000b80b0000a00f00008813000070170000581b0000401f00002823000010270000f82a0000e02e0000c8320000b03600006842000050460000384a0000c05d000030750000
+  _displayConfiguration:
+    _displayOptions:
+    - _aspectRatio: {x: 9, y: 16}
+      _orthogonalSize: 4.75
+    - _aspectRatio: {x: 9, y: 19}
+      _orthogonalSize: 5.35
+    - _aspectRatio: {x: 207, y: 448}
+      _orthogonalSize: 5.35
+    - _aspectRatio: {x: 6, y: 13}
+      _orthogonalSize: 5.35
