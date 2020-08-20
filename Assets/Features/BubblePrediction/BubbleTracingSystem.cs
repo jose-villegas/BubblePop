@@ -58,6 +58,8 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
 
             // cast ray in given direction, 
             var circleCast = Physics2D.CircleCast(pos, _configuration.CircleCastRadius, direction, 15, _hitLayer);
+            var shift = Vector3.zero;
+            var lastTag = string.Empty;
 
             if (circleCast.collider != null)
             {
@@ -93,15 +95,29 @@ public class BubbleTracingSystem : IExecuteSystem, IAnyGameStartedListener
                         break;
                     }
 
-                    // reflect vector at hit point
-                    direction = Vector3.Reflect(direction,
-                            circleCast.collider.tag == "LimitRight" ? Vector3.left : Vector3.right).normalized;
+                    // don't reflect twice on the same limit
+                    if (lastTag != circleCast.collider.tag)
+                    {
+                        // reflect vector at hit point
+                        if (circleCast.collider.tag == "LimitRight")
+                        {
+                            lastTag = circleCast.collider.tag;
+                            direction = Vector3.Reflect(direction, Vector3.left).normalized;
+                            shift = Vector3.zero;
+                        }
+                        else if (circleCast.collider.tag == "LimitLeft")
+                        {
+                            lastTag = circleCast.collider.tag;
+                            direction = Vector3.Reflect(direction, Vector3.right).normalized;
+                            shift = Vector3.zero;
+                        }
+                    }
 
-                    // shift next sphere cast position to avoid constant colliding with limits
-                    var shift = direction * _configuration.CircleCastRadius * 2 * Mathf.PI;
+                    pos = circleCast.centroid;
+                    shift += direction * _configuration.CircleCastRadius * Mathf.PI / 2f;
 
-                    circleCast = Physics2D.CircleCast(circleCast.point + new Vector2(shift.x, shift.y),
-                        _configuration.CircleCastRadius, direction, 15, _hitLayer);
+                    circleCast = Physics2D.CircleCast(pos + shift, _configuration.CircleCastRadius, direction, 15,
+                        _hitLayer);
                 }
 
                 _contexts.game.ReplaceBubbleTrace(trace);
